@@ -124,7 +124,6 @@ Showveo.Controls.AddTV.Upload = function(parameters) {
 	//
 	var uploadSuccess = function(file, data, response) {
 		alert(data);
-		alert(response);
 	}
 
 	//
@@ -132,7 +131,7 @@ Showveo.Controls.AddTV.Upload = function(parameters) {
 	//	successfully.
 	//
 	var uploadComplete = function() {
-		alert("complete");
+		
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -149,7 +148,7 @@ Showveo.Controls.AddTV.Upload = function(parameters) {
 
 		_components.upload = new SWFUpload({
 			flash_url : "resources/swfupload.swf",
-			upload_url: "http://localhost/showveoservice/FileUploadService.svc",
+			upload_url: "http://localhost/showveoservice/FileUploadService.svc/",
 			file_size_limit : "100 MB",
 			file_types : "*.*",
 			file_types_description : "All Files",

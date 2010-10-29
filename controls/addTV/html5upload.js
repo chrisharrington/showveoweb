@@ -3,7 +3,7 @@ Showveo.Validator.validateNamespace("Showveo.Controls.AddTV");
 //
 //	A control used to provide the user with file upload functionality.
 //
-Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
+Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
@@ -40,32 +40,70 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	//	Begins the upload process for the currently selected file.
 	//
 	this.upload = function() {
-		_components.upload.uploadifyUpload();
+		_components.upload.startUpload();
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handlers */
 
 	//
-	//	Fired after the user has successfully chosen a file to upload.  Updates the control with the chosen file's
-	//	information.
-	//	event:					The event arguments.
-	//	id:						The queue ID.
+	//	Fired after the user has clicked the "browse" button to open the file selection dialog.  Clears the current
+	//	queue.
+	//
+	var fileDialogStarted = function() {
+		_components.upload.cancelQueue();
+	}
+
+	//
+	//	Fired after the user has chosen a file.  Updates the view with the file information.
 	//	file:					The queued file.
 	//
-	var fileSelect = function(event, id, file) {
+	var fileQueued = function(file) {
+		_components.file = file;
+	}
+
+	//
+	//	Fired after the user has attempted to queue a file, but an error occurs.  Informs the user of
+	//	the error.
+	//	file:					The queued file.
+	//	code:					The error code.
+	//	message:				The error message.
+	//
+	var fileQueueError = function(file, code, message) {
+		_components.queueError = { code: code, message: message };
+	}
+
+	//
+	//	Fired after the user has successfully chosen a file to upload.  Updates the control with the chosen file's
+	//	information.
+	//	numselected:			The number of selected files.
+	//	numqueued:				The number of queued files from this selection.
+	//	totalqueue:				The total number of files in the queue.
+	//
+	var fileDialogComplete = function(numselected, numqueued, totalqueue) {
 		try {
-			if (file.size == 0)
-				throw "The file you have chosen has a size of zero bytes.  Please select another file.";
+			if (numselected > 1 || numqueued > 1 || totalqueue > 1)
+				throw "Please upload one file at a time!";
+
+			if (_components.queueError) {
+				var error = _components.queueError;
+				if (error.code == SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE)
+					throw "Zero byte files cannot be uploaded.  Please select another file.";
+				if (error.code == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT)
+					throw "The file you have selected is too large.  Please select another file.";
+				if (error.code == SWFUpload.QUEUE_ERROR.INVALID_FILETYPE)
+					throw "The file you have selected is of an invalid type.  Please select another file.";
+			}
 
 			_feedback.clear();
-			_components.textFileName.val(file.name);
-			_handlers.fileSelected({ name: file.name, size: file.size });
+			_components.textFileName.val(_components.file.name);
+			_handlers.fileSelected({ name: _components.file.name, size: _components.file.size });
 		} catch (error) {
+			_components.upload.cancelQueue();
 			_feedback.error(error);
 		}
 
-		return false;
+		_components.queueError = undefined;
 	}
 
 	//
@@ -96,30 +134,6 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	var uploadComplete = function() {
 		alert("complete");
 	}
-	
-	//
-	//	Fired after an error occurs during upload.  Displays an error message to the user.
-	//	event:					The event object.
-	//	id:						The queue ID.
-	//	file:					The file that failed to upload.
-	//	error:					The error object.
-	//
-	var fileError = function(event, id, file, error) {
-		//_feedback.error("An error has occurred while uploading your chosen file.  Please try again later!");
-		_feedback.error(error.type + " - " + error.info);
-	}
-
-    //
-    //  Fired after a file has finished uploading.  Displays a success message to the user.
-    //  event:                  The event object.
-	//	id:						The queue ID.
-	//	file:					The file that uploaded successfully.
-	//	response:				The server response.
-	//	data:					The data sent back from the server.
-	//
-	var fileComplete = function(event, id, file, response, data) {
-		alert(response);
-	}
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
@@ -133,23 +147,11 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 		_components.panel = panel;
 		_components.textFileName = panel.find("div.input>input[type='text']");
 
-		_components.upload = panel.find("#uploadify");
+		_components.upload = _components.panel.find("input[type='file']").html5_upload();
 
-        _components.upload.uploadify({
-			uploader: "resources/uploadify.swf",
-			script: "http://localhost/showveoservice/fileuploadservice.svc/",
-			queueSizeLimit: 1,
-			multi: false,
-			auto: false,
-			buttonText: "",
-			buttonImg: "images/uploadbutton.png",
-			width: 87,
-			height: 23,
-			onSelect: fileSelect,
-			onError: fileError,
-            onComplete: fileComplete
-		});
+		alert($.html5_upload);
 	}
 
 	this.initialize(parameters);
 };
+
