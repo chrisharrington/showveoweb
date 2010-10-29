@@ -40,8 +40,7 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	//	Begins the upload process for the currently selected file.
 	//
 	this.upload = function() {
-		//_components.upload.uploadifyUpload();
-		alert(_components.upload);
+		_components.upload.uploadifyUpload();
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -97,15 +96,27 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	var uploadComplete = function() {
 		alert("complete");
 	}
-
+	
 	//
 	//	Fired after an error occurs during upload.  Displays an error message to the user.
 	//	event:					The event object.
 	//	id:						The queue ID.
 	//	file:					The file that failed to upload.
+	//	error:					The error object.
 	//
-	var fileError = function(event, id, file) {
-		_feedback.error("An error has occurred while uploading your chosen file.  Please try again later!");
+	var fileError = function(event, id, file, error) {
+		//_feedback.error("An error has occurred while uploading your chosen file.  Please try again later!");
+		_feedback.error(error.type + " - " + error.info);
+	}
+
+    //
+    //  Fired after a file has finished uploading.  Displays a success message to the user.
+    //  event:                  The event object.
+	//	id:						The queue ID.
+	//	file:					The file that uploaded successfully.
+	//
+	var fileComplete = function(event, id, file) {
+		alert("complete!");
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -120,9 +131,11 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 		_components.panel = panel;
 		_components.textFileName = panel.find("div.input>input[type='text']");
 
-		_components.upload = panel.find("#uploadify").uploadify({
+		_components.upload = panel.find("#uploadify");
+
+        _components.upload.uploadify({
 			uploader: "resources/uploadify.swf",
-			script: "blah",
+			script: "http://localhost/showveoservice/fileuploadservice.svc",
 			queueSizeLimit: 1,
 			multi: false,
 			auto: false,
@@ -131,7 +144,8 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 			width: 87,
 			height: 23,
 			onSelect: fileSelect,
-			onError: fileError
+			onError: fileError,
+            onComplete: fileComplete
 		});
 	}
 
