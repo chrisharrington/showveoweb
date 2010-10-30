@@ -46,7 +46,7 @@ Showveo.Controllers.AddTVController = function(parameters) {
 		_components.labelFileSize = view.find("div.file b:last");
 		_components.buttonUpload = view.find("div.file input[type='button']").click(buttonUploadClicked);
 
-		_components.upload = new Showveo.Controls.AddTV.YUIUploader({
+		_components.upload = new Showveo.Controls.YUIUploader({
 			panel: _components.view.find("div.choosefile"),
 			feedback: _feedback,
 			fileSelected: fileSelected

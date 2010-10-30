@@ -14,9 +14,11 @@ $(document).ready(function() {
 	this.initialize = function() {
 		var container = {};
 		loadControls(container);
-		loadViews(container);
 		loadModels(container);
+		loadViews(container);
 		loadControllers(container);
+
+		container.Controllers.AddMovieController.load();
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -32,21 +34,23 @@ $(document).ready(function() {
 	}
 
 	//
-	//	Loads the necessary view objects and stores them in the given container.
-	//	container:						Holds the loaded views, referenced by namespace.
-	//
-	var loadViews = function(container) {
-		container.Views = {};
-		container.Views.AddTVView = new Showveo.Views.Base({ path: "views/tv/add/addTV" });
-	}
-
-	//
 	//	Loads the necessary model objects and stores them in the given container.
 	//	container:						Holds the loaded models, referenced by namespace.
 	//
 	var loadModels = function(container) {
 		container.Models = {};
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
+		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ apikey: "c26c67ed161834067f4d91430df1024e" });
+	}
+
+	//
+	//	Loads the necessary view objects and stores them in the given container.
+	//	container:						Holds the loaded views, referenced by namespace.
+	//
+	var loadViews = function(container) {
+		container.Views = {};
+		container.Views.AddTVView = new Showveo.Views.Base({ path: "views/tv/add/addTV" });
+		container.Views.AddMovieView = new Showveo.Views.AddMovieView({ path: "views/movie/add/addMovie", model: container.Models.AddMovieModel, feedback: container.Controls.Feedback });
 	}
 
 	//
@@ -56,10 +60,18 @@ $(document).ready(function() {
 	//
 	var loadControllers = function(container) {
 		container.Controllers = {};
+
 		container.Controllers.AddTVController = new Showveo.Controllers.AddTVController({
 			panel: $("div.content>div"),
 			view: container.Views.AddTVView,
 			model: container.Models.AddTVModel,
+			feedback: container.Controls.Feedback
+		});
+
+		container.Controllers.AddMovieController = new Showveo.Controllers.AddMovieController({
+			panel: $("div.content>div"),
+			view: container.Views.AddMovieView,
+			model: container.Models.AddMovieModel,
 			feedback: container.Controls.Feedback
 		});
 	}

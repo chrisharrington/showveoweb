@@ -1,9 +1,9 @@
-Showveo.Validator.validateNamespace("Showveo.Controls.AddTV");
+Showveo.Validator.validateNamespace("Showveo.Controls");
 
 //
 //	A control used to provide the user with file upload functionality.
 //
-Showveo.Controls.AddTV.YUIUploader = function(parameters) {
+Showveo.Controls.YUIUploader = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */

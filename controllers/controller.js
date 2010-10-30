@@ -8,11 +8,14 @@ Showveo.Controllers.Base = function(parameters) {
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
 
-	//	The view for the controller.
+	//	The panel into which the view is loaded.
+	var _panel;
+
+	//	The view to be loaded.
 	var _view;
 
-	//	The model for the controller.
-	var _model;
+	//	The implementer of this class.
+	var _implementor;
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Properties */
@@ -29,18 +32,25 @@ Showveo.Controllers.Base = function(parameters) {
 	//
 	//	The default constructor.
 	//	panel:						The panel into which the view contents should be inserted.
-	//	view:						The view for the controller.
-	//	model:						The model for the controller.
+	//	view:						The view to be loaded.
 	//	implementor:				The implementor of this base class.
 	//
 	this.base_initialize = function(parameters, implementer) {
+		_panel = parameters.panel;
 		_view = parameters.view;
-		_model = parameters.model;
+		_implementer = implementer;
+	}
 
+	//------------------------------------------------------------------------------------------------------------------
+	/* Public Methods */
+
+	//
+	//	Loads the view and controller.
+	//
+	this.load = function() {
 		_view.load(function(html) {
 			html = $(html);
-			parameters.panel.append(html);
-			implementer.loadComponents($("div.content>div>div"));
+			_panel.append(html);
 		});
 	}
 };

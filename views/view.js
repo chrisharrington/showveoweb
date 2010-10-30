@@ -11,18 +11,30 @@ Showveo.Views.Base = function(parameters) {
 	//	A container for view components.
 	var _components;
 
+	//	The implementer of this class.
+	var _implementer;
+
 	//	The path of the html for the view.
 	var _path;
+
+	//	The feedback control.
+	var _feedback;
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
 	//
 	//	The default constructor.
+	//	model:						The model.
 	//	path:						The path of the html code for the inheriting view.
+	//	feedback:					The feedback control.
 	//
-	this.initialize = function(parameters) {
+	this.base_initialize = function(parameters, implementer) {
+		parameters.model.register(implementer);
+
+		_implementer = implementer;
 		_path = parameters.path;
+		_feedback = parameters.feedback;
 		_components = {};
 	}
 
@@ -40,10 +52,18 @@ Showveo.Views.Base = function(parameters) {
 		$.get(_path + ".html", function(html) {
 			if (callback)
 				callback(html);
+
+			_implementer.loadComponents($("div.content>div>div"));
 		});
 
 		$("head").append($("<link>").attr({ type: "text/css", rel: "stylesheet", href: _path + ".css" }));
 	}
 
-	this.initialize(parameters);
+	//
+	//	Shows an error message.
+	//	message:					The message.
+	//
+	this.error = function(message) {
+		_feedback.error(message);
+	}
 };
