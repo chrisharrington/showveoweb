@@ -47,8 +47,10 @@ Showveo.Views.AddMovieView = function(parameters) {
 		_components = {};
 		_components.view = view
 
-		_components.textMovieSearchName = view.find("div.chooseinfo>div.input>input[type='text']");
-		_components.buttonSearch = view.find("div.chooseinfo>div.input>input[type='button']").click(function() { if (_handlers["search"]) _handlers["search"](_components.textMovieSearchName.val()); });
+		_components.searchResults = new Showveo.Controls.AddMovie.MovieSearchResults({
+			panel: view.find("div.chooseinfo"),
+			handlers: _handlers
+		});
 
 		/*_components.upload = new Showveo.Controls.YUIUploader({
 			panel: _components.view.find("div.choosefile"),
@@ -59,17 +61,29 @@ Showveo.Views.AddMovieView = function(parameters) {
 
 	//
 	//	Sets the result of a search.
-	//	movies:							The search results.
 	//
-	this.searchResults = function(movies) {
-		try {
-			if (movies.length == 0)
-				throw "No movies were found.";
-
-			alert(movies.length);
-		} catch(e) {
-			_this.error(e);
+	this.searchResults = function() {
+		var movies = _this.model.getResults("searchResults"); 
+		if (movies.length == 0) {
+			_this.error("No movies were found.");
+			return;
 		}
+
+		_components.searchResults.load(movies);
+	}
+
+	//
+	//	Sets the search results count.
+	//
+	this.searchResultsCount = function() {
+		_components.searchResults.count(_this.model.getResults("searchResultsCount"));
+	}
+
+	//
+	//	Updates the created movie panels with more information.
+	//
+	this.detailedInfo = function() {
+		_components.searchResults.update(_this.model.getResults("detailedInfo"));
 	}
 
 	this.base_initialize(parameters, this);

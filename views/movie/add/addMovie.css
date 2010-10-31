@@ -8,9 +8,18 @@ div.step>span { float:left; width:100%; }
 div.step>span.description { margin-top:2px; }
 
 div.chooseinfo>div.input { float:left; width:100%; margin-top:20px; }
-div.chooseinfo>div.input>span { float:left; }
+div.chooseinfo>div.input>span { float:left; margin-top:1px; }
 div.chooseinfo>div.input>input[type='text'] { float:left; width:550px; margin-left:10px; }
 div.chooseinfo>div.input>input[type='button'] { float:right; }
+div.chooseinfo>div.searchresults { float:left; width:100%; margin-top:10px; font-size:14px; }
+div.chooseinfo>div.searchresults>div { float:left; width:934px; padding:2px 5px; border:solid 1px #DDD; background-color:White; margin-top:2px; }
+div.chooseinfo>div.searchresults>div:hover { border-color:#6FA4E8; }
+div.chooseinfo>div.searchresults>div:first-child { margin-top:0px; }
+div.chooseinfo>div.searchresults>div>i { float:left; font-style:normal; }
+div.chooseinfo>div.searchresults>div>b { float:left; font-weight:normal; color:#888; font-size:0.85em; margin-top:2px; margin-left:10px; }
+div.chooseinfo>div.searchresults>div.count { float:left; width:100%; color:#777; padding:0; border:none; background-color:inherit; margin-top:10px; }
+div.chooseinfo>div.searchresults>div.count>span { float:left; }
+div.chooseinfo>div.searchresults>div.count>a { float:right; margin-left:10px; }
 
 div.choosefile>div.input { float:left; width:100%; margin-top:10px; }
 div.choosefile>div.input>object { float:right; }

@@ -60,16 +60,17 @@ $(document).ready(function() {
 	//
 	var loadControllers = function(container) {
 		container.Controllers = {};
+		var panel = $("div.content>div>div");
 
 		container.Controllers.AddTVController = new Showveo.Controllers.AddTVController({
-			panel: $("div.content>div"),
+			panel: panel,
 			view: container.Views.AddTVView,
 			model: container.Models.AddTVModel,
 			feedback: container.Controls.Feedback
 		});
 
 		container.Controllers.AddMovieController = new Showveo.Controllers.AddMovieController({
-			panel: $("div.content>div"),
+			panel: panel,
 			view: container.Views.AddMovieView,
 			model: container.Models.AddMovieModel,
 			feedback: container.Controls.Feedback

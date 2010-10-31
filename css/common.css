@@ -1,13 +1,17 @@
 body { margin:0; padding:0; background-color:#BED7ED; font-family:Franklin Gothic Medium; font-size:15px; }
 
 .hidden { display:none; }
+.rounded { -moz-border-radius:5px; -webkit-border-radius:5px; }
+.pointer { cursor:pointer; }
 
-input[type='button'] { padding:2px 5px; background:url(../images/buttongradient.png) repeat-x; color:White; border:none; -moz-border-radius:5px; -webkit-border-radius:5px; text-transform:uppercase; font-family:Franklin Gothic Medium; }
+input[type='button'] { padding:0px 5px; background:url(../images/buttongradient.png) repeat-x; color:White; border:solid 2px; border-top-color:#999; border-left-color:#999; border-right-color:Black; border-bottom-color:Black; -moz-border-radius:3px; -webkit-border-radius:3px; text-transform:uppercase; font-family:Franklin Gothic Medium; }
+input[type='button']:active { border-top-color:Black; border-left-color:Black; border-right-color:#999; border-bottom-color:#999; }
+input[type='button'][disabled] { background:#DDD; color:#999; }
+input[type='button'][disabled]:active { border-top-color:#999; border-left-color:#999; border-right-color:Black; border-bottom-color:Black; }
 
 span.subheader { font-size:1.25em; }
 span.description { font-size:0.85em; }
 span.header { font-size:1.5em; }
-div.rounded { -moz-border-radius:5px; -webkit-border-radius:5px; }
 input[type='text'].rounded, input[type='password'].rounded { -moz-border-radius:3px; -webkit-border-radius:3px; }
 
 div.header { float:left; width:100%; background:url(../images/headergradient.jpg) repeat-x; height:50px; }
@@ -27,7 +31,8 @@ div.feedback>div>a { float:right; font-size:0.8em; margin-top:2px; cursor:pointe
 div.feedback>div>a:hover { text-decoration:underline; }
 
 div.content { float:left; width:100%; padding-top:15px; background:url(../images/bodygradient.jpg) repeat-x; }
-div.content>div { width:970px; margin:auto; padding:10px; background-color:White; -moz-border-radius:5px; -webkit-border-radius:5px; min-height:600px; }
+div.content>div { width:970px; margin:auto; }
+div.content>div>div { float:left; width:100%; min-height:600px; padding:10px; background-color:White; -moz-border-radius:5px; -webkit-border-radius:5px; margin-bottom:10px; }
 
 div.modal { position:absolute; z-index:3; background-color:#f0f0f0; border:solid 2px #BED7ED; -moz-border-radius:5px; -webkit-border-radius:5px; }
 div.modal>div { position:relative; float:left; width:100%; }
@@ -45,3 +50,5 @@ div.panel>span.subheader { color:#333; }
 div.panel>span.description { color:#666; }
 div.panel.rounded { -moz-border-radius:8px; -webkit-border-radius:8px; }
 div.panel input[type='text'], div.panel input[type='password'] { padding:3px; border:solid 1px #AAA; }
+div.panel a { color:#4F91E8; font-size:0.9em; font-weight:bold; cursor:pointer; }
+div.panel a[disabled] color:#888; }

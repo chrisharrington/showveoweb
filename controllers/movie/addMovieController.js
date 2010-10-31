@@ -43,16 +43,16 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	//
 	//	Fired after the user initiates a movie search.  Displays the movie search control filled with search results.
 	//	name:							The name of movie for which to search.
+	//	start:							The position at which to begin retrieving results.
+	//	count:							The number of results to retrieve.
 	//
-	var onSearch = function(name) {
-		try {
-			if (name == "")
-				throw "Please enter the name of a movie to search for.";
-
-			_model.search(name);
-		} catch(e) {
-			_view.error(e);
+	var onSearch = function(name, start, count) {
+		if (name == "") {
+			_view.error("Please enter the name of a movie to search for.");
+			return;
 		}
+
+		_model.search(name, start, count);
 	}
 
 	//------------------------------------------------------------------------------------------------------------------

@@ -11,6 +11,15 @@ Showveo.Models.Base = function(parameters) {
 	//	The list of views to notify.
 	var _views;
 
+	//	The results container.
+	var _results;
+
+	//------------------------------------------------------------------------------------------------------------------
+	/* Properties */
+
+	//	Returns a result set.
+	this.getResults = function(key) { return _results[key]; };
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -19,6 +28,7 @@ Showveo.Models.Base = function(parameters) {
 	//
 	this.base_initialize = function(parameters) {
 		_views = new Array();
+		_results = {};
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -38,9 +48,11 @@ Showveo.Models.Base = function(parameters) {
 	//	data:						The data to give to the executed handler.
 	//
 	this.notify = function(handler, data) {
+		_results[handler] = data;
+
 		$(_views).each(function(index, view) {
 			if (view[handler])
-				view[handler](data);
+				view[handler]();
 		});
 	}
 };

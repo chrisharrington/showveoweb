@@ -8,6 +8,9 @@ Showveo.Views.Base = function(parameters) {
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
 
+	//	Maintains scope.
+	var _this = this;
+
 	//	A container for view components.
 	var _components;
 
@@ -36,6 +39,8 @@ Showveo.Views.Base = function(parameters) {
 		_path = parameters.path;
 		_feedback = parameters.feedback;
 		_components = {};
+
+		_this.model = parameters.model;
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -61,9 +66,9 @@ Showveo.Views.Base = function(parameters) {
 
 	//
 	//	Shows an error message.
-	//	message:					The message.
 	//
 	this.error = function(message) {
-		_feedback.error(message);
+		var error = message ? message : _this.model.getResults("error")
+		_feedback.error(error);
 	}
 };
