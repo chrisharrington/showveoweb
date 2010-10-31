@@ -85,6 +85,17 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 		_components.panelSearchResults.find(">div[name='" + movie.ID + "']").find("b").hide().text(deriveCastString(movie)).fadeIn(250);
 	}
 
+	//
+	//	Fired after the user submits a search.
+	//
+	var search = function() {
+		_components.linkMore.fadeOut(250);
+		_components.panel.find("input").attr("disabled", true);
+		_this.clear();
+		if (_handlers["search"])
+			_handlers["search"](_components.textMovieSearchName.val(), (_page-1)*_size, _size);
+	}
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
 
@@ -96,32 +107,17 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 		_components = {};
 		_components.panel = panel;
 		_components.panelSearchResults = panel.find("div.searchresults");
-		_components.textMovieSearchName = panel.find("div.input>input[type='text']");
 		_components.labelSearchResults = panel.find("div.searchresults>div.count>span");
 
-		_components.buttonSearch = panel.find("div.input>input[type='button']").click(function() {
-			_components.panel.find("input").attr("disabled", true);
-			_this.clear();
-			if (_handlers["search"])
-				_handlers["search"](_components.textMovieSearchName.val(), (_page-1)*_size, _size);
-		});
+		_components.textMovieSearchName = panel.find("div.input>input[type='text']").enter(search);
+		_components.buttonSearch = panel.find("div.input>input[type='button']").click(search);
+		_components.panelDetails = panel.find("div.moviedetails").modal();
+		_components.buttonCloseDetails = panel.find("div.moviedetails input[type='button']:last").click(function () { _components.panelDetails.modal("hide"); });
 
 		_components.linkMore = panel.find("div.searchresults>div.count>a").click(function() {
 			if (_handlers["search"])
 				_handlers["search"](_components.textMovieSearchName.val(), (++_page-1)*_size, _size);
 		});
-	}
-
-	//
-	//	Creates a panel to wrap a movie.
-	//	movie:							The movie.
-	//	Returns:						The created panel.
-	//
-	var createMoviePanel = function(movie) {
-		var panel = $("<div></div>").addClass("rounded pointer").attr("name", movie.ID).hide();
-		panel.append($("<i></i>").text(movie.Name + (movie.Year == "" ? "" : " (" + movie.Year + ")")));
-		panel.append($("<b></b>"));
-		return panel;
 	}
 
 	//
@@ -131,8 +127,8 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 	//
 	var deriveCastString = function (movie) {
 		var string = "";
-		for (var i = 0; i < movie.Cast.length; i++)
-			string += ", " + movie.Cast[i].Name;
+		for (var i = 0; i < movie.Actors.length; i++)
+			string += ", " + movie.Actors[i].Name;
 		return string.substring(2);
 	}
 
@@ -142,7 +138,7 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 	//
 	var addMovies = function (movies) {
 		$(movies).each(function(index, movie) {
-			createMoviePanel(movie).insertBefore(_components.panelSearchResults.find(">div.count")).slideDown(250);
+			Showveo.Controls.AddMovie.MoviePanelCreator.create({ panel: _components.panelSearchResults, movie: movie, details: _components.panelDetails });
 		});
 	}
 

@@ -28,3 +28,10 @@ div.choosefile>div.input>input[type='text'] { float:left; width:833px; }
 div.choosefile>div.file { float:left; width:100%; margin-top:20px; display:none; font-size:0.85em; color:#666; }
 div.choosefile>div.file>span { float:left; width:100%; }
 div.choosefile>div.file>input { float:right; margin-top:10px; }
+
+div.moviedetails { float:left; width:700px; }
+div.moviedetails>div.info { float:left; width:100%; }
+div.moviedetails>div.info>img { float:left; width:180px; height:270px; }
+div.moviedetails>div.info>span { float:left; width:500px; margin-left:10px; color:#666; font-size:0.9em; }
+div.moviedetails>div.buttons { float:left; width:100%; margin-top:10px; }
+div.moviedetails>div.buttons>input { float:right; margin-left:10px; }
