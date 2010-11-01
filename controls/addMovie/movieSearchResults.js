@@ -11,14 +11,17 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 	//	Maintains scope.
 	var _this = this;
 
-	//	The event handlers.
-	var _handlers;
-
 	//	The common components for the control.
 	var _components;
 
 	//	The maximum number of movies to display.
 	var _count;
+
+	//	The event handler to execute on a search.
+	var _onSearch;
+
+	//	The event handler to execute on a movie selection.
+	var _onMovieSelected;
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
@@ -26,15 +29,40 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 	//
 	//	The default constructor.
 	//	panel:							The panel containing the control elements.
-	//	handlers:						The event handlers.
+	//	onSearch:						The event handler to execute on a search.
+	//	onMovieSelected:				The event handler to execute on a movie selection.
 	//
 	this.initialize = function(parameters) {
 		_count = 0;
 		_page = 1;
 		_size = 5;
-		_handlers = parameters.handlers;
+		_onSearch = parameters.onSearch;
+		_onMovieSelected = parameters.onMovieSelected;
 
 		loadComponents(parameters.panel);
+	}
+
+	//------------------------------------------------------------------------------------------------------------------
+	/* Event Handlers */
+
+	//
+	//	Fired after the user submits a search.
+	//
+	var search = function() {
+		_components.linkMore.fadeOut(250);
+		//_components.panel.find("input").attr("disabled", true);
+		_this.clear();
+
+		_onSearch(_components.textMovieSearchName.val(), (_page-1)*_size, _size);
+	}
+
+	//
+	//	Fired after a movie has been selected.
+	//
+	var movieSelected = function() {
+		Showveo.Controls.AddMovie.MoviePanelCreator.hideDetails();
+
+		_onMovieSelected(Showveo.Controls.AddMovie.MoviePanelCreator.getMovie());
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -51,9 +79,6 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 		var count = _components.panelSearchResults.find(">div:not(div.count)").length;
 		if (count >= _count)
 			_components.linkMore.fadeOut(250);
-
-		if (_handlers["searchResultsLoaded"])
-			_handlers["searchResultsLoaded"](_components.textMovieSearchName.val());
 
 		_components.panel.find("input").attr("disabled", false);
 	}
@@ -85,17 +110,6 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 		_components.panelSearchResults.find(">div[name='" + movie.ID + "']").find("b").hide().text(deriveCastString(movie)).fadeIn(250);
 	}
 
-	//
-	//	Fired after the user submits a search.
-	//
-	var search = function() {
-		_components.linkMore.fadeOut(250);
-		_components.panel.find("input").attr("disabled", true);
-		_this.clear();
-		if (_handlers["search"])
-			_handlers["search"](_components.textMovieSearchName.val(), (_page-1)*_size, _size);
-	}
-
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
 
@@ -113,6 +127,7 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 		_components.buttonSearch = panel.find("div.input>input[type='button']").click(search);
 		_components.panelDetails = panel.find("div.moviedetails").modal();
 		_components.buttonCloseDetails = panel.find("div.moviedetails input[type='button']:last").click(function () { _components.panelDetails.modal("hide"); });
+		_components.buttonSelectMovie = panel.find("div.moviedetails input[type='button']:first").click(movieSelected);
 
 		_components.linkMore = panel.find("div.searchresults>div.count>a").click(function() {
 			if (_handlers["search"])

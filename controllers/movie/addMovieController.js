@@ -55,6 +55,20 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 		_model.search(name, start, count);
 	}
 
+	//
+	//	Fired after the user has selected a movie.  Hides the movie data selection step and shows the movie upload step.
+	//
+	var onMovieSelected = function() {
+		_view.hideMovieSelection(_view.showMovieUpload);
+	}
+
+	//
+	//	Fired after the user has selected a movie file to upload.
+	//
+	var onMovieFileSelected = function() {
+		_view.showFileDetails();
+	}
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
 
@@ -63,6 +77,8 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	//
 	var loadHandlers = function() {
 		_view.onSearch(onSearch);
+		_view.onMovieSelected(onMovieSelected);
+		_view.onMovieFileSelected(onMovieFileSelected);
 	}
 
 	this.base_initialize(parameters, this);

@@ -14,6 +14,15 @@ Showveo.Controls.AddMovie.MoviePanelCreator = new function() {
 	//	The movie details modal dialog panel.
 	var _details;
 
+	//	The selected movie.
+	var _movie;
+
+	//------------------------------------------------------------------------------------------------------------------
+	/* Properties */
+
+	//	Returns the selected movie.
+	this.getMovie = function() { return _movie; }
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
 
@@ -26,6 +35,13 @@ Showveo.Controls.AddMovie.MoviePanelCreator = new function() {
 	this.create = function(parameters) {
 		loadComponents(parameters.panel, parameters.details);
 		createMoviePanel(parameters.movie).insertBefore(parameters.panel.find(">div.count")).slideDown(250);
+	}
+
+	//
+	//	Hides the details panel.
+	//
+	this.hideDetails = function() {
+		_components.details.modal("hide");
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -71,5 +87,7 @@ Showveo.Controls.AddMovie.MoviePanelCreator = new function() {
 		_components.imageMoviePoster.attr("src", "").attr("src", movie.PosterUrl).show();
 		if (movie.PosterUrl == "")
 			_components.imageMoviePoster.hide();
+
+		_movie = movie;
 	}
 }

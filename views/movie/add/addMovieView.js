@@ -17,6 +17,9 @@ Showveo.Views.AddMovieView = function(parameters) {
 	//	The common components.
 	var _components;
 
+	//	The feedback control.
+	var _feedback;
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Properties */
 
@@ -26,13 +29,21 @@ Showveo.Views.AddMovieView = function(parameters) {
 	//	Sets the handler for the movie search event.
 	this.onSearch = function(handler) { _handlers["search"] = handler; }
 
+	//	Sets the handler for the movie information selected event.
+	this.onMovieSelected = function(handler) { _handlers["movieSelected"] = handler; }
+
+	//	Sets the handler for the movie file selected event.
+	this.onMovieFileSelected = function(handler) { _handlers["movieFileSelected"] = handler; }
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
 	//
 	//	The default constructor.
+	//	feedback:						The feedback control.
 	//
 	this.initialize = function(parameters) {
+		_feedback = parameters.feedback;
 		_handlers = {};
 	}
 
@@ -46,17 +57,20 @@ Showveo.Views.AddMovieView = function(parameters) {
 	this.loadComponents = function(view) {
 		_components = {};
 		_components.view = view
+		_components.panelMovieSelection = view.find("div.chooseinfo");
+		_components.panelMovieUpload = view.find("div.choosefile");
 
 		_components.searchResults = new Showveo.Controls.AddMovie.MovieSearchResults({
 			panel: view.find("div.chooseinfo"),
-			handlers: _handlers
+			onSearch: _handlers["search"],
+			onMovieSelected: _handlers["movieSelected"]
 		});
 
-		/*_components.upload = new Showveo.Controls.YUIUploader({
+		_components.upload = new Showveo.Controls.YUIUploader({
 			panel: _components.view.find("div.choosefile"),
 			feedback: _feedback,
-			fileSelected: fileSelected
-		});*/
+			fileSelected: _handlers["movieFileSelected"]
+		});
 	}
 
 	//
@@ -84,6 +98,29 @@ Showveo.Views.AddMovieView = function(parameters) {
 	//
 	this.detailedInfo = function() {
 		_components.searchResults.update(_this.model.getResults("detailedInfo"));
+	}
+
+	//
+	//	Hides the movie selection step.
+	//	callback:						The callback function to fire once the movie selection step has been hidden.
+	//
+	this.hideMovieSelection = function(callback) {
+		_components.panelMovieSelection.fadeOut(250, callback);
+	}
+
+	//
+	//	Shows the movie upload step.
+	//
+	this.showMovieUpload = function() {
+		_components.panelMovieUpload.fadeIn(250);
+	}
+
+	//
+	//	Shows the file details panel.
+	//	file:							The file to show details for.
+	//
+	this.showFileDetails = function(file) {
+		alert(file.Name);
 	}
 
 	this.base_initialize(parameters, this);

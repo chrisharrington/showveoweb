@@ -23,7 +23,7 @@ div.chooseinfo>div.searchresults>div.count>a { float:right; margin-left:10px; }
 
 div.choosefile>div.input { float:left; width:100%; margin-top:10px; }
 div.choosefile>div.input>object { float:right; }
-div.choosefile>div.input>span { float:right; width:88px; height:23px; }
+div.choosefile>div.input>span { float:right; width:92px; height:23px; }
 div.choosefile>div.input>input[type='text'] { float:left; width:833px; }
 div.choosefile>div.file { float:left; width:100%; margin-top:20px; display:none; font-size:0.85em; color:#666; }
 div.choosefile>div.file>span { float:left; width:100%; }

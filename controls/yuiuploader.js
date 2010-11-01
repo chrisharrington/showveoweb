@@ -52,19 +52,13 @@ Showveo.Controls.YUIUploader = function(parameters) {
 	//	file:					The queued file.
 	//
 	var fileSelect = function(file) {
-		try {
-			if (file.size == 0)
-				throw "The file you have chosen has a size of zero bytes.  Please select another file.";
+		if (file.size == 0)
+			throw "The file you have chosen has a size of zero bytes.  Please select another file.";
 
-			_feedback.clear();
-			_components.textFileName.val(file.name);
-			_handlers.fileSelected({ name: file.name, size: file.size });
-			_components.file = file;
-		} catch (error) {
-			_feedback.error(error);
-		}
-
-		return false;
+		_feedback.clear();
+		_components.textFileName.val(file.name);
+		_handlers.fileSelected({ name: file.Name, size: file.Size });
+		_components.file = file;
 	}
 
 	//
