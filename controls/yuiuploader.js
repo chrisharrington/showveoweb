@@ -17,6 +17,9 @@ Showveo.Controls.YUIUploader = function(parameters) {
 	//	The event handlers container.
 	var _handlers;
 
+	//	The upload service location.
+	var _service;
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -24,11 +27,13 @@ Showveo.Controls.YUIUploader = function(parameters) {
 	//	The default constructor.
 	//	panel:					The panel containing the control elements.
 	//	feedback:				The feedback control.
-	//	fileSelected:			The callback function to execute once the user has chosen a valid file.
+	//	service:				The upload service location.
+	//	onFileSelected:			The callback function to execute once the user has chosen a valid file.
 	//
 	this.initialize = function(parameters) {
 		_feedback = parameters.feedback;
-		_handlers = { fileSelected: parameters.fileSelected };
+		_service = parameters.service;
+		_handlers = { onFileSelected: parameters.onFileSelected };
 
 		loadComponents(parameters.panel);
 	}
@@ -38,9 +43,11 @@ Showveo.Controls.YUIUploader = function(parameters) {
 
 	//
 	//	Begins the upload process for the currently selected file.
+	//	file:					The file to upload.
+	//	movieID:				The ID of the movie to upload.
 	//
-	this.upload = function() {
-		_components.upload.upload(_components.file.id, "http://localhost/showveoservice/fileuploadservice.svc/", "POST")
+	this.upload = function(file, movieID) {
+		_components.upload.upload(file.id, _service + movieID, "POST")
 	}
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -57,37 +64,8 @@ Showveo.Controls.YUIUploader = function(parameters) {
 
 		_feedback.clear();
 		_components.textFileName.val(file.name);
-		_handlers.fileSelected({ name: file.Name, size: file.Size });
+		_handlers.onFileSelected(file);
 		_components.file = file;
-	}
-
-	//
-	//	Fired when an error occurs during the upload of a file.  Displays an error message to the user.
-	//	file:					The file that failed to upload.
-	//	code:					The error code.
-	//	message:				The error message.
-	//
-	var uploadError = function(file, code, message) {
-		_feedback.error(code + " - " + message);
-	}
-
-	//
-	//	Fired after the upload has successfully been uploaded.  Informs the user.
-	//	file:					The successfully uploaded file object.
-	//	data:					The server data.
-	//	response:				The server response.
-	//
-	var uploadSuccess = function(file, data, response) {
-		alert(data);
-		alert(response);
-	}
-
-	//
-	//	Fired when the upload has completed.  Doesn't care if an error occurred or if the file was uploaded
-	//	successfully.
-	//
-	var uploadComplete = function() {
-		alert("complete");
 	}
 
 	//
@@ -95,8 +73,7 @@ Showveo.Controls.YUIUploader = function(parameters) {
 	//	error:					The error message.
 	//
 	var fileError = function(error) {
-		//_feedback.error("An error has occurred while uploading your chosen file.  Please try again later!");
-		_feedback.error(error);;
+		alert(error);
 	}
 
     //
@@ -124,9 +101,9 @@ Showveo.Controls.YUIUploader = function(parameters) {
 		_components.textFileName = panel.find("div.input>input[type='text']");
 
 		YAHOO.widget.Uploader.SWFURL = "resources/yuiuploader.swf";
-        _components.upload = new YAHOO.widget.Uploader("yuiuploader", "http://localhost/showveo/images/uploadbutton.png");
+        _components.upload = new YAHOO.widget.Uploader("yuiuploader", "/images/uploadbutton.png");
 		_components.upload.addListener("fileSelect", function(event) { fileSelect({ name: event.fileList["file0"].name, id: event.fileList["file0"].id, size: event.fileList["file0"].size }); });
-		_components.upload.addListener("uploadError", function(event) { fileError(event.status); });
+		_components.upload.addListener("uploadError", function(event) { alert("error: " + event.status); });
 		_components.upload.addListener("uploadComplete", function() { alert("success!"); });
 		_components.upload.addListener("uploadCompleteData", function(event) { alert(event.data); });
 	}

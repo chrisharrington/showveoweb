@@ -63,10 +63,11 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	}
 
 	//
-	//	Fired after the user has selected a movie file to upload.
+	//	Fired after the user has selected a movie file to upload.  Immediately begins the upload.
+	//	file:							The selected file.
 	//
-	var onMovieFileSelected = function() {
-		_view.showFileDetails();
+	var onMovieFileSelected = function(file) {
+		_view.startUpload(file);
 	}
 
 	//------------------------------------------------------------------------------------------------------------------

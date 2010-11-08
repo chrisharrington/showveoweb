@@ -20,6 +20,12 @@ Showveo.Views.AddMovieView = function(parameters) {
 	//	The feedback control.
 	var _feedback;
 
+	//	The upload service location.
+	var _uploadService;
+
+	//	The selected movie ID.
+	var _movieID;
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Properties */
 
@@ -41,9 +47,11 @@ Showveo.Views.AddMovieView = function(parameters) {
 	//
 	//	The default constructor.
 	//	feedback:						The feedback control.
+	//	uploadService:					The upload service location.
 	//
 	this.initialize = function(parameters) {
 		_feedback = parameters.feedback;
+		_uploadService = parameters.uploadService;
 		_handlers = {};
 	}
 
@@ -63,13 +71,17 @@ Showveo.Views.AddMovieView = function(parameters) {
 		_components.searchResults = new Showveo.Controls.AddMovie.MovieSearchResults({
 			panel: view.find("div.chooseinfo"),
 			onSearch: _handlers["search"],
-			onMovieSelected: _handlers["movieSelected"]
+			onMovieSelected: function(movie) {
+				_movieID = movie.ID;
+				_handlers["movieSelected"](movie);
+			}
 		});
 
 		_components.upload = new Showveo.Controls.YUIUploader({
 			panel: _components.view.find("div.choosefile"),
 			feedback: _feedback,
-			fileSelected: _handlers["movieFileSelected"]
+			service: _uploadService,
+			onFileSelected: _handlers["movieFileSelected"]
 		});
 	}
 
@@ -116,11 +128,11 @@ Showveo.Views.AddMovieView = function(parameters) {
 	}
 
 	//
-	//	Shows the file details panel.
-	//	file:							The file to show details for.
+	//	Starts the upload of the selected file.
+	//	file:							The file to upload.
 	//
-	this.showFileDetails = function(file) {
-		alert(file.Name);
+	this.startUpload = function(file) {
+		_components.upload.upload(file, _movieID);
 	}
 
 	this.base_initialize(parameters, this);

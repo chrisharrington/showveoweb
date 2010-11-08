@@ -51,8 +51,15 @@ $(document).ready(function() {
 	//
 	var loadViews = function(container) {
 		container.Views = {};
+
 		container.Views.AddTVView = new Showveo.Views.Base({ path: "views/tv/add/addTV" });
-		container.Views.AddMovieView = new Showveo.Views.AddMovieView({ path: "views/movie/add/addMovie", model: container.Models.AddMovieModel, feedback: container.Controls.Feedback });
+		
+		container.Views.AddMovieView = new Showveo.Views.AddMovieView({
+			path: "views/movie/add/addMovie",
+			model: container.Models.AddMovieModel,
+			feedback: container.Controls.Feedback,
+			uploadService: "/upload/movie/"
+		});
 	}
 
 	//
