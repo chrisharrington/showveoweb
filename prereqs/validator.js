@@ -12,3 +12,17 @@ Showveo.Validator.validateNamespace = function (namespace) {
 			obj = obj[split[i]];
 	}
 };
+
+Showveo.Validator.addInheritance = function(implementer) {
+	if (!Showveo.Validator.inheritance)
+		Showveo.Validator.inheritance = new Array();
+	Showveo.Validator.inheritance.push(implementer);
+};
+
+Showveo.Validator.validateInheritance = function() {
+	if (!Showveo.Validator.inheritance)
+		return;
+	$(Showveo.Validator.inheritance).each(function(index, handler) {
+		handler();
+	})
+};

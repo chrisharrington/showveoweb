@@ -1,4 +1,4 @@
-Showveo.Validator.validateNamespace("Showveo.Controllersr");
+Showveo.Validator.validateNamespace("Showveo.Controllers");
 
 //
 //	A controller used to provide event delegation for adding a movie.
@@ -85,4 +85,6 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	this.initialize(parameters);
 };
 
-Showveo.Controllers.AddMovieController.prototype = new Showveo.Controllers.Base;
+Showveo.Validator.addInheritance(function() {
+	Showveo.Controllers.AddMovieController.prototype = new Showveo.Controllers.Base;	
+});

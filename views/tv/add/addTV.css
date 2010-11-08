@@ -5,7 +5,7 @@ div.info>ol { float:left; width:100%; margin-top:0px; margin-bottom:0px; font-si
 
 div.step { float:left; width:946px; padding:10px; margin-top:30px; }
 div.step>span { float:left; width:100%; }
-div.step>span.description { margin-top:2px; }
+div.step>span.description { margin-top:5px; }
 
 div.choosefile>div.input { float:left; width:100%; margin-top:10px; }
 div.choosefile>div.input>object { float:right; }

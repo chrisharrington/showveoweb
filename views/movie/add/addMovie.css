@@ -5,12 +5,12 @@ div.info>ol { float:left; width:100%; margin-top:0px; margin-bottom:0px; font-si
 
 div.step { float:left; width:946px; padding:10px; margin-top:30px; }
 div.step>span { float:left; width:100%; }
-div.step>span.description { margin-top:2px; }
+div.step>span.description { margin-top:5px; }
 
 div.chooseinfo>div.input { float:left; width:100%; margin-top:20px; }
 div.chooseinfo>div.input>span { float:left; margin-top:1px; }
-div.chooseinfo>div.input>input[type='text'] { float:left; width:550px; margin-left:10px; }
-div.chooseinfo>div.input>input[type='button'] { float:right; }
+div.chooseinfo>div.input>input[type='text'] { float:left; width:840px; }
+div.chooseinfo>div.input>input[type='button'] { float:right; margin-top:1px; }
 div.chooseinfo>div.searchresults { float:left; width:100%; margin-top:10px; font-size:14px; }
 div.chooseinfo>div.searchresults>div { float:left; width:934px; padding:2px 5px; border:solid 1px #DDD; background-color:White; margin-top:2px; }
 div.chooseinfo>div.searchresults>div:hover { border-color:#6FA4E8; }

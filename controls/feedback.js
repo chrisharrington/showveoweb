@@ -61,7 +61,7 @@ Showveo.Controls.Feedback = function(parameters) {
 	var loadComponents = function(panel) {
 		_components = {};
 		_components.panel = panel;
-		_components.label = panel.find(">div>span");
+		_components.label = panel.find("span");
 		_components.hide = panel.find("a").click(hideClicked);
 	}
 

@@ -50,7 +50,6 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 	//
 	var search = function() {
 		_components.linkMore.fadeOut(250);
-		//_components.panel.find("input").attr("disabled", true);
 		_this.clear();
 
 		_onSearch(_components.textMovieSearchName.val(), (_page-1)*_size, _size);
@@ -123,15 +122,15 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 		_components.panelSearchResults = panel.find("div.searchresults");
 		_components.labelSearchResults = panel.find("div.searchresults>div.count>span");
 
-		_components.textMovieSearchName = panel.find("div.input>input[type='text']").enter(search);
+		_components.textMovieSearchName = panel.find("div.input>input[type='text']").enter(search).clearbox();
 		_components.buttonSearch = panel.find("div.input>input[type='button']").click(search);
 		_components.panelDetails = panel.find("div.moviedetails").modal();
 		_components.buttonCloseDetails = panel.find("div.moviedetails input[type='button']:last").click(function () { _components.panelDetails.modal("hide"); });
 		_components.buttonSelectMovie = panel.find("div.moviedetails input[type='button']:first").click(movieSelected);
 
 		_components.linkMore = panel.find("div.searchresults>div.count>a").click(function() {
-			if (_handlers["search"])
-				_handlers["search"](_components.textMovieSearchName.val(), (++_page-1)*_size, _size);
+			if (_onSearch)
+				_onSearch(_components.textMovieSearchName.val(), (++_page-1)*_size, _size);
 		});
 	}
 

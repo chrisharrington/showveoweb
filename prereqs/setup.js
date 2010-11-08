@@ -5,6 +5,8 @@ var Showveo = {};
 //
 $(document).ready(function() {
 
+	Showveo.Validator.validateInheritance();
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -40,7 +42,7 @@ $(document).ready(function() {
 	var loadModels = function(container) {
 		container.Models = {};
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
-		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ apikey: "c26c67ed161834067f4d91430df1024e" });
+		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: "http://localhost:3000/movie", apikey: "c26c67ed161834067f4d91430df1024e" });
 	}
 
 	//
