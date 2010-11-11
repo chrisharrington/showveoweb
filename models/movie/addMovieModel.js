@@ -91,4 +91,6 @@ Showveo.Models.AddMovieModel = function(parameters) {
 	this.initialize(parameters);
 };
 
-Showveo.Models.AddMovieModel.prototype = new Showveo.Models.Base;
+Showveo.Validator.addInheritance(function() {
+	Showveo.Models.AddMovieModel.prototype = new Showveo.Models.Base;	
+});

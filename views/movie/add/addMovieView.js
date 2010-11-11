@@ -53,7 +53,7 @@ Showveo.Views.AddMovieView = function(parameters) {
 		_feedback = parameters.feedback;
 		_uploadService = parameters.uploadService;
 		_handlers = {};
-	}
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
@@ -64,7 +64,7 @@ Showveo.Views.AddMovieView = function(parameters) {
 	//
 	this.loadComponents = function(view) {
 		_components = {};
-		_components.view = view
+		_components.view = view;
 		_components.panelMovieSelection = view.find("div.chooseinfo");
 		_components.panelMovieUpload = view.find("div.choosefile");
 
@@ -83,7 +83,7 @@ Showveo.Views.AddMovieView = function(parameters) {
 			service: _uploadService,
 			onFileSelected: _handlers["movieFileSelected"]
 		});
-	}
+	};
 
 	//
 	//	Sets the result of a search.
@@ -96,21 +96,21 @@ Showveo.Views.AddMovieView = function(parameters) {
 		}
 
 		_components.searchResults.load(movies);
-	}
+	};
 
 	//
 	//	Sets the search results count.
 	//
 	this.searchResultsCount = function() {
 		_components.searchResults.count(_this.model.getResults("searchResultsCount"));
-	}
+	};
 
 	//
 	//	Updates the created movie panels with more information.
 	//
 	this.detailedInfo = function() {
 		_components.searchResults.update(_this.model.getResults("detailedInfo"));
-	}
+	};
 
 	//
 	//	Hides the movie selection step.
@@ -118,14 +118,14 @@ Showveo.Views.AddMovieView = function(parameters) {
 	//
 	this.hideMovieSelection = function(callback) {
 		_components.panelMovieSelection.fadeOut(250, callback);
-	}
+	};
 
 	//
 	//	Shows the movie upload step.
 	//
 	this.showMovieUpload = function() {
 		_components.panelMovieUpload.fadeIn(250);
-	}
+	};
 
 	//
 	//	Starts the upload of the selected file.
@@ -133,10 +133,10 @@ Showveo.Views.AddMovieView = function(parameters) {
 	//
 	this.startUpload = function(file) {
 		_components.upload.upload(file, _movieID);
-	}
+	};
 
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
-}
+};
 
 Showveo.Views.AddMovieView.prototype = new Showveo.Views.Base;

@@ -41,6 +41,7 @@ $(document).ready(function() {
 	//
 	var loadModels = function(container) {
 		container.Models = {};
+		container.Models.UserGuestModel = new Showveo.Models.UserGuestModel({});
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
 		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: "http://localhost:3000/movie", apikey: "c26c67ed161834067f4d91430df1024e" });
 	}
@@ -51,6 +52,12 @@ $(document).ready(function() {
 	//
 	var loadViews = function(container) {
 		container.Views = {};
+
+		container.Views.UserGuestVIew = new Showveo.Views.UserGuestView({
+			path: "views/user/guest",
+			model: container.Models.UserGuestModel,
+			feedback: container.Controls.Feedback
+		});
 
 		container.Views.AddTVView = new Showveo.Views.Base({ path: "views/tv/add/addTV" });
 		
@@ -70,6 +77,13 @@ $(document).ready(function() {
 	var loadControllers = function(container) {
 		container.Controllers = {};
 		var panel = $("div.content>div>div");
+
+		container.Controllers.UserGuestController = new Showveo.Controllers.UserGuestController({
+			panel: panel.find("div.header"),
+			view: container.Views.UserGuestView,
+			model: container.Models.UserGuestModel,
+			feedback: container.Controls.Feedback
+		});
 
 		container.Controllers.AddTVController = new Showveo.Controllers.AddTVController({
 			panel: panel,
