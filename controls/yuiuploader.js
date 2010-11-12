@@ -1,7 +1,7 @@
 Showveo.Validator.validateNamespace("Showveo.Controls");
 
 //
-//	A control used to provide the user with file upload functionality.
+//	A control used to provide the header with file upload functionality.
 //
 Showveo.Controls.YUIUploader = function(parameters) {
 
@@ -28,7 +28,7 @@ Showveo.Controls.YUIUploader = function(parameters) {
 	//	panel:					The panel containing the control elements.
 	//	feedback:				The feedback control.
 	//	service:				The upload service location.
-	//	onFileSelected:			The callback function to execute once the user has chosen a valid file.
+	//	onFileSelected:			The callback function to execute once the header has chosen a valid file.
 	//
 	this.initialize = function(parameters) {
 		_feedback = parameters.feedback;
@@ -54,7 +54,7 @@ Showveo.Controls.YUIUploader = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the user has successfully chosen a file to upload.  Updates the control with the chosen file's
+	//	Fired after the header has successfully chosen a file to upload.  Updates the control with the chosen file's
 	//	information.
 	//	file:					The queued file.
 	//
@@ -69,7 +69,7 @@ Showveo.Controls.YUIUploader = function(parameters) {
 	}
 
 	//
-	//	Fired after an error occurs during upload.  Displays an error message to the user.
+	//	Fired after an error occurs during upload.  Displays an error message to the header.
 	//	error:					The error message.
 	//
 	var fileError = function(error) {
@@ -77,7 +77,7 @@ Showveo.Controls.YUIUploader = function(parameters) {
 	}
 
     //
-    //  Fired after a file has finished uploading.  Displays a success message to the user.
+    //  Fired after a file has finished uploading.  Displays a success message to the header.
     //  event:                  The event object.
 	//	id:						The queue ID.
 	//	file:					The file that uploaded successfully.

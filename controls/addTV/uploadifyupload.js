@@ -1,7 +1,7 @@
 Showveo.Validator.validateNamespace("Showveo.Controls.AddTV");
 
 //
-//	A control used to provide the user with file upload functionality.
+//	A control used to provide the header with file upload functionality.
 //
 Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 
@@ -24,7 +24,7 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	//	The default constructor.
 	//	panel:					The panel containing the control elements.
 	//	feedback:				The feedback control.
-	//	fileSelected:			The callback function to execute once the user has chosen a valid file.
+	//	fileSelected:			The callback function to execute once the header has chosen a valid file.
 	//
 	this.initialize = function(parameters) {
 		_feedback = parameters.feedback;
@@ -47,7 +47,7 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the user has successfully chosen a file to upload.  Updates the control with the chosen file's
+	//	Fired after the header has successfully chosen a file to upload.  Updates the control with the chosen file's
 	//	information.
 	//	event:					The event arguments.
 	//	id:						The queue ID.
@@ -69,7 +69,7 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	}
 
 	//
-	//	Fired when an error occurs during the upload of a file.  Displays an error message to the user.
+	//	Fired when an error occurs during the upload of a file.  Displays an error message to the header.
 	//	file:					The file that failed to upload.
 	//	code:					The error code.
 	//	message:				The error message.
@@ -79,7 +79,7 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	}
 
 	//
-	//	Fired after the upload has successfully been uploaded.  Informs the user.
+	//	Fired after the upload has successfully been uploaded.  Informs the header.
 	//	file:					The successfully uploaded file object.
 	//	data:					The server data.
 	//	response:				The server response.
@@ -98,7 +98,7 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	}
 	
 	//
-	//	Fired after an error occurs during upload.  Displays an error message to the user.
+	//	Fired after an error occurs during upload.  Displays an error message to the header.
 	//	event:					The event object.
 	//	id:						The queue ID.
 	//	file:					The file that failed to upload.
@@ -110,7 +110,7 @@ Showveo.Controls.AddTV.UploadifyUpload = function(parameters) {
 	}
 
     //
-    //  Fired after a file has finished uploading.  Displays a success message to the user.
+    //  Fired after a file has finished uploading.  Displays a success message to the header.
     //  event:                  The event object.
 	//	id:						The queue ID.
 	//	file:					The file that uploaded successfully.

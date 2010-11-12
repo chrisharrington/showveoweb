@@ -1,7 +1,7 @@
 Showveo.Validator.validateNamespace("Showveo.Controls.AddTV");
 
 //
-//	A control used to provide the user with file upload functionality.
+//	A control used to provide the header with file upload functionality.
 //
 Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 
@@ -24,7 +24,7 @@ Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 	//	The default constructor.
 	//	panel:					The panel containing the control elements.
 	//	feedback:				The feedback control.
-	//	fileSelected:			The callback function to execute once the user has chosen a valid file.
+	//	fileSelected:			The callback function to execute once the header has chosen a valid file.
 	//
 	this.initialize = function(parameters) {
 		_feedback = parameters.feedback;
@@ -47,7 +47,7 @@ Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the user has clicked the "browse" button to open the file selection dialog.  Clears the current
+	//	Fired after the header has clicked the "browse" button to open the file selection dialog.  Clears the current
 	//	queue.
 	//
 	var fileDialogStarted = function() {
@@ -55,7 +55,7 @@ Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 	}
 
 	//
-	//	Fired after the user has chosen a file.  Updates the view with the file information.
+	//	Fired after the header has chosen a file.  Updates the view with the file information.
 	//	file:					The queued file.
 	//
 	var fileQueued = function(file) {
@@ -63,7 +63,7 @@ Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 	}
 
 	//
-	//	Fired after the user has attempted to queue a file, but an error occurs.  Informs the user of
+	//	Fired after the header has attempted to queue a file, but an error occurs.  Informs the header of
 	//	the error.
 	//	file:					The queued file.
 	//	code:					The error code.
@@ -74,7 +74,7 @@ Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 	}
 
 	//
-	//	Fired after the user has successfully chosen a file to upload.  Updates the control with the chosen file's
+	//	Fired after the header has successfully chosen a file to upload.  Updates the control with the chosen file's
 	//	information.
 	//	numselected:			The number of selected files.
 	//	numqueued:				The number of queued files from this selection.
@@ -107,7 +107,7 @@ Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 	}
 
 	//
-	//	Fired when an error occurs during the upload of a file.  Displays an error message to the user.
+	//	Fired when an error occurs during the upload of a file.  Displays an error message to the header.
 	//	file:					The file that failed to upload.
 	//	code:					The error code.
 	//	message:				The error message.
@@ -117,7 +117,7 @@ Showveo.Controls.AddTV.Html5Upload = function(parameters) {
 	}
 
 	//
-	//	Fired after the upload has successfully been uploaded.  Informs the user.
+	//	Fired after the upload has successfully been uploaded.  Informs the header.
 	//	file:					The successfully uploaded file object.
 	//	data:					The server data.
 	//	response:				The server response.

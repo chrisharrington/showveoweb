@@ -3,7 +3,7 @@
  *
  * mmSWFUpload 1.0: Flash upload dialog - http://profandesign.se/swfupload/,  http://www.vinterwebb.se/
  *
- * SWFUpload is (c) 2006-2007 Lars Huring, Olov Nilzén and Mammon Media and is released under the MIT License:
+ * SWFUpload is (c) 2006-2007 Lars Huring, Olov Nilzï¿½n and Mammon Media and is released under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
  *
  * SWFUpload 2 is (c) 2007-2008 Jake Roberts and is released under the MIT License:
@@ -563,7 +563,7 @@ SWFUpload.prototype.selectFile = function () {
 
 // WARNING: this function does not work in Flash Player 10
 // Public: selectFiles causes a File Selection Dialog window to appear/ This
-// dialog allows the user to select any number of files
+// dialog allows the header to select any number of files
 // Flash Bug Warning: Flash limits the number of selectable files based on the combined length of the file names.
 // If the selection name length is too long the dialog will fail in an unpredictable manner.  There is no work-around
 // for this bug.
@@ -625,7 +625,7 @@ SWFUpload.prototype.getStats = function () {
 // Public: setStats changes the SWFUpload statistics.  You shouldn't need to 
 // change the statistics but you can.  Changing the statistics does not
 // affect SWFUpload accept for the successful_uploads count which is used
-// by the upload_limit setting to determine how many files the user may upload.
+// by the upload_limit setting to determine how many files the header may upload.
 SWFUpload.prototype.setStats = function (statsObject) {
 	this.callFlash("SetStats", [statsObject]);
 };
@@ -883,7 +883,7 @@ SWFUpload.prototype.unescapeFilePostParams = function (file) {
 	return file;
 };
 
-// Private: This event is called by SWFUpload Init after we've determined what the user's Flash Player supports.
+// Private: This event is called by SWFUpload Init after we've determined what the header's Flash Player supports.
 // Use the swfupload_preload_handler event setting to execute custom code when SWFUpload has loaded.
 // Return false to prevent SWFUpload from loading and allow your script to do something else if your required feature is
 // not supported

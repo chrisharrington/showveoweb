@@ -39,7 +39,7 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the user initiates a movie search.  Displays the movie search control filled with search results.
+	//	Fired after the header initiates a movie search.  Displays the movie search control filled with search results.
 	//	name:							The name of movie for which to search.
 	//	start:							The position at which to begin retrieving results.
 	//	count:							The number of results to retrieve.
@@ -54,14 +54,14 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	};
 
 	//
-	//	Fired after the user has selected a movie.  Hides the movie data selection step and shows the movie upload step.
+	//	Fired after the header has selected a movie.  Hides the movie data selection step and shows the movie upload step.
 	//
 	var onMovieSelected = function() {
 		_view.hideMovieSelection(_view.showMovieUpload);
 	};
 
 	//
-	//	Fired after the user has selected a movie file to upload.  Immediately begins the upload.
+	//	Fired after the header has selected a movie file to upload.  Immediately begins the upload.
 	//	file:							The selected file.
 	//
 	var onMovieFileSelected = function(file) {

@@ -46,7 +46,7 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the user submits a search.
+	//	Fired after the header submits a search.
 	//
 	var search = function() {
 		_components.linkMore.fadeOut(250);

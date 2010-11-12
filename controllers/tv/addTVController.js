@@ -57,7 +57,7 @@ Showveo.Controllers.AddTVController = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the user has selected a file.  Displays the file information to the user.
+	//	Fired after the header has selected a file.  Displays the file information to the header.
 	//	file:							The selected file.
 	//
 	var fileSelected = function(file) {
@@ -67,7 +67,7 @@ Showveo.Controllers.AddTVController = function(parameters) {
 	}
 
 	//
-	//	Fired after the user has clicked on the upload button.  Begins the upload of the selected file.
+	//	Fired after the header has clicked on the upload button.  Begins the upload of the selected file.
 	//
 	var buttonUploadClicked = function() {
 		_components.upload.upload();

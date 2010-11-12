@@ -1,9 +1,9 @@
 Showveo.Validator.validateNamespace("Showveo.Views");
 
 //
-//	The view for the user-guest control.
+//	The view for the header control.
 //
-Showveo.Views.UserGuestView = function(parameters) {
+Showveo.Views.HeaderView = function(parameters) {
 
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -29,11 +29,11 @@ Showveo.Views.UserGuestView = function(parameters) {
 
 	//
 	//	The default constructor.
-	//	model:						The user-guest model.
+	//	model:						The header model.
 	//	feedback:					The feedback control.
 	//
-	_feedback = parameters.feedback;
 	this.initialize = function(parameters) {
+		_feedback = parameters.feedback;
 		_handlers = {};
 	};
 
@@ -41,7 +41,7 @@ Showveo.Views.UserGuestView = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the user fires a sign in event.  Retrieves the email address and password to send to the controller.
+	//	Fired after the header fires a sign in event.  Retrieves the email address and password to send to the controller.
 	//
 	var onSignIn = function() {
 		_handlers["onSignIn"](_components.textEmailAddress.clearbox("value"), _components.textPassword.clearbox("value"));
@@ -70,5 +70,5 @@ Showveo.Views.UserGuestView = function(parameters) {
 };
 
 Showveo.Validator.addInheritance(function() {
-	Showveo.Views.UserGuestView.prototype = new Showveo.Views.Base;
+	Showveo.Views.HeaderView.prototype = new Showveo.Views.Base;
 });

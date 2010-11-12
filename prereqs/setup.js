@@ -20,8 +20,8 @@ $(document).ready(function() {
 		loadViews(container);
 		loadControllers(container);
 
+		container.Controllers.HeaderController.load();
 		container.Controllers.AddMovieController.load();
-		container.Controllers.UserGuestController.load();
 
 		$(document).bind("ajaxError", function(status, request, error) {
 			error = container.Controls.Feedback.error;
@@ -51,7 +51,7 @@ $(document).ready(function() {
 	//
 	var loadModels = function(container) {
 		container.Models = {};
-		container.Models.UserGuestModel = new Showveo.Models.UserGuestModel({ service: "http://localhost:3000/data"});
+		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: "http://localhost:3000/data"});
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
 		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: "http://localhost:3000/movie", apikey: "c26c67ed161834067f4d91430df1024e" });
 	};
@@ -63,9 +63,9 @@ $(document).ready(function() {
 	var loadViews = function(container) {
 		container.Views = {};
 
-		container.Views.UserGuestView = new Showveo.Views.UserGuestView({
-			path: "views/user/guest",
-			model: container.Models.UserGuestModel,
+		container.Views.HeaderView = new Showveo.Views.HeaderView({
+			path: "views/header/header",
+			model: container.Models.HeaderModel,
 			feedback: container.Controls.Feedback
 		});
 
@@ -88,10 +88,10 @@ $(document).ready(function() {
 		container.Controllers = {};
 		var panel = $("div.content>div>div");
 
-		container.Controllers.UserGuestController = new Showveo.Controllers.UserGuestController({
+		container.Controllers.HeaderController = new Showveo.Controllers.HeaderController({
 			panel: $("div.header>div"),
-			view: container.Views.UserGuestView,
-			model: container.Models.UserGuestModel,
+			view: container.Views.HeaderView,
+			model: container.Models.HeaderModel,
 			feedback: container.Controls.Feedback
 		});
 

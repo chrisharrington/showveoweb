@@ -1,7 +1,7 @@
 Showveo.Validator.validateNamespace("Showveo.Controls");
 
 //
-//	The control used to display global error, success and working messages to the user.
+//	The control used to display global error, success and working messages to the header.
 //
 Showveo.Controls.Feedback = function(parameters) {
 
@@ -45,7 +45,7 @@ Showveo.Controls.Feedback = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the user clicks the hide link.  Hides the feedback control.
+	//	Fired after the header clicks the hide link.  Hides the feedback control.
 	//
 	var hideClicked = function() {
 		clear();

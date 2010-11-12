@@ -1,9 +1,9 @@
 Showveo.Validator.validateNamespace("Showveo.Controllers");
 
 //
-//	The controller for the user-guest control.
+//	The controller for the header control.
 //
-Showveo.Controllers.UserGuestController = function(parameters) {
+Showveo.Controllers.HeaderController = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
@@ -40,9 +40,9 @@ Showveo.Controllers.UserGuestController = function(parameters) {
 	/* Event Handlers */
 
 	//
-	//	Fired after the view reports a sign in event.  Verifies the user's credentials and performs a sign in operation.
-	//	emailAddress:					The user's email address.
-	//	password:						The user's password.
+	//	Fired after the view reports a sign in event.  Verifies the header's credentials and performs a sign in operation.
+	//	emailAddress:					The header's email address.
+	//	password:						The header's password.
 	//
 	var onSignIn = function(emailAddress, password) {
 		try {
@@ -56,7 +56,7 @@ Showveo.Controllers.UserGuestController = function(parameters) {
 			_model.signIn(emailAddress, password, function(user) {
 				try {
 					if (!user)
-						throw "The credentials specified correspond to no user.";
+						throw "The credentials specified correspond to no header.";
 
 					alert("success!");
 				} catch (error) {
@@ -85,5 +85,5 @@ Showveo.Controllers.UserGuestController = function(parameters) {
 };
 
 Showveo.Validator.addInheritance(function() {
-	Showveo.Controllers.UserGuestController.prototype = new Showveo.Controllers.Base;
+	Showveo.Controllers.HeaderController.prototype = new Showveo.Controllers.Base;
 });
