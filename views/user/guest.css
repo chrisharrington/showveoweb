@@ -1,0 +1,4 @@
+div.guest { float:right; }
+div.guest>* { float:left; margin-left:5px; }
+div.guest>input[type='text'], div.guest>input[type='password'] { width:180px; font-size:11px; padding:2px; }
+div.guest>button { padding:1px; margin-top:1px; }

@@ -71,7 +71,7 @@ Showveo.Controls.Feedback = function(parameters) {
 	//
 	var show = function(message) {
 		_components.panel.slideUp(250, function() {
-			_components.label.text(message);
+			_components.label.html(message.toString ? message.toString() : message);
 			_components.panel.slideDown(250);
 		});
 	}

@@ -31,6 +31,7 @@ Showveo.Views.Base = function(parameters) {
 	//	model:						The model.
 	//	path:						The path of the html code for the inheriting view.
 	//	feedback:					The feedback control.
+	//	container:					The container into which the view should be loaded.
 	//
 	this.base_initialize = function(parameters, implementer) {
 		parameters.model.register(implementer);
@@ -48,17 +49,15 @@ Showveo.Views.Base = function(parameters) {
 
 	//
 	//	Loads the view's html code.
-	//	callback:					The callback function to execute once the load has completed.
+	//	panel:						The panel into which the html should be loaded.
 	//
-	this.load = function(callback) {
+	this.load = function(panel) {
 		if (!_path)
 			return;
 
 		$.get(_path + ".html", function(html) {
-			if (callback)
-				callback(html);
-
-			_implementer.loadComponents($("div.content>div>div"));
+			panel.append(html);
+			_implementer.loadComponents(panel);
 		});
 
 		$("head").append($("<link>").attr({ type: "text/css", rel: "stylesheet", href: _path + ".css" }));

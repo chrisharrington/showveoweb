@@ -21,10 +21,10 @@ Showveo.Controllers.Base = function(parameters) {
 	/* Properties */
 
 	//	Returns the view.
-	this.getView = function() { return _view; }
+	this.getView = function() { return _view; };
 
 	//	Returns the model.
-	this.getModel = function() { return _model; }
+	this.getModel = function() { return _model; };
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
@@ -39,7 +39,7 @@ Showveo.Controllers.Base = function(parameters) {
 		_panel = parameters.panel;
 		_view = parameters.view;
 		_implementer = implementer;
-	}
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
@@ -48,9 +48,6 @@ Showveo.Controllers.Base = function(parameters) {
 	//	Loads the view and controller.
 	//
 	this.load = function() {
-		_view.load(function(html) {
-			html = $(html);
-			_panel.append(html);
-		});
-	}
+		_view.load(_panel);
+	};
 };

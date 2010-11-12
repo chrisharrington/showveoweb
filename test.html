@@ -3,14 +3,25 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title></title>
+	<link type="text/css" rel="stylesheet" href="/css/common.css" />
 	<style type="text/css">
-		span { float:left; width:100%; }
+		body { background-color:White; }
+		button { float:left; margin-top:100px; margin-left:10px; }
+		button:first-child { margin-left:100px; }
 	</style>
 </head>
 
 <body>
-	<form action="/upload/movie/12345" enctype="multipart/form-data" method="post">
-		<input type="file" />
-		<input type="submit" value="Submit" />
-	</form>
+	<button class="success">
+		<img src="/images/greencheckbutton.png" alt="" />
+		<span>Sign In</span>
+	</button>
+	<button class="neutral">
+		<img src="/images/searchbutton.png" alt="" />
+		<span>Neutral</span>
+	</button>
+	<button class="negative">
+		<img src="/images/redxbutton.png" alt="" />
+		<span>Negative</span>
+	</button>
 </html>

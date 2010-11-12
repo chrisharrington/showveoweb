@@ -21,7 +21,17 @@ $(document).ready(function() {
 		loadControllers(container);
 
 		container.Controllers.AddMovieController.load();
-	}
+		container.Controllers.UserGuestController.load();
+
+		$(document).bind("ajaxError", function(status, request, error) {
+			error = container.Controls.Feedback.error;
+			status = parseInt(request.status);
+			if (status <= 510)
+				error("An unexpected technical error has occurred.  Our support staff have been notified.  Please try again later!");
+			else if (status > 510)
+				error("Error!!1");
+		});
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
@@ -33,7 +43,7 @@ $(document).ready(function() {
 	var loadControls = function(container) {
 		container.Controls = {};
 		container.Controls.Feedback = new Showveo.Controls.Feedback({ panel: $("div.feedback") });
-	}
+	};
 
 	//
 	//	Loads the necessary model objects and stores them in the given container.
@@ -41,10 +51,10 @@ $(document).ready(function() {
 	//
 	var loadModels = function(container) {
 		container.Models = {};
-		container.Models.UserGuestModel = new Showveo.Models.UserGuestModel({});
+		container.Models.UserGuestModel = new Showveo.Models.UserGuestModel({ service: "http://localhost:3000/data"});
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
 		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: "http://localhost:3000/movie", apikey: "c26c67ed161834067f4d91430df1024e" });
-	}
+	};
 
 	//
 	//	Loads the necessary view objects and stores them in the given container.
@@ -53,7 +63,7 @@ $(document).ready(function() {
 	var loadViews = function(container) {
 		container.Views = {};
 
-		container.Views.UserGuestVIew = new Showveo.Views.UserGuestView({
+		container.Views.UserGuestView = new Showveo.Views.UserGuestView({
 			path: "views/user/guest",
 			model: container.Models.UserGuestModel,
 			feedback: container.Controls.Feedback
@@ -67,7 +77,7 @@ $(document).ready(function() {
 			feedback: container.Controls.Feedback,
 			uploadService: "/upload/movie/"
 		});
-	}
+	};
 
 	//
 	//	Loads the necessary controller objects and stores them in the given container.  Assumes
@@ -79,7 +89,7 @@ $(document).ready(function() {
 		var panel = $("div.content>div>div");
 
 		container.Controllers.UserGuestController = new Showveo.Controllers.UserGuestController({
-			panel: panel.find("div.header"),
+			panel: $("div.header>div"),
 			view: container.Views.UserGuestView,
 			model: container.Models.UserGuestModel,
 			feedback: container.Controls.Feedback
@@ -98,7 +108,7 @@ $(document).ready(function() {
 			model: container.Models.AddMovieModel,
 			feedback: container.Controls.Feedback
 		});
-	}
+	};
 
 	this.initialize();
 });

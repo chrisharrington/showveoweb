@@ -17,9 +17,6 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	//	The model for the controller.
 	var _model;
 
-	//	The feedback control.
-	var _feedback;
-
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -28,6 +25,7 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	//	view:							The add movie view.
 	//	model:							The add movie model.
 	//	feedback:						The feedback control.
+	//	header:							The header controller.
 	//
 	this.initialize = function(parameters) {
 		_view = parameters.view;
@@ -35,7 +33,7 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 		_components = {};
 
 		loadHandlers();
-	}
+	};
 	
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handlers */
@@ -53,14 +51,14 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 		}
 
 		_model.search(name, start, count);
-	}
+	};
 
 	//
 	//	Fired after the user has selected a movie.  Hides the movie data selection step and shows the movie upload step.
 	//
 	var onMovieSelected = function() {
 		_view.hideMovieSelection(_view.showMovieUpload);
-	}
+	};
 
 	//
 	//	Fired after the user has selected a movie file to upload.  Immediately begins the upload.
@@ -68,7 +66,7 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 	//
 	var onMovieFileSelected = function(file) {
 		_view.startUpload(file);
-	}
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
@@ -80,7 +78,7 @@ Showveo.Controllers.AddMovieController = function(parameters) {
 		_view.onSearch(onSearch);
 		_view.onMovieSelected(onMovieSelected);
 		_view.onMovieFileSelected(onMovieFileSelected);
-	}
+	};
 
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
