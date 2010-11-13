@@ -14,11 +14,17 @@ Showveo.Controllers.HeaderController = function(parameters) {
 	//	The feedback control.
 	var _feedback;
 
+	//	Reads and writes cookies.
+	var _cookie;
+
 	//	The view.
 	var _view;
 
 	//	The model.
 	var _model;
+
+	//	The callback function to execute once a user has signed in.
+	var _onSignIn;
 	
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
@@ -28,10 +34,14 @@ Showveo.Controllers.HeaderController = function(parameters) {
 	//	view:							The view for the controller.
 	//	model:							The model for the controller.
 	//	feedback:						The feedback control.
+	//	cookie:							Reads and writes cookies.
+	//	onSignIn:						The callback function to execute once a user has signed in.
 	//
 	this.initialize = function(parameters) {
 		_view = parameters.view;
 		_model = parameters.model;
+		_cookie = parameters.cookie;
+		_onSignIn = parameters.onSignIn;
 
 		loadHandlers();
 	};
@@ -58,7 +68,11 @@ Showveo.Controllers.HeaderController = function(parameters) {
 					if (!user)
 						throw "The credentials specified correspond to no header.";
 
-					alert("success!");
+					_cookie.write("identity", user.identity);
+					_view.signedIn(user);
+
+					if (_onSignIn)
+						_onSignIn(user);
 				} catch (error) {
 					_view.error(error);
 				}

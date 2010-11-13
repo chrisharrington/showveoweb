@@ -2,3 +2,8 @@ div.guest { float:right; }
 div.guest>* { float:left; margin-left:5px; }
 div.guest>input[type='text'], div.guest>input[type='password'] { width:180px; font-size:11px; padding:2px; }
 div.guest>button { padding:1px; margin-top:1px; }
+
+div.user { float:left; width:100%; display:none; font-size:13px; }
+div.user>div.account { float:right; }
+div.user>div.account>span { float:left; }
+div.user>div.account>a { float:left; margin-left:15px; cursor:pointer; }

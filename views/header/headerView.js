@@ -57,10 +57,29 @@ Showveo.Views.HeaderView = function(parameters) {
 	this.loadComponents = function(view) {
 		_components = {};
 		_components.view = view;
-		_components.textEmailAddress = view.find("input[type='text']:first").clearbox().enter(onSignIn);
-		_components.textPassword = view.find("input[type='password']:last").clearbox().enter(onSignIn);
-		_components.buttonSignIn = view.find("button").click(onSignIn);
+
+		_components.panelGuest = view.find("div.guest");
+		_components.textEmailAddress = view.find("div.guest>input[type='text']:first").clearbox().enter(onSignIn);
+		_components.textPassword = view.find("div.guest>input[type='password']:last").clearbox().enter(onSignIn);
+		_components.buttonSignIn = view.find("div.guest>button").click(onSignIn);
+
+		_components.panelUser = view.find("div.user");
+		_components.panelAccount = _components.panelUser.find(">div.account");
+		_components.labelName = _components.panelAccount.find("b");
+		_components.linkSignOut = _components.panelAccount.find("a");
 	};
+
+	//
+	//	Called by the controller after a user has been successfully signed in.  Hides the sign in control and displays
+	//	the user's account control.
+	//	user:						The signed in user.
+	//
+	this.signedIn = function(user) {
+		_components.panelGuest.fadeOut(200, function() {
+			_components.labelName.text(user.firstName);			
+			_components.panelUser.fadeIn(200);
+		});
+	}
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */

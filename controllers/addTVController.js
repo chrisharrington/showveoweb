@@ -30,7 +30,7 @@ Showveo.Controllers.AddTVController = function(parameters) {
 		_model = parameters.model;
 		_feedback = parameters.feedback;
 		_components = {};
-	}
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
@@ -51,7 +51,7 @@ Showveo.Controllers.AddTVController = function(parameters) {
 			feedback: _feedback,
 			fileSelected: fileSelected
 		});
-	}
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handlers */
@@ -64,17 +64,19 @@ Showveo.Controllers.AddTVController = function(parameters) {
 		_components.labelFileName.text(file.name);
 		_components.labelFileSize.text(file.size + " bytes");
 		_components.panelFile.slideDown(250);
-	}
+	};
 
 	//
 	//	Fired after the header has clicked on the upload button.  Begins the upload of the selected file.
 	//
 	var buttonUploadClicked = function() {
 		_components.upload.upload();
-	}
+	};
 
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
 };
 
-Showveo.Controllers.AddTVController.prototype = new Showveo.Controllers.Base;
+Showveo.Validator.addInheritance(function() {
+	Showveo.Controllers.AddTVController.prototype = new Showveo.Controllers.Base;
+});

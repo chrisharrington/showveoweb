@@ -56,8 +56,12 @@ Showveo.Views.Base = function(parameters) {
 			return;
 
 		$.get(_path + ".html", function(html) {
-			panel.append(html);
-			_implementer.loadComponents(panel);
+			panel.fadeOut(200, function() {
+				panel.empty().append(html);
+				_implementer.loadComponents(panel);
+
+				panel.fadeIn(200);
+			});
 		});
 
 		$("head").append($("<link>").attr({ type: "text/css", rel: "stylesheet", href: _path + ".css" }));
