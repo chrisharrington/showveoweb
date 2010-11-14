@@ -25,7 +25,10 @@ Showveo.Controllers.HeaderController = function(parameters) {
 
 	//	The callback function to execute once a user has signed in.
 	var _onSignIn;
-	
+
+	//	The callback function to execute once a user has signed out.
+	var _onSignOut;
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -36,12 +39,14 @@ Showveo.Controllers.HeaderController = function(parameters) {
 	//	feedback:						The feedback control.
 	//	cookie:							Reads and writes cookies.
 	//	onSignIn:						The callback function to execute once a user has signed in.
+	//	onSignOut:						The callback function to execute once a user has signed out.
 	//
 	this.initialize = function(parameters) {
 		_view = parameters.view;
 		_model = parameters.model;
 		_cookie = parameters.cookie;
 		_onSignIn = parameters.onSignIn;
+		_onSignOut = parameters.onSignOut;
 
 		loadHandlers();
 	};
@@ -84,6 +89,16 @@ Showveo.Controllers.HeaderController = function(parameters) {
 		}
 	};
 
+    //
+    //  Fired after the view indicates that the user wishes to sign out.  Removes the user cookie and redirects the user
+    //  to the landing page.
+    //
+    var onSignOut = function() {
+    	_cookie.remove("identity");
+		_view.signedOut();
+		_onSignOut();
+    };
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
 
@@ -92,6 +107,7 @@ Showveo.Controllers.HeaderController = function(parameters) {
 	//
 	var loadHandlers = function() {
 		_view.onSignIn(onSignIn);
+        _view.onSignOut(onSignOut);
 	};
 
 	this.base_initialize(parameters, this);

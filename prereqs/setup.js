@@ -53,6 +53,13 @@ $(document).ready(function() {
 		_container.Controllers.LandingController.signIn();
 	};
 
+	//
+	//	Fired after a user has signed out.  Redirects the user to the landing page.
+	//
+	var onSignOut = function() {
+		_container.Controllers.LandingController.load();
+	};
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
 
@@ -117,12 +124,13 @@ $(document).ready(function() {
 		var panel = $("div.content>div>div");
 
 		container.Controllers.HeaderController = new Showveo.Controllers.HeaderController({
-			panel: $("div.header>div"),
+			panel: $("div.header>div>div"),
 			view: container.Views.HeaderView,
 			model: container.Models.HeaderModel,
 			feedback: container.Controls.Feedback,
 			cookie: container.Controls.Cookie,
-			onSignIn: onSignIn
+			onSignIn: onSignIn,
+			onSignOut: onSignOut
 		});
 
 		container.Controllers.AddTVController = new Showveo.Controllers.AddTVController({

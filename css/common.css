@@ -25,7 +25,8 @@ input[type='text'].rounded, input[type='password'].rounded { -moz-border-radius:
 
 div.header { float:left; width:100%; background:url(../images/headergradient.jpg) repeat-x; height:50px; }
 div.header a { color:#77B2ED; cursor:pointer; }
-div.header>div { width:990px; margin:auto; color:White; margin-top:16px; display:none; }
+div.header>div { width:990px; margin:auto; color:White; margin-top:14px; }
+div.header>div>div { float:left; width:100%; display:none; }
 
 div.feedback { float:left; width:100%; display:none; height:30px; color:White; }
 div.feedback>div { margin:auto; width:990px; padding:5px 0px; }

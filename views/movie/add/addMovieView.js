@@ -139,4 +139,6 @@ Showveo.Views.AddMovieView = function(parameters) {
 	this.initialize(parameters);
 };
 
-Showveo.Views.AddMovieView.prototype = new Showveo.Views.Base;
+Showveo.Validator.addInheritance(function() {
+    Showveo.Views.AddMovieView.prototype = new Showveo.Views.Base;
+});

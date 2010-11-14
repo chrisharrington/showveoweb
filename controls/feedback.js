@@ -84,4 +84,4 @@ Showveo.Controls.Feedback = function(parameters) {
 	}
 
 	this.initialize(parameters);
-};
+};//

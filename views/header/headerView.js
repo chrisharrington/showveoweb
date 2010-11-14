@@ -24,6 +24,9 @@ Showveo.Views.HeaderView = function(parameters) {
 	//	Sets the handler for the sign in event.
 	this.onSignIn = function(handler) { _handlers["onSignIn"] = handler; };
 
+    //  Sets the handler for the sign out event.
+    this.onSignOut = function(handler) { _handlers["onSignOut"] = handler; };
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -66,7 +69,7 @@ Showveo.Views.HeaderView = function(parameters) {
 		_components.panelUser = view.find("div.user");
 		_components.panelAccount = _components.panelUser.find(">div.account");
 		_components.labelName = _components.panelAccount.find("b");
-		_components.linkSignOut = _components.panelAccount.find("a");
+		_components.linkSignOut = _components.panelAccount.find("a").click(_handlers["onSignOut"]);
 	};
 
 	//
@@ -79,7 +82,18 @@ Showveo.Views.HeaderView = function(parameters) {
 			_components.labelName.text(user.firstName);			
 			_components.panelUser.fadeIn(200);
 		});
-	}
+	};
+
+	//
+	//	Called by the controller after the user has signed out.  Hides the user panel and shows the guest panel.
+	//
+	this.signedOut = function() {
+		_components.panelUser.fadeOut(200, function() {
+			_components.textEmailAddress.clearbox("reset");
+			_components.textPassword.clearbox("reset");
+			_components.panelGuest.fadeIn(200);
+		});
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */

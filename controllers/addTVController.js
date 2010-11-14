@@ -1,4 +1,4 @@
-Showveo.Validator.validateNamespace("Showveo.Controllersr");
+Showveo.Validator.validateNamespace("Showveo.Controllers");
 
 //
 //	A controller used to provide event delegation for adding a TV show.

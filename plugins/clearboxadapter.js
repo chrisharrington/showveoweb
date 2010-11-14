@@ -15,8 +15,11 @@
 
 			return this.each(function () {
 				var input = $(this);
-				if (method && method == "reset")
+				if (method && method == "reset") {
 					input.val(input.attr("name")).css("color", color);
+					if (input.is("input[type='password']"))
+						input.hide().next("input[type='text']").show();
+				}
 				else {
 					if (input.is("input[type='password']")) {
 						var textbox = $("<input type=\"text\" />").val(input.val()).show().css("color", color).focus(function () {
