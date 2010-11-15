@@ -25,20 +25,9 @@ $(document).ready(function() {
 		loadModels(container);
 		loadViews(container);
 		loadControllers(container);
+		loadErrorHandlers();
 
-		container.Controllers.HeaderController.load();
-		container.Controllers.LandingController.load();
-
-		$(document).bind("ajaxError", function(status, request, error) {
-			error = container.Controls.Feedback.error;
-			status = parseInt(request.status);
-			if (status <= 510) {
-				error("An unexpected technical error has occurred.  Our support staff have been notified.  Please try again later!");
-				Showveo.Error = request.responseText;
-			}
-			else if (status > 510)
-				error("Error!!1");
-		});
+		container.Controllers.GuestController.load();
 		
 		_container = container;
 	};
@@ -48,9 +37,11 @@ $(document).ready(function() {
 
 	//
 	//	Fired after a user has signed in.  Shows the default landing page for the user.
+	//	user:							The signed in user.
+	//	initial:						A flag indicating that the sign in operation occurred at application load.
 	//
-	var onSignIn = function() {
-		_container.Controllers.LandingController.signIn();
+	var onSignIn = function(user, initial) {
+		_container.Controllers.LandingController.signIn(initial);
 	};
 
 	//
@@ -71,6 +62,7 @@ $(document).ready(function() {
 		container.Controls = {};
 		container.Controls.Feedback = new Showveo.Controls.Feedback({ panel: $("div.feedback") });
 		container.Controls.Cookie = new Showveo.Controls.Cookie();
+		container.Controls.Header = new Showveo.Controls.Header({ panel: $("div.header"), cookie: container.Controls.Cookie });
 	};
 
 	//
@@ -79,7 +71,7 @@ $(document).ready(function() {
 	//
 	var loadModels = function(container) {
 		container.Models = {};
-		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: "http://localhost:3000/data"});
+		container.Models.GuestModel = new Showveo.Models.GuestModel({ service: "http://localhost:3000/guest" });
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
 		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: "http://localhost:3000/movie", apikey: "c26c67ed161834067f4d91430df1024e" });
 		container.Models.LandingModel = new Showveo.Models.LandingModel({});
@@ -90,11 +82,13 @@ $(document).ready(function() {
 	//	container:						Holds the loaded views, referenced by namespace.
 	//
 	var loadViews = function(container) {
+		var panel = $("div.content>div>div");
 		container.Views = {};
 
-		container.Views.HeaderView = new Showveo.Views.HeaderView({
-			path: "views/header/header",
-			model: container.Models.HeaderModel,
+		container.Views.GuestView = new Showveo.Views.GuestView({
+			path: "views/guest/guest",
+			panel: panel,
+			model: container.Models.GuestModel,
 			feedback: container.Controls.Feedback
 		});
 
@@ -109,6 +103,7 @@ $(document).ready(function() {
 
 		container.Views.LandingView = new Showveo.Views.LandingView({
 			path: "views/landing/landing",
+			panel: $("div.content>div>div"),
 			model: container.Models.LandingModel,
 			feedback: container.Controls.Feedback
 		});
@@ -123,15 +118,12 @@ $(document).ready(function() {
 		container.Controllers = {};
 		var panel = $("div.content>div>div");
 
-		container.Controllers.HeaderController = new Showveo.Controllers.HeaderController({
-			panel: $("div.header>div>div"),
-			view: container.Views.HeaderView,
-			model: container.Models.HeaderModel,
-			feedback: container.Controls.Feedback,
-			cookie: container.Controls.Cookie,
-			onSignIn: onSignIn,
-			onSignOut: onSignOut
+		container.Controllers.GuestController = new Showveo.Controllers.GuestController({
+			view: container.Views.GuestView,
+			model: container.Models.GuestModel,
+			header: container.Controls.Header
 		});
+
 
 		container.Controllers.AddTVController = new Showveo.Controllers.AddTVController({
 			panel: panel,
@@ -148,11 +140,26 @@ $(document).ready(function() {
 		});
 
 		container.Controllers.LandingController = new Showveo.Controllers.LandingController({
-			panel: panel,
 			view: container.Views.LandingView,
 			model: container.Models.LandingModel,
 			feedback: container.Controls.Feedback,
 			onMovieSelection: function() { container.Controllers.AddMovieController.load(); }
+		});
+	};
+
+	//
+	//	Loads the error handlers.
+	//
+	var loadErrorHandlers = function() {
+		$(document).bind("ajaxError", function(status, request, error) {
+			error = container.Controls.Feedback.error;
+			status = parseInt(request.status);
+			if (status <= 510) {
+				error("An unexpected technical error has occurred.  Our support staff have been notified.  Please try again later!");
+				Showveo.Error = request.responseText;
+			}
+			else if (status > 510)
+				error("Error!!1");
 		});
 	};
 

@@ -15,7 +15,7 @@ Showveo.Controllers.Base = function(parameters) {
 	var _view;
 
 	//	The implementer of this class.
-	var _implementor;
+	var _implementer;
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Properties */
@@ -33,7 +33,7 @@ Showveo.Controllers.Base = function(parameters) {
 	//	The default constructor.
 	//	panel:						The panel into which the view contents should be inserted.
 	//	view:						The view to be loaded.
-	//	implementor:				The implementor of this base class.
+	//	implementer:				The implementer of this base class.
 	//
 	this.base_initialize = function(parameters, implementer) {
 		_panel = parameters.panel;
@@ -48,6 +48,9 @@ Showveo.Controllers.Base = function(parameters) {
 	//	Loads the view and controller.
 	//
 	this.load = function() {
-		_view.load(_panel);
+		_view.load(function() {
+			if (_implementer.loaded)
+				_implementer.loaded();
+		});
 	};
 };

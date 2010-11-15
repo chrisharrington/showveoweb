@@ -1,9 +1,9 @@
 Showveo.Validator.validateNamespace("Showveo.Views");
 
 //
-//	The view for the landing page.
+//	The view for the guest page.
 //
-Showveo.Views.LandingView = function(parameters) {
+Showveo.Views.GuestView = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
@@ -16,9 +16,6 @@ Showveo.Views.LandingView = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Properties */
-
-	//	Sets the event handler for when the user clicks the movie panel.
-	this.onMovieSelection = function(handler) { _handlers["onMovieSelection"] = handler; };
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
@@ -39,22 +36,6 @@ Showveo.Views.LandingView = function(parameters) {
 	//
 	this.loadComponents = function(view) {
 		_components = {};
-
-		_components.panelGuest = view.find("div.guestpanel");
-
-		_components.panelUser = view.find("div.userpanel");
-		_components.panelMovie = _components.panelUser.find("div.movies").click(_handlers["onMovieSelection"]);
-	};
-
-	//
-	//	Indicates that a user has signed in.  Hides the guest panel and shows the user panel.
-	//	initial:				A flag indicating that the sign in operation occurred at application load.
-	//
-	this.signIn = function(initial) {
-		var fade = initial ? 0 : 200;
-		_components.panelGuest.fadeOut(fade, function() {
-			_components.panelUser.fadeIn(fade);
-		});
 	};
 
 	this.base_initialize(parameters, this);
@@ -62,7 +43,5 @@ Showveo.Views.LandingView = function(parameters) {
 };
 
 Showveo.Validator.addInheritance(function() {
-	Showveo.Views.LandingView.prototype = new Showveo.Views.Base;
+	Showveo.Views.GuestView.prototype = new Showveo.Views.Base;
 });
-
-

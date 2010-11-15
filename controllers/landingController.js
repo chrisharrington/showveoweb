@@ -32,13 +32,6 @@ Showveo.Controllers.LandingController = function(parameters) {
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
 
-	//
-	//	Called when a user has signed in.  Notifies the view that a user has signed in.
-	//
-	this.signIn = function() {
-		_view.signIn();
-	};
-
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handlers */
 

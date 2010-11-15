@@ -23,6 +23,9 @@ Showveo.Views.Base = function(parameters) {
 	//	The feedback control.
 	var _feedback;
 
+	//	The panel into which the view should be loaded.
+	var _panel;
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -31,6 +34,7 @@ Showveo.Views.Base = function(parameters) {
 	//	model:						The model.
 	//	path:						The path of the html code for the inheriting view.
 	//	feedback:					The feedback control.
+	//	panel:						The panel into which the view should be loaded.
 	//	container:					The container into which the view should be loaded.
 	//
 	this.base_initialize = function(parameters, implementer) {
@@ -39,6 +43,7 @@ Showveo.Views.Base = function(parameters) {
 		_implementer = implementer;
 		_path = parameters.path;
 		_feedback = parameters.feedback;
+		_panel = parameters.panel;
 		_components = {};
 
 		_this.model = parameters.model;
@@ -50,17 +55,20 @@ Showveo.Views.Base = function(parameters) {
 	//
 	//	Loads the view's html code.
 	//	panel:						The panel into which the html should be loaded.
+	//	callback:					The callback function to execute once the view is loaded.
 	//
-	this.load = function(panel) {
+	this.load = function(callback) {
 		if (!_path)
 			return;
 
 		$.get(_path + ".html", function(html) {
-			panel.fadeOut(200, function() {
-				panel.empty().append(html);
-				_implementer.loadComponents(panel);
+			_panel.fadeOut(200, function() {
+				_panel.empty().append(html);
+				_implementer.loadComponents(_panel);
 
-				panel.fadeIn(200);
+				_panel.fadeIn(200);
+				if (callback)
+					callback();
 			});
 		});
 

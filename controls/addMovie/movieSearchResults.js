@@ -123,7 +123,7 @@ Showveo.Controls.AddMovie.MovieSearchResults = function(parameters) {
 		_components.labelSearchResults = panel.find("div.searchresults>div.count>span");
 
 		_components.textMovieSearchName = panel.find("div.input>input[type='text']").enter(search).clearbox();
-		_components.buttonSearch = panel.find("div.input>input[type='button']").click(search);
+		_components.buttonSearch = panel.find("div.input>button").click(search);
 		_components.panelDetails = panel.find("div.moviedetails").modal();
 		_components.buttonCloseDetails = panel.find("div.moviedetails input[type='button']:last").click(function () { _components.panelDetails.modal("hide"); });
 		_components.buttonSelectMovie = panel.find("div.moviedetails input[type='button']:first").click(movieSelected);
