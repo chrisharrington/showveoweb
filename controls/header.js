@@ -11,22 +11,11 @@ Showveo.Controls.Header = function(parameters) {
 	//	The common components.
 	var _components;
 
-	//	The cookie manager.
-	var _cookie;
+	//	The sign in event handler.
+	var _onSignIn;
 
-	//------------------------------------------------------------------------------------------------------------------
-	/* Properties */
-
-	//	Sets the sign in event handler.
-	this.onSignIn = function(handler) {
-		var callback = function() {
-			handler(_components.textEmailAddress.clearbox("value"), _components.textPassword.clearbox("value"));
-		};
-
-		_components.textEmailAddress.enter(callback);
-		_components.textPassword.enter(callback);
-		_components.buttonSignIn.click(callback);
-	};
+	//	The sign out event handler.
+	var _onSignOut;
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
@@ -34,30 +23,40 @@ Showveo.Controls.Header = function(parameters) {
 	//
 	//	The default constructor.
 	//	panel:					The panel containing the control elements.
-	//	cookie:					The cookie manager.
-	//	onSignIn:				The handler to execute on a sign in attempt.
+	//	onSignIn:				The sign in event handler.
+	//	onSignOut:				The sign out event handler.
 	//
 	this.initialize = function(parameters) {
-		_cookie = parameters.cookie;
+		_onSignIn = parameters.onSignIn;
+		_onSignOut = parameters.onSignOut;
 
 		loadComponents(parameters.panel);
-		loadUser();
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
 
 	//
-	//	Tells the header control that a user has successfully signed in.  Hides the guest panel and shows the user
-	//	panel.
+	//	Tells the header control that a guest is the current user.  Displays the guest panel, including the controls
+	//	used to allow the guest to sign in.
+	//
+	this.guest = function() {
+		_components.panelUser.fadeOut(200, function() {
+			_components.textEmailAddress.clearbox("reset");
+			_components.textPassword.clearbox("reset");
+			_components.panelGuest.fadeIn(200);
+		});
+	};
+
+	//
+	//	Tells the header control that a signed in user is the current user.  Displays the user panel, along with the
+	//	user's basic information.
 	//	user:					The signed in user.
 	//
-	this.signedIn = function(user) {
+	this.user = function(user) {
 		_components.panelGuest.fadeOut(200, function() {
 			_components.labelName.text(user.firstName);
 			_components.panelUser.fadeIn(200);
-
-			_cookie.write("identity", user.identity);
 		});
 	};
 
@@ -74,23 +73,16 @@ Showveo.Controls.Header = function(parameters) {
 
 		_components.panelUser = panel.find("div.userheader");
 		_components.labelName = _components.panelUser.find("b");
+		_components.linkSignOut = _components.panelUser.find("a").click(_onSignOut);
+
+		var callback = function() {
+			_onSignIn(_components.textEmailAddress.clearbox("value"), _components.textPassword.clearbox("value"));
+		};
 
 		_components.panelGuest = panel.find("div.guestheader");
-		_components.textEmailAddress = _components.panelGuest.find("input[type='text']").clearbox();
-		_components.textPassword = _components.panelGuest.find("input[type='password']").clearbox();
-		_components.buttonSignIn = _components.panelGuest.find("button");
-	};
-
-	//
-	//	Loads the currently logged in user.
-	//
-	var loadUser = function() {
-		var identity = _cookie.read("identity");
-		if (identity) {
-			
-		}
-		else
-			_components.panelGuest.show();
+		_components.textEmailAddress = _components.panelGuest.find("input[type='text']").clearbox().enter(callback);
+		_components.textPassword = _components.panelGuest.find("input[type='password']").clearbox().enter(callback);
+		_components.buttonSignIn = _components.panelGuest.find("button").click(callback);
 	};
 
 	this.initialize(parameters);

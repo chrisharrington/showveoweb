@@ -48,6 +48,9 @@ Showveo.Controllers.Base = function(parameters) {
 	//	Loads the view and controller.
 	//
 	this.load = function() {
+		if (_implementer.preload)
+			_implementer.preload();
+
 		_view.load(function() {
 			if (_implementer.loaded)
 				_implementer.loaded();

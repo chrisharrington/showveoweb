@@ -1,4 +1,4 @@
-div.userpanel { float:left; width:100%; display:none; }
+div.userpanel { float:left; width:100%; }
 
 div.option { float:left; width:940px; padding:10px; margin-top:10px; background-color:#fff; cursor:pointer; border-left:solid 5px #fff; }
 div.option:hover { border-color:#98C1D6; background-color:#f5f5f5; }

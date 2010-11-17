@@ -1,0 +1,10 @@
+div.header>div>div.guestheader { float:right; display:none; margin-top:13px; }
+div.header>div>div.guestheader>* { float:left; margin-left:5px; }
+div.header>div>div.guestheader>input[type='text'], div.header>div>div.guestheader>input[type='password'] { width:180px; font-size:11px; padding:2px; }
+div.header>div>div.guestheader>button { padding:1px; margin-top:1px; }
+
+div.header>div>div.userheader { float:left; width:100%; margin-top:17px; font-size:13px; display:none; }
+div.header>div>div.userheader>div { }
+div.header>div>div.userheader>div.account { float:right; }
+div.header>div>div.userheader>div.account>span { float:left; }
+div.header>div>div.userheader>div.account>a { float:left; margin-left:15px; cursor:pointer; }

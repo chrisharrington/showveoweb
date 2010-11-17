@@ -11,6 +11,12 @@ Showveo.Controllers.LandingController = function(parameters) {
 	//	The view.
 	var _view;
 
+	//	The model.
+	var _model;
+
+	//	The user's identity.
+	var _identity;
+
 	//	The callback function to execute once the user has selected a movie panel.
 	var _onMovieSelection;
 
@@ -20,11 +26,17 @@ Showveo.Controllers.LandingController = function(parameters) {
 	//
 	//	The default constructor.
 	//	view:				The view.
+	//	model:				The model.
+	//	identity:			The user's identity.
 	//	onMovieSelection:	The callback function to execute once the user has selected a movie panel.
+	//	onSignIn:			The callback function to execute once the user has been retrieved.
 	//
 	this.initialize = function(parameters) {
 		_view = parameters.view;
+		_model = parameters.model;
+		_identity = parameters.identity;
 		_onMovieSelection = parameters.onMovieSelection;
+		_onSignIn = parameters.onSignIn;
 
 		loadHandlers();
 	};
@@ -32,12 +44,22 @@ Showveo.Controllers.LandingController = function(parameters) {
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
 
+	//
+	//	Called after the controller has loaded.
+	//
+	this.loaded = function() {
+		
+	};
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handlers */
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
 
+	//
+	//	Loads the common handlers for the controller.
+	//
 	var loadHandlers = function() {
 		_view.onMovieSelection(_onMovieSelection);
 	};

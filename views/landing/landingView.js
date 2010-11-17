@@ -46,17 +46,6 @@ Showveo.Views.LandingView = function(parameters) {
 		_components.panelMovie = _components.panelUser.find("div.movies").click(_handlers["onMovieSelection"]);
 	};
 
-	//
-	//	Indicates that a user has signed in.  Hides the guest panel and shows the user panel.
-	//	initial:				A flag indicating that the sign in operation occurred at application load.
-	//
-	this.signIn = function(initial) {
-		var fade = initial ? 0 : 200;
-		_components.panelGuest.fadeOut(fade, function() {
-			_components.panelUser.fadeIn(fade);
-		});
-	};
-
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
 };

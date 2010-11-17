@@ -1,9 +1,9 @@
 Showveo.Validator.validateNamespace("Showveo.Models");
 
 //
-//	The model for the guest page.
+//	The model for the header control.
 //
-Showveo.Models.GuestModel = function(parameters) {
+Showveo.Models.HeaderModel = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
@@ -53,10 +53,36 @@ Showveo.Models.GuestModel = function(parameters) {
 		});
 	};
 
+	//
+	//	Retrieves a user by identity.
+	//	identity:				The user's identity.
+	//	callback:				The success callback.
+	//
+	this.signInWithIdentity = function(identity, callback) {
+		if (!identity)
+			callback();
+
+		$.ajax({
+			url: _service + "/signin/" + identity,
+			dataType: "json",
+			success: function(data) { callback(data); },
+			fixture: function() {
+				return [{
+					id: 1,
+					firstName: "Chris",
+					lastName: "Harrington",
+					identity: "areallylongidentity",
+					password: "",
+					emailAddress: "chrisharrington99@gmail.com"
+				}];
+			}
+		});
+	};
+
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
 };
 
 Showveo.Validator.addInheritance(function() {
-	Showveo.Models.GuestModel.prototype = new Showveo.Models.Base;	
+	Showveo.Models.HeaderModel.prototype = new Showveo.Models.Base;
 });

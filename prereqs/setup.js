@@ -27,9 +27,9 @@ $(document).ready(function() {
 		loadControllers(container);
 		loadErrorHandlers();
 
-		container.Controllers.GuestController.load();
-		
 		_container = container;
+
+		load();
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -38,17 +38,18 @@ $(document).ready(function() {
 	//
 	//	Fired after a user has signed in.  Shows the default landing page for the user.
 	//	user:							The signed in user.
-	//	initial:						A flag indicating that the sign in operation occurred at application load.
 	//
-	var onSignIn = function(user, initial) {
-		_container.Controllers.LandingController.signIn(initial);
+	var onSignIn = function(user) {
+		_container.Controllers.LandingController.load();
+		_container.Controllers.HeaderController.user(user);
 	};
 
 	//
 	//	Fired after a user has signed out.  Redirects the user to the landing page.
 	//
 	var onSignOut = function() {
-		_container.Controllers.LandingController.load();
+		_container.Controllers.GuestController.load();
+		_container.Controllers.HeaderController.guest();
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -62,7 +63,7 @@ $(document).ready(function() {
 		container.Controls = {};
 		container.Controls.Feedback = new Showveo.Controls.Feedback({ panel: $("div.feedback") });
 		container.Controls.Cookie = new Showveo.Controls.Cookie();
-		container.Controls.Header = new Showveo.Controls.Header({ panel: $("div.header"), cookie: container.Controls.Cookie });
+		//container.Controls.Header = new Showveo.Controls.Header({ panel: $("div.header"), cookie: container.Controls.Cookie, onSignIn: onSignIn, onSignOut: onSignOut });
 	};
 
 	//
@@ -74,7 +75,8 @@ $(document).ready(function() {
 		container.Models.GuestModel = new Showveo.Models.GuestModel({ service: "http://localhost:3000/guest" });
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
 		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: "http://localhost:3000/movie", apikey: "c26c67ed161834067f4d91430df1024e" });
-		container.Models.LandingModel = new Showveo.Models.LandingModel({});
+		container.Models.LandingModel = new Showveo.Models.LandingModel({ service: "http://localhost:3000/landing" });
+		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: "http://localhost:3000/header" });
 	};
 
 	//
@@ -107,6 +109,13 @@ $(document).ready(function() {
 			model: container.Models.LandingModel,
 			feedback: container.Controls.Feedback
 		});
+
+		container.Views.HeaderView = new Showveo.Views.HeaderView({
+			path: "views/header/header",
+			panel: $("div.header>div"),
+			model: container.Models.HeaderModel,
+			feedback: container.Controls.Feedback
+		});
 	};
 
 	//
@@ -121,7 +130,9 @@ $(document).ready(function() {
 		container.Controllers.GuestController = new Showveo.Controllers.GuestController({
 			view: container.Views.GuestView,
 			model: container.Models.GuestModel,
-			header: container.Controls.Header
+			header: container.Controls.Header,
+			cookie: container.Controls.Cookie,
+			onSignIn: onSignIn
 		});
 
 
@@ -143,7 +154,16 @@ $(document).ready(function() {
 			view: container.Views.LandingView,
 			model: container.Models.LandingModel,
 			feedback: container.Controls.Feedback,
+			identity: container.Controls.Cookie.read("identity"),
 			onMovieSelection: function() { container.Controllers.AddMovieController.load(); }
+		});
+
+		container.Controllers.HeaderController = new Showveo.Controllers.HeaderController({
+			view: container.Views.HeaderView,
+			model: container.Models.HeaderModel,
+			cookie: container.Controls.Cookie,
+			onSignIn: onSignIn,
+			onSignOut: onSignOut
 		});
 	};
 
@@ -161,6 +181,15 @@ $(document).ready(function() {
 			else if (status > 510)
 				error("Error!!1");
 		});
+	};
+
+	//
+	//	Loads the application.
+	//
+	var load = function() {
+		_container.Controllers.HeaderController.load();
+		if (!_container.Controls.Cookie.read("identity"))
+			_container.Controllers.GuestController.load();
 	};
 
 	this.initialize();
