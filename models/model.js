@@ -52,7 +52,7 @@ Showveo.Models.Base = function(parameters) {
 
 		$(_views).each(function(index, view) {
 			if (view[handler])
-				view[handler]();
+				view[handler](data);
 		});
 	}
 };

@@ -36,7 +36,7 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	//	Called after the controller has loaded.
 	//
 	this.loaded = function() {
-		
+		_model.getRecentlyUploadedMovies();
 	};
 
 	//------------------------------------------------------------------------------------------------------------------

@@ -37,9 +37,14 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	this.loadComponents = function(view) {
 		_components = {};
         _components.view = view;
+	};
 
-        view.find("div.movie>div>div>img:first").tooltip("right");
-		view.find("div.movie>div>div>img:last").tooltip("right");
+	//
+	//	Sets the list of recently uploaded movies.
+	//	movies:					The recently uploaded movies.
+	//
+	this.recentlyUploadedMovies = function(movies) {
+			
 	};
 
 	this.base_initialize(parameters, this);
