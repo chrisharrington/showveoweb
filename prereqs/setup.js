@@ -40,7 +40,8 @@ $(document).ready(function() {
 	//	user:							The signed in user.
 	//
 	var onSignIn = function(user) {
-		_container.Controllers.LandingController.load();
+		//_container.Controllers.LandingController.load();
+        _container.Controllers.ManageMoviesController.load();
 		_container.Controllers.HeaderController.user(user);
 	};
 
@@ -71,12 +72,15 @@ $(document).ready(function() {
 	//	container:						Holds the loaded models, referenced by namespace.
 	//
 	var loadModels = function(container) {
+        var service = "http://localhost:3000/";
+
 		container.Models = {};
-		container.Models.GuestModel = new Showveo.Models.GuestModel({ service: "http://localhost:3000/guest" });
+		container.Models.GuestModel = new Showveo.Models.GuestModel({ service: service + "guest" });
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
-		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: "http://localhost:3000/movie", apikey: "c26c67ed161834067f4d91430df1024e" });
-		container.Models.LandingModel = new Showveo.Models.LandingModel({ service: "http://localhost:3000/landing" });
-		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: "http://localhost:3000/header" });
+		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: service + "movie", apikey: "c26c67ed161834067f4d91430df1024e" });
+		container.Models.LandingModel = new Showveo.Models.LandingModel({ service: service + "landing" });
+		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: service + "header" });
+        container.Models.ManageMoviesModel = new Showveo.Models.ManageMoviesModel({ service: service + "movie" });
 	};
 
 	//
@@ -105,7 +109,7 @@ $(document).ready(function() {
 
 		container.Views.LandingView = new Showveo.Views.LandingView({
 			path: "views/landing/landing",
-			panel: $("div.content>div>div"),
+			panel: panel,
 			model: container.Models.LandingModel,
 			feedback: container.Controls.Feedback
 		});
@@ -116,6 +120,13 @@ $(document).ready(function() {
 			model: container.Models.HeaderModel,
 			feedback: container.Controls.Feedback
 		});
+
+        container.Views.ManageMoviesView = new Showveo.Views.ManageMoviesView({
+            path: "views/movie/manage/manageMovies",
+            panel: panel,
+            model: container.Models.ManageMoviesModel,
+            feedback: container.Controls.Feedback
+        });
 	};
 
 	//
@@ -165,6 +176,11 @@ $(document).ready(function() {
 			onSignIn: onSignIn,
 			onSignOut: onSignOut
 		});
+
+        container.Controllers.ManageMoviesController = new Showveo.Controllers.ManageMoviesController({
+            view: container.Views.ManageMoviesView,
+            model: container.Models.ManageMoviesModel
+        });
 	};
 
 	//

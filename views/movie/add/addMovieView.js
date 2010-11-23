@@ -141,4 +141,4 @@ Showveo.Views.AddMovieView = function(parameters) {
 
 Showveo.Validator.addInheritance(function() {
     Showveo.Views.AddMovieView.prototype = new Showveo.Views.Base;
-});
+});//

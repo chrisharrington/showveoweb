@@ -60,7 +60,6 @@ Showveo.Controllers.HeaderController = function(parameters) {
 		else {
 			_model.signInWithIdentity(identity, function(user) {
 				_onSignIn(user);
-				_this.user(user);
 			});
 		}
 	};
