@@ -1,3 +1,4 @@
+
 Showveo.Validator.validateNamespace("Showveo.Controls.AddMovie");
 
 //

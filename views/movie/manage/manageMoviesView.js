@@ -36,6 +36,10 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//
 	this.loadComponents = function(view) {
 		_components = {};
+        _components.view = view;
+
+        view.find("div.movie>div>div>img:first").tooltip("right");
+		view.find("div.movie>div>div>img:last").tooltip("right");
 	};
 
 	this.base_initialize(parameters, this);

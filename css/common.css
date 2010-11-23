@@ -2,6 +2,7 @@ body { margin:0; padding:0; background-color:#BED7ED; font-family:Arial, sans-se
 
 .hidden { display:none; }
 .rounded { -moz-border-radius:5px; -webkit-border-radius:5px; }
+.srounded { -moz-border-radius:3px; -webkit-border-radius:3px; }
 .pointer { cursor:pointer; }
 
 input[type='button'] { font-size:12px; }
@@ -61,3 +62,9 @@ div.panel.rounded { -moz-border-radius:8px; -webkit-border-radius:8px; }
 div.panel input[type='text'], div.panel input[type='password'] { padding:3px; border:solid 1px #AAA; }
 div.panel a { color:#4F91E8; font-size:0.9em; font-weight:bold; cursor:pointer; }
 div.panel a[disabled] { color:#888; }
+
+div.tooltip { position:absolute; z-index:4; background-color:Black; padding:3px 7px; font-size:12px; }
+div.tooltip>span { float:left; width:100%; color:White; }
+div.tooltip>div.arrow { border-color:transparent transparent Black transparent; border-style:solid; border-width:10px; height:0; width:0; position:absolute; top:-19px; }
+div.tooltip.left>div.arrow { left:5px; }
+div.tooltip.right>div.arrow { right:5px; }

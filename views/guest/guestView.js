@@ -44,4 +44,4 @@ Showveo.Views.GuestView = function(parameters) {
 
 Showveo.Validator.addInheritance(function() {
 	Showveo.Views.GuestView.prototype = new Showveo.Views.Base;
-});
+});//
