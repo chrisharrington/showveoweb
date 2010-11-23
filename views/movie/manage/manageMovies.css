@@ -9,7 +9,7 @@ div.tabs>div.selection>span.selected { background-color:#BED7ED; color:#333; cur
 div.tabs>div.tab { float:left; width:960px; padding:5px; background-color:#BED7ED; }
 div.tabs>div.tab>div { float:left; width:940px; padding:10px; height:100%; background-color:White; }
 
-div.movie { float:left; width:100%; margin-top:10px; border-top:dotted 1px #888; }
+div.movie { float:left; width:100%; padding-top:10px; border-top:dotted 1px #888; margin-bottom:10px; }
 div.movie:first-child { margin-top:0px; border-top:none; }
 div.movie>img { float:left; width:86px; height:129px; }
 div.movie>div { float:left; width:844px; margin-left:10px; }
@@ -21,3 +21,7 @@ div.movie>div>div>div { float:left; }
 div.movie>div>div>img { float:right; cursor:pointer; margin-left:5px; width:16px; height:16px; }
 div.movie>div>div>div>a { cursor:pointer; font-size:0.75em; color:#2A7AC9; background-color:White; padding:2px 5px; -moz-border-radius:3px; }
 div.movie>div>div>div>a:hover { background-color:#CEE8F5; }
+
+div.loading { float:left; width:100%; font-size:0.9em; }
+div.loading>img { float:left; }
+div.loading>span { float:left; margin-left:10px; margin-top:4px; }
