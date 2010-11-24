@@ -11,6 +11,9 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//	The common components for the view.
 	var _components;
 
+	//	The factory used to create movie panels.
+	var _moviePanelFactory;
+
 	//	The event handlers.
 	var _handlers;
 
@@ -22,8 +25,10 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 
 	//
 	//	The default constructor.
+	//	moviePanelFactory:			The factory used to create movie panels.
 	//
 	this.initialize = function(parameters) {
+		_moviePanelFactory = parameters.moviePanelFactory;
 		_handlers = {};
 	};
 
@@ -37,6 +42,9 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	this.loadComponents = function(view) {
 		_components = {};
         _components.view = view;
+
+		_components.panelLoading = view.find("div.loading");
+		_components.panelRecentlyUploaded = view.find("div.tabs>div.recent>div.movies");
 	};
 
 	//
@@ -44,7 +52,15 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//	movies:					The recently uploaded movies.
 	//
 	this.recentlyUploadedMovies = function(movies) {
-			
+		$(movies).each(function(index, movie) {
+			var panel = _moviePanelFactory.create(movie);
+			new Showveo.Views.Movie.Manage.Movie({ panel: panel, movie: movie });
+			_components.panelRecentlyUploaded.append(panel);
+		});
+
+		_components.panelLoading.fadeOut(200, function() {
+			_components.panelRecentlyUploaded.fadeIn(200);
+		});
 	};
 
 	this.base_initialize(parameters, this);

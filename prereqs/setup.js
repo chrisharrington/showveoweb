@@ -21,6 +21,8 @@ $(document).ready(function() {
 	//
 	this.initialize = function() {
 		var container = {};
+
+        loadFactories(container);
 		loadControls(container);
 		loadModels(container);
 		loadViews(container);
@@ -55,6 +57,15 @@ $(document).ready(function() {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
+
+    //
+    //  Loads the necesary factory objects and stores them in the given container.
+    //  container:                                             Holds the loaded factories, referenced by namespace.
+    //
+    var loadFactories = function (container) {
+		container.Factories = {};
+		container.Factories.MoviePanelFactory = new Showveo.Factories.MoviePanelFactory({});
+    };
 
 	//
 	//	Loads the necessary control objects and stores them in the given container.
@@ -125,7 +136,8 @@ $(document).ready(function() {
             path: "views/movie/manage/manageMovies",
             panel: panel,
             model: container.Models.ManageMoviesModel,
-            feedback: container.Controls.Feedback
+            feedback: container.Controls.Feedback,
+			moviePanelFactory: container.Factories.MoviePanelFactory
         });
 	};
 
