@@ -1,9 +1,9 @@
 Showveo.Validator.validateNamespace("Showveo.Views");
 
 //
-//	The view for the guest page.
+//	The view for the movie details page.
 //
-Showveo.Views.GuestView = function(parameters) {
+Showveo.Views.MovieDetailsView = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
@@ -43,5 +43,7 @@ Showveo.Views.GuestView = function(parameters) {
 };
 
 Showveo.Validator.addInheritance(function() {
-	Showveo.Views.GuestView.prototype = new Showveo.Views.Base;
+	Showveo.Views.MovieDetailsView.prototype = new Showveo.Views.Base;
 });
+
+

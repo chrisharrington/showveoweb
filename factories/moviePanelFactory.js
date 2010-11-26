@@ -73,24 +73,4 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 		});
 		return panel;
 	};
-
-//	<div class="movie">
-//		<img src="/images/test.jpg" alt="">
-//		<div>
-//			<b>Megamind (2010)</b>
-//			<i>Uploaded by <b>Chris Harrington</b> three days ago.  Last watched by <b>Chris Harrington</b> two days ago.</i>
-//			<u>Megamind & his life-long archenemy, MetroMan are aliens that were sent away from their respective home planets in time of crisis. Megamind, taking the role of villain, continuously loses battles to MetroMan. It seems that the pattern will never cease until Megamind apparently kills him with a solar-powered satellite during one of his many hostage plots. Now freed from his rival's shadow, Megamind proceeds to take control of Metro City & at first, enjoys his...</u>
-//			<div>
-//				<div>
-//					<a>Action</a>
-//					<a>Comedy</a>
-//					<a>Drama</a>
-//					<a>Thriller</a>
-//				</div>
-//				<img src="/images/favorite.png" alt="" title="Mark this movie as a favorite." />
-//				<img src="/images/delete.png" alt="" title="Delete this movie." />
-//			</div>
-//		</div>
-//	</div>
-
 };

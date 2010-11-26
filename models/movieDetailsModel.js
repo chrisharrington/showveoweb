@@ -1,47 +1,34 @@
-Showveo.Validator.validateNamespace("Showveo.Views");
+Showveo.Validator.validateNamespace("Showveo.Models");
 
 //
-//	The view for the guest page.
+//	The model for the movie details page.
 //
-Showveo.Views.GuestView = function(parameters) {
+Showveo.Models.MovieDetailsModel = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
 
-	//	The common components for the view.
-	var _components;
-
-	//	The event handlers.
-	var _handlers;
-
-	//------------------------------------------------------------------------------------------------------------------
-	/* Properties */
+	//	The service location.
+	var _service;
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
 	//
 	//	The default constructor.
+	//	service:				The service location.
 	//
 	this.initialize = function(parameters) {
-		_handlers = {};
+		_service = parameters.service;
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
-
-	//
-	//	Loads the common components for the view.
-	//	view:					The html comprising the view.
-	//
-	this.loadComponents = function(view) {
-		_components = {};
-	};
 
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
 };
 
 Showveo.Validator.addInheritance(function() {
-	Showveo.Views.GuestView.prototype = new Showveo.Views.Base;
+	Showveo.Models.MovieDetailsModel.prototype = new Showveo.Models.Base;
 });

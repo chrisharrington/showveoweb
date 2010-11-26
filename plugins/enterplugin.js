@@ -1,4 +1,5 @@
-﻿//
+
+//
 //	A plugin providing enter keypress event capture functionality.
 //
 (function ($) {

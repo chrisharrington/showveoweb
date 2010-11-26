@@ -10,8 +10,8 @@ $(document).ready(function() {
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
 
-	//	The container for required objects.
-	var _container;
+	//	The state manager.
+	var _state;
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
@@ -22,6 +22,8 @@ $(document).ready(function() {
 	this.initialize = function() {
 		var container = {};
 
+		_state = new Showveo.Controls.State();
+
         loadFactories(container);
 		loadControls(container);
 		loadModels(container);
@@ -29,30 +31,7 @@ $(document).ready(function() {
 		loadControllers(container);
 		loadErrorHandlers();
 
-		_container = container;
-
-		load();
-	};
-
-	//------------------------------------------------------------------------------------------------------------------
-	/* Event Handlers */
-
-	//
-	//	Fired after a user has signed in.  Shows the default landing page for the user.
-	//	user:							The signed in user.
-	//
-	var onSignIn = function(user) {
-		//_container.Controllers.LandingController.load();
-        _container.Controllers.ManageMoviesController.load();
-		_container.Controllers.HeaderController.user(user);
-	};
-
-	//
-	//	Fired after a user has signed out.  Redirects the user to the landing page.
-	//
-	var onSignOut = function() {
-		_container.Controllers.GuestController.load();
-		_container.Controllers.HeaderController.guest();
+		_state.load(container.Controllers, container.Controls.Cookie.read("identity"));
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -75,7 +54,6 @@ $(document).ready(function() {
 		container.Controls = {};
 		container.Controls.Feedback = new Showveo.Controls.Feedback({ panel: $("div.feedback") });
 		container.Controls.Cookie = new Showveo.Controls.Cookie();
-		//container.Controls.Header = new Showveo.Controls.Header({ panel: $("div.header"), cookie: container.Controls.Cookie, onSignIn: onSignIn, onSignOut: onSignOut });
 	};
 
 	//
@@ -92,6 +70,7 @@ $(document).ready(function() {
 		container.Models.LandingModel = new Showveo.Models.LandingModel({ service: service + "landing" });
 		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: service + "header" });
         container.Models.ManageMoviesModel = new Showveo.Models.ManageMoviesModel({ service: service + "movie" });
+		container.Models.MovieDetailsModel = new Showveo.Models.MovieDetailsModel({ service: service + "movie" });
 	};
 
 	//
@@ -139,6 +118,13 @@ $(document).ready(function() {
             feedback: container.Controls.Feedback,
 			moviePanelFactory: container.Factories.MoviePanelFactory
         });
+
+		container.Views.MovieDetailsView = new Showveo.Views.MovieDetailsView({
+			path: "views/movie/details/movieDetails",
+			panel: panel,
+			model: container.Models.MovieDetailsModel,
+			feedback:container.Controls.Feedback
+		});
 	};
 
 	//
@@ -155,9 +141,8 @@ $(document).ready(function() {
 			model: container.Models.GuestModel,
 			header: container.Controls.Header,
 			cookie: container.Controls.Cookie,
-			onSignIn: onSignIn
+			onSignIn: _state.signIn
 		});
-
 
 		container.Controllers.AddTVController = new Showveo.Controllers.AddTVController({
 			panel: panel,
@@ -185,14 +170,19 @@ $(document).ready(function() {
 			view: container.Views.HeaderView,
 			model: container.Models.HeaderModel,
 			cookie: container.Controls.Cookie,
-			onSignIn: onSignIn,
-			onSignOut: onSignOut
+			onSignIn: _state.signIn,
+			onSignOut: _state.signOut
 		});
 
         container.Controllers.ManageMoviesController = new Showveo.Controllers.ManageMoviesController({
             view: container.Views.ManageMoviesView,
             model: container.Models.ManageMoviesModel
         });
+
+		container.Controllers.MovieDetailsController = new Showveo.Controllers.MovieDetailsController({
+			view: container.Views.MovieDetailsView,
+			model: container.Views.MovieDetailsModel
+		});
 	};
 
 	//
@@ -209,15 +199,6 @@ $(document).ready(function() {
 			else if (status > 510)
 				error("Error!!1");
 		});
-	};
-
-	//
-	//	Loads the application.
-	//
-	var load = function() {
-		_container.Controllers.HeaderController.load();
-		if (!_container.Controls.Cookie.read("identity"))
-			_container.Controllers.GuestController.load();
 	};
 
 	this.initialize();
