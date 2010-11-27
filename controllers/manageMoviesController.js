@@ -39,10 +39,38 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 		_model.getRecentlyUploadedMovies();
 		_model.getFavoriteMovies();
 		_model.getAllMovies();
+
+		_view.onMovieDeleted(onMovieDeleted);
+		_view.onMovieFavorited(onMovieFavorited);
+		_view.onGenreSelected(onGenreSelected);
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handlers */
+
+	//
+	//	Fired after the user has requested that a movie be deleted.
+	//	movie:				The movie to be deleted.
+	//
+	var onMovieDeleted = function(movie) {
+		alert("delete " + movie.id);	
+	};
+
+	//
+	//	Fired after the use rhas requested that a movie be added to his or her favorites.
+	//	movie:				The movie to be favorited.
+	//
+	var onMovieFavorited = function(movie) {
+		alert("favorite " + movie.id);
+	};
+
+	//
+	//	Fired after the user has selected a movie genre to view.
+	//	genre:				The genre to view.
+	//
+	var onGenreSelected = function(genre) {
+		alert("genre " + genre);
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */

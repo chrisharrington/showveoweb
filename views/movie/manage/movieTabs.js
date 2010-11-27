@@ -20,6 +20,27 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	The status of the control.
 	var _status;
 
+	//	The event handler that's fired when the user requests that the movie be deleted.
+	var _onMovieDeleted;
+
+	//	The event handler that's fired when the user requests that the movie be placed in his or her favorites.
+	var _onMovieFavorited;
+
+	//	The event handler that's fired when the user clicks one of the movie's genre links.
+	var _onGenreSelected;
+
+	//------------------------------------------------------------------------------------------------------------------
+	/* Properties */
+
+	//	Sets the event handler for deleting a movie.
+	this.onMovieDeleted = function(handler) { _onMovieDeleted = handler; };
+
+	//	Sets the event handler for favoriting a movie.
+	this.onMovieFavorited = function(handler) { _onMovieFavorited = handler; };
+
+	//	Sets the event handler for selecting a movie genre.
+	this.onGenreSelected = function(handler) { _onGenreSelected = handler; };
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -28,10 +49,14 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	tabs:				The tab parameters.
 	//	panel:			The panel containing the control elements.
 	//	factory:			Creates movie panels.
+	//	onMovieDeleted:	The event handler for deleting a movie.
+	//	onMovieFavorited:	The event handler for favoriting a movie.
 	//
 	this.initialize = function(parameters) {
 		_moviePanelFactory = parameters.factory;
-		_movies = {};
+		_onMovieDeleted = parameters.onMovieDeleted;
+		_onMovieFavorited = parameters.onMovieFavorited;
+		_movies = new Array();
 		_status = {};
 
 		loadComponents(parameters.panel);
@@ -52,10 +77,12 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//
 	this.setMoviesForTab = function(name, movies) {
 		_status[name] = true;
-		_movies[name] = movies;
 		populateTab(name, movies);
 
-		checkStatus();
+		checkStatus(function() {
+			selectTab(_components.panelSelection.find("span.selected").attr("name"));
+			addHandlers();
+		});
 	};
 
 	//
@@ -136,7 +163,10 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 		$(movies).each(function(index, movie) {
 			var panel = _moviePanelFactory.create(movie);
-			new Showveo.Views.Movie.Manage.Movie({ panel: panel, movie: movie });
+			_movies.push(new Showveo.Views.Movie.Manage.Movie({
+				panel: panel,
+				movie: movie
+			}));
 			tab.append(panel);
 		});
 	};
@@ -148,7 +178,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	var selectTab = function(name) {
 		deselectAll(function() {
 			_components.panelSelection.find("span[name='" + name + "']").addClass("selected");
-			_components.panel.find("div.tab[name='" + name + "']").fadeIn(0).addClass("selected");
+			_components.panel.find("div.tab[name='" + name + "']").fadeIn(200).addClass("selected");
 		});
 	};
 
@@ -158,7 +188,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//
 	var deselectAll = function(callback) {
 		var panel = _components.panel.find("div.loading").is(":visible") ? _components.panel.find("div.loading") : _components.panel.find("div.tab.selected");
-		panel.removeClass("selected").fadeOut(0, function() {
+		panel.removeClass("selected").fadeOut(200, function() {
 			_components.panelSelection.find("span.selected").removeClass("selected");
 			callback();
 		});
@@ -175,9 +205,10 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	};
 
 	//
-	//	Checks to see if the control has been completely loaded.  Hides the loading tab and shows the preselected tab if that's the case.
+	//	Checks to see if the control has been completely loaded.
+	//	callback:			The callback function to execute if the control has been loaded.
 	//
-	var checkStatus = function () {
+	var checkStatus = function (callback) {
 		var done = true;
 		for (var name in _status) {
 			if (!_status[name]) {
@@ -187,7 +218,18 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 		}
 
 		if (done)
-			selectTab(_components.panelSelection.find("span.selected").attr("name"));
+			callback();
+	};
+
+	//
+	//	Adds the event handlers for all of the loaded movies.
+	//
+	var addHandlers = function () {
+		$(_movies).each(function(index, movie) {
+			movie.onMovieDeleted(_onMovieDeleted);
+			movie.onMovieFavorited(_onMovieFavorited);
+			movie.onGenreSelected(_onGenreSelected);
+		});
 	};
 
 	this.initialize(parameters);
