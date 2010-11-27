@@ -17,15 +17,6 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//	The event handlers.
 	var _handlers;
 
-	//	The event handler that's fired when the user requests that the movie be deleted.
-	var _onMovieDeleted;
-
-	//	The event handler that's fired when the user requests that the movie be placed in his or her favorites.
-	var _onMovieFavorited;
-
-	//	The event handler that's fired when the user clicks one of the movie's genre links.
-	var _onGenreSelected;
-
 	//------------------------------------------------------------------------------------------------------------------
 	/* Properties */
 
@@ -34,6 +25,9 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 
 	//	Sets the event handler for favoriting a movie.
 	this.onMovieFavorited = function(handler) { _components.tabs.onMovieFavorited(handler); };
+
+	//	Sets the event handler for selecting a movie.
+	this.onMovieSelected = function(handler) { _components.tabs.onMovieSelected(handler); };
 
 	//	Sets the event handler for selecting a movie genre.
 	this.onGenreSelected = function(handler) { _components.tabs.onGenreSelected(handler); };

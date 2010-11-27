@@ -15,7 +15,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
     //
     this.create = function(movie) {
     	var panel = $("<div></div>").addClass("movie");
-		panel.append($("<img />").attr("src", movie.poster).attr("alt", ""));
+		panel.append($("<img />").addClass("selectable").attr("src", movie.poster).attr("alt", ""));
 		panel.append(createOverview(movie));
 		return panel;
     };
@@ -30,7 +30,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 	//
 	var createOverview = function (movie) {
 		var panel = $("<div></div>");
-		panel.append($("<a></a>").text(movie.name + " (" + movie.year + ")"));
+		panel.append($("<a></a>").addClass("selectable").text(movie.name + " (" + movie.year + ")"));
 		panel.append($("<i></i>").html("Uploaded by <b>" + movie.owner.firstName + " " + movie.owner.lastName + "</b> " + movie.uploadDate.differenceString() + ". " + deriveLastWatched(movie)));
 		panel.append($("<u></u>").text(movie.synopsis));
 		panel.append(createFooter(movie));

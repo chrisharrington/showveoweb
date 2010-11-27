@@ -26,6 +26,9 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	The event handler that's fired when the user requests that the movie be placed in his or her favorites.
 	var _onMovieFavorited;
 
+	//	The event handler that's fired when the user selects a movie.
+	var _onMovieSelected;
+
 	//	The event handler that's fired when the user clicks one of the movie's genre links.
 	var _onGenreSelected;
 
@@ -37,6 +40,9 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//	Sets the event handler for favoriting a movie.
 	this.onMovieFavorited = function(handler) { _onMovieFavorited = handler; };
+
+	//	Sets the event handler for selecting a movie.
+	this.onMovieSelected = function(handler) { _onMovieSelected = handler; };
 
 	//	Sets the event handler for selecting a movie genre.
 	this.onGenreSelected = function(handler) { _onGenreSelected = handler; };
@@ -228,6 +234,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 		$(_movies).each(function(index, movie) {
 			movie.onMovieDeleted(_onMovieDeleted);
 			movie.onMovieFavorited(_onMovieFavorited);
+			movie.onMovieSelected(_onMovieSelected);
 			movie.onGenreSelected(_onGenreSelected);
 		});
 	};

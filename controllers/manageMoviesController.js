@@ -42,6 +42,7 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 
 		_view.onMovieDeleted(onMovieDeleted);
 		_view.onMovieFavorited(onMovieFavorited);
+		_view.onMovieSelected(onMovieSelected);
 		_view.onGenreSelected(onGenreSelected);
 	};
 
@@ -57,11 +58,19 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	};
 
 	//
-	//	Fired after the use rhas requested that a movie be added to his or her favorites.
+	//	Fired after the user has requested that a movie be added to his or her favorites.
 	//	movie:				The movie to be favorited.
 	//
 	var onMovieFavorited = function(movie) {
 		alert("favorite " + movie.id);
+	};
+
+	//
+	//	Fired after the user has selected a movie.
+	//	movie:				The selected movie.
+	//
+	var onMovieSelected = function(movie) {
+		alert("selected " + movie.id);	
 	};
 
 	//
