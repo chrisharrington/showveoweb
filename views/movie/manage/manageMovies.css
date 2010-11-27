@@ -25,5 +25,5 @@ div.movie>div>div>div>a { cursor:pointer; font-size:0.75em; color:#2A7AC9; backg
 div.movie>div>div>div>a:hover { background-color:#CEE8F5; }
 
 div.loading { font-size:0.9em; }
-div.loading>img { float:left; }
-div.loading>span { float:left; margin-left:10px; margin-top:4px; }
+div.loading>div>img { float:left; }
+div.loading>div>span { float:left; margin-left:10px; margin-top:4px; }

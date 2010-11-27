@@ -37,6 +37,8 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	//
 	this.loaded = function() {
 		_model.getRecentlyUploadedMovies();
+		_model.getFavoriteMovies();
+		_model.getAllMovies();
 	};
 
 	//------------------------------------------------------------------------------------------------------------------

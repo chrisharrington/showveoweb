@@ -79,9 +79,6 @@ Showveo.Controls.State = function(parameters) {
 	//	state:						The movie state.
 	//
 	var handleMovies = function(state) {
-		switch (state) {
-			case "": _controllers.ManageMoviesController.load(); break;
-			case "recent": _controllers.ManageMoviesController.load(); break;
-		}
+		_controllers.ManageMoviesController.load(state);
 	};
 };

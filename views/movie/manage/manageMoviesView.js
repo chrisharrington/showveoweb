@@ -45,6 +45,12 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 
 		_components.panelLoading = view.find("div.loading");
 		_components.panelRecentlyUploaded = view.find("div.tabs>div.recent>div.movies");
+
+		_components.tabs = new Showveo.Views.Movie.Manage.MovieTabs({
+			tabs: [{ name: "recent", title: "New Additions"}, { name: "favorites", title: "Favorites"}, { name: "all", title: "Browse" }],
+			panel: view.find("div.tabs"),
+			factory: _moviePanelFactory
+		});
 	};
 
 	//
@@ -52,15 +58,23 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//	movies:					The recently uploaded movies.
 	//
 	this.recentlyUploadedMovies = function(movies) {
-		$(movies).each(function(index, movie) {
-			var panel = _moviePanelFactory.create(movie);
-			new Showveo.Views.Movie.Manage.Movie({ panel: panel, movie: movie });
-			_components.panelRecentlyUploaded.append(panel);
-		});
+		_components.tabs.setMoviesForTab("recent", movies);
+	};
 
-		_components.panelLoading.fadeOut(200, function() {
-			_components.panelRecentlyUploaded.fadeIn(200);
-		});
+	//
+	//	Sets the list of favorite movies.
+	//	movies:					The favorite movies.
+	//
+	this.favoriteMovies = function(movies) {
+		_components.tabs.setMoviesForTab("favorites", movies);
+	};
+
+	//
+	//	Sets the list of all movies.
+	//	movies:					The list of all movies.
+	//
+	this.allMovies = function(movies) {
+		_components.tabs.setMoviesForTab("all", movies);
 	};
 
 	this.base_initialize(parameters, this);
@@ -69,4 +83,4 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 
 Showveo.Validator.addInheritance(function() {
 	Showveo.Views.ManageMoviesView.prototype = new Showveo.Views.Base;
-});//
+});

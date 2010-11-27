@@ -38,17 +38,15 @@
 									input.val(input.attr("name"));
 
 							input.css("color", color).attr("name", input.val()).addClass("clearbox").focus(function () {
-									var textbox = input;
-									if (textbox.val() == textbox.attr("name"))
-											textbox.val("").css("color", "Black");
+									if (input.val() == input.attr("name"))
+											input.val("").css("color", "Black");
 							}).blur(function () {
-									var textbox = input;
-									if (textbox.val() == "")
-											textbox.val(textbox.attr("name")).css("color", color);
+								if (input.val() == "")
+									input.val(input.attr("name")).css("color", color);
 							});
 					}
 				}
 			});
 		}
 	});
-})(jQuery);//
+})(jQuery);

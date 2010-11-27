@@ -45,15 +45,16 @@ Showveo.Controllers.Base = function(parameters) {
 	/* Public Methods */
 
 	//
-	//	Loads the view and controller.
+	//  Loads the view and controller.
+	//  data:                                                   Any data that might be required for the implementer.
 	//
-	this.load = function() {
+	this.load = function(data) {
 		if (_implementer.preload)
 			_implementer.preload();
 
 		_view.load(function() {
 			if (_implementer.loaded)
-				_implementer.loaded();
+				_implementer.loaded(data);
 		});
 	};
 };
