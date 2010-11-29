@@ -6,6 +6,9 @@ body { margin:0; padding:0; background-color:#BED7ED; font-family:Arial, sans-se
 .pointer { cursor:pointer; }
 .selectable { cursor:pointer; }
 
+a.tag { cursor:pointer; font-size:0.75em; color:#2A7AC9; background-color:White; padding:2px 5px; -moz-border-radius:3px; }
+a.tag:hover { background-color:#CEE8F5; }
+
 input[type='button'] { font-size:12px; }
 button { font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size:13px; cursor:pointer; padding:2px; background-color:#eee; border:solid 1px #AAA; -moz-border-radius:3px; -webkit-border-radius:3px; }
 button>img { float:left; margin-top:1px; }

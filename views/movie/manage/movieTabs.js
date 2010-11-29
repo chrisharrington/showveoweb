@@ -32,6 +32,9 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	The event handler that's fired when the user clicks one of the movie's genre links.
 	var _onGenreSelected;
 
+	//	The event handler that's fired when the user selects a movie tab.
+	var _onTabSelected;
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Properties */
 
@@ -46,6 +49,9 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//	Sets the event handler for selecting a movie genre.
 	this.onGenreSelected = function(handler) { _onGenreSelected = handler; };
+
+	//	Sets the event handler for selecting a movie tab.
+	this.onTabSelected = function(handler) { _onTabSelected = handler; };
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
@@ -183,8 +189,9 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//
 	var selectTab = function(name) {
 		deselectAll(function() {
+			_onTabSelected(name);
 			_components.panelSelection.find("span[name='" + name + "']").addClass("selected");
-			_components.panel.find("div.tab[name='" + name + "']").fadeIn(200).addClass("selected");
+			_components.panel.find("div.tab[name='" + name + "']").fadeIn(0).addClass("selected");
 		});
 	};
 
@@ -194,7 +201,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//
 	var deselectAll = function(callback) {
 		var panel = _components.panel.find("div.loading").is(":visible") ? _components.panel.find("div.loading") : _components.panel.find("div.tab.selected");
-		panel.removeClass("selected").fadeOut(200, function() {
+		panel.removeClass("selected").fadeOut(0, function() {
 			_components.panelSelection.find("span.selected").removeClass("selected");
 			callback();
 		});

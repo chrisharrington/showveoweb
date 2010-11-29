@@ -8,6 +8,9 @@ Showveo.Models.TemplateModel = function(parameters) {
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
 
+	//	Maintains scope.
+	var _this = this;
+
 	//	The service location.
 	var _service;
 

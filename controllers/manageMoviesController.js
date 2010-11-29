@@ -14,6 +14,12 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	//	The model.
 	var _model;
 
+	//	The event handler to execute once the user has selected a movie tab.
+	var _onTabSelected;
+
+	//	The event handler to execute once the user has selected a movie.
+	var _onMovieSelected;
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -21,10 +27,14 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	//	The default constructor.
 	//	view:				The view.
 	//	model:				The model.
+	//	onTabSelected:		The event handler to execute once the user has selected a movie tab.
+	//	onMovieSelected:	The event handler to execute once the user has selected a movie.
 	//
 	this.initialize = function(parameters) {
 		_view = parameters.view;
 		_model = parameters.model;
+		_onTabSelected = parameters.onTabSelected;
+		_onMovieSelected = parameters.onMovieSelected;
 
 		loadHandlers();
 	};
@@ -34,16 +44,20 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 
 	//
 	//	Called after the controller has loaded.
+	//	state:				The state of the application.
 	//
-	this.loaded = function() {
+	this.loaded = function(state) {
 		_model.getRecentlyUploadedMovies();
 		_model.getFavoriteMovies();
 		_model.getAllMovies();
 
 		_view.onMovieDeleted(onMovieDeleted);
 		_view.onMovieFavorited(onMovieFavorited);
-		_view.onMovieSelected(onMovieSelected);
+		_view.onMovieSelected(_onMovieSelected);
 		_view.onGenreSelected(onGenreSelected);
+		_view.onTabSelected(_onTabSelected);
+
+		_view.selectTab(state.replace("movies/", ""));
 	};
 
 	//------------------------------------------------------------------------------------------------------------------

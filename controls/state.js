@@ -3,7 +3,7 @@ Showveo.Validator.validateNamespace("Showveo.Controls");
 //
 //	A control used to read and validate the state of the application.
 //
-Showveo.Controls.State = function(parameters) {
+Showveo.Controls.State = function() {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
@@ -14,19 +14,37 @@ Showveo.Controls.State = function(parameters) {
 	//	The identity of the logged in user.
 	var _identity;
 
+	//	A flag used to determine if the application should be refreshed.
+	var _refresh;
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
 
-	//l
-	//	Loads the correct controller based on the hash of the url.
+	//
+	//	Initializes the state manager.
 	//	controllers:				The collection of controllers.
 	//	identity:					The identity of the logged in user.
 	//
-	this.load = function(controllers, identity) {
+	this.initialize = function(controllers, identity) {
 		_controllers = controllers;
 		_identity = identity;
+		_refresh = true;
+
+		$(window).hashchange(function() {
+			//alert(_refresh + " " + window.location.hash);
+			if (_refresh)
+				load();
+			_refresh = true;
+		});
 
 		_controllers.HeaderController.load();
+	};
+
+	//
+	//	Loads the correct controller based on the hash of the url.
+	//
+	this.load = function() {
+		load();
 	};
 
 	//
@@ -46,6 +64,32 @@ Showveo.Controls.State = function(parameters) {
 		_controllers.HeaderController.guest();
 	};
 
+	//
+	//	Retrieves the current state of the application.
+	//	Returns:					The current state of the application.
+	//
+	this.getState = function() {
+		return window.location.hash;
+	};
+
+	//
+	//	Sets the state and refreshes the application.
+	//	state:						The new state of the application.
+	//
+	this.setStateRefresh = function(state) {
+		_refresh = true;
+		window.location.hash = state;
+	};
+
+	//
+	//	Sets the state of the application without refreshing it.
+	//	state:						The new state of the application.
+	//
+	this.setState = function(state) {
+		_refresh = false;
+		window.location.hash = state;
+	}
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
 
@@ -59,8 +103,10 @@ Showveo.Controls.State = function(parameters) {
 		else {
 			var state = hash.substring(1);
 			var parts = state.split("/");
+			var substate = parts[1] ? parts[1] : "";
 			switch (parts[0]) {
-				case "movies": handleMovies(parts[1] ? parts[1] : ""); break;
+				case "movie": _controllers.MovieDetailsController.load(substate); break;
+				case "movies": _controllers.ManageMoviesController.load(substate); break;
 				default: loadDefault(); break;
 			}
 		}
@@ -72,13 +118,5 @@ Showveo.Controls.State = function(parameters) {
 	var loadDefault = function () {
 		if (!_identity)
 			_controllers.GuestController.load();
-	};
-
-	//
-	//	Handles loading a movie page.
-	//	state:						The movie state.
-	//
-	var handleMovies = function(state) {
-		_controllers.ManageMoviesController.load(state);
 	};
 };

@@ -64,7 +64,7 @@ Showveo.Views.Base = function(parameters) {
 		var status = { panel: false, html: false };
 
 		var done = function(html) {
-			_panel.empty().append(html).fadeIn(200);
+			_panel.empty().append(html).fadeIn(0);
 
 			_implementer.loadComponents(_panel);
 
@@ -72,7 +72,7 @@ Showveo.Views.Base = function(parameters) {
 				callback();
 		}
 
-		_panel.fadeOut(200, function() {
+		_panel.fadeOut(0, function() {
 			status.panel = true;
 			if (status.panel && status.html)
 				done(status.html);

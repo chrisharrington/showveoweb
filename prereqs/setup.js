@@ -29,9 +29,9 @@ $(document).ready(function() {
 		loadModels(container);
 		loadViews(container);
 		loadControllers(container);
-		loadErrorHandlers();
+		loadErrorHandlers(container.Controls.Feedback);
 
-		_state.load(container.Controllers, container.Controls.Cookie.read("identity"));
+		_state.initialize(container.Controllers, container.Controls.Cookie.read("identity"));
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ $(document).ready(function() {
 		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: service + "movie", apikey: "c26c67ed161834067f4d91430df1024e" });
 		container.Models.LandingModel = new Showveo.Models.LandingModel({ service: service + "landing" });
 		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: service + "header" });
-        container.Models.ManageMoviesModel = new Showveo.Models.ManageMoviesModel({ service: service + "movie" });
+        container.Models.ManageMoviesModel = new Showveo.Models.ManageMoviesModel({ service: service + "movies" });
 		container.Models.MovieDetailsModel = new Showveo.Models.MovieDetailsModel({ service: service + "movie" });
 	};
 
@@ -176,21 +176,25 @@ $(document).ready(function() {
 
         container.Controllers.ManageMoviesController = new Showveo.Controllers.ManageMoviesController({
             view: container.Views.ManageMoviesView,
-            model: container.Models.ManageMoviesModel
+            model: container.Models.ManageMoviesModel,
+			onTabSelected: function(name) { _state.setState("movies/" + name); },
+			onMovieSelected: function(movie) { _state.setStateRefresh("movie/" + movie.name.replace(/ /g, "_") + "_" + movie.year); }
         });
 
 		container.Controllers.MovieDetailsController = new Showveo.Controllers.MovieDetailsController({
 			view: container.Views.MovieDetailsView,
-			model: container.Views.MovieDetailsModel
+			model: container.Models.MovieDetailsModel,
+			onGenreSelected: function(genre) { alert("genre " + genre); }
 		});
 	};
 
 	//
 	//	Loads the error handlers.
+	//	feedback:				The feedback control.
 	//
-	var loadErrorHandlers = function() {
+	var loadErrorHandlers = function(feedback) {
 		$(document).bind("ajaxError", function(status, request, error) {
-			error = container.Controls.Feedback.error;
+			error = feedback.error;
 			status = parseInt(request.status);
 			if (status <= 510) {
 				error("An unexpected technical error has occurred.  Our support staff have been notified.  Please try again later!");

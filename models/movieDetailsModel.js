@@ -8,6 +8,9 @@ Showveo.Models.MovieDetailsModel = function(parameters) {
 	//------------------------------------------------------------------------------------------------------------------
 	/* Data Members */
 
+	//	Maintains scope.
+	var _this = this;
+
 	//	The service location.
 	var _service;
 
@@ -24,6 +27,40 @@ Showveo.Models.MovieDetailsModel = function(parameters) {
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
+
+	//
+	//	Retrieves movie details.
+	//	title:					The movie title.
+	//	year:					The movie year.
+	//
+	this.getMovieDetails = function(title, year) {
+		$.ajax({
+			url: _service + "/" + (title.replace(/ /g, "_") + "_" + year),
+			type: "GET",
+			dataType: "json",
+			success: function(movie) {
+				_this.notify("movieDetails", movie);
+			},
+			fixture: "/fixtures/movie.json"
+		})
+	};
+
+	//
+	//	Changes the favorite status of a movie.
+	//	movie:					The movie whose favorite status is changing.
+	//	favorite:				The flag indicating whether or not the movie should be a favorite.
+	//
+	this.setMovieFavorite = function(movie, favorite) {
+		$.ajax({
+			url: _service + (favorite ? "/favorite" : "/unfavorite") + "/" + movie.id,
+			type: "PUT",
+			dataType: "json",
+			error: function() {
+				_this.notify("favoriteChanged", !favorite);	
+			},
+			fixture: function() {}
+		});
+	};
 
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);

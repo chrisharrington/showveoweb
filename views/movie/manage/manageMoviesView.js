@@ -32,6 +32,9 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//	Sets the event handler for selecting a movie genre.
 	this.onGenreSelected = function(handler) { _components.tabs.onGenreSelected(handler); };
 
+	//	Sets the event handler for selecting a movie tab.
+	this.onTabSelected = function(handler) { _components.tabs.onTabSelected(handler); };
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -59,7 +62,7 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 		_components.panelRecentlyUploaded = view.find("div.tabs>div.recent>div.movies");
 
 		_components.tabs = new Showveo.Views.Movie.Manage.MovieTabs({
-			tabs: [{ name: "recent", title: "New Additions"}, { name: "favorites", title: "Favorites"}, { name: "all", title: "Browse" }],
+			tabs: [{ name: "recent", title: "New Additions"}, { name: "favorites", title: "Favorites"}, { name: "genres", title: "Genres" }, { name: "all", title: "All" }],
 			panel: view.find("div.tabs"),
 			factory: _moviePanelFactory
 		});
@@ -82,11 +85,29 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	};
 
 	//
+	//	Sets the list of movies by genre.
+	//	movies:					The movies list.
+	//
+	this.moviesByGenres = function(movies) {
+		_components.tabs.setMoviesForTab("genres", movies);
+	};
+
+	//
 	//	Sets the list of all movies.
 	//	movies:					The list of all movies.
 	//
 	this.allMovies = function(movies) {
 		_components.tabs.setMoviesForTab("all", movies);
+	};
+
+	//
+	//	Selects the tab with the given name.
+	//	name:					The tab to select.
+	//
+	this.selectTab = function(name) {
+		if (name == "" || name == "/")
+			name = "recent";
+		_components.tabs.selectTab(name);	
 	};
 
 	this.base_initialize(parameters, this);
