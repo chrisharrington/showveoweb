@@ -49,10 +49,11 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	this.loaded = function(state) {
 		_model.getRecentlyUploadedMovies();
 		_model.getFavoriteMovies();
+		_model.getMoviesByGenre("Action");
 		_model.getAllMovies();
 
 		_view.onMovieDeleted(onMovieDeleted);
-		_view.onMovieFavorited(onMovieFavorited);
+		_view.onMovieFavoriteChanged(onMovieFavoriteChanged);
 		_view.onMovieSelected(_onMovieSelected);
 		_view.onGenreSelected(onGenreSelected);
 		_view.onTabSelected(_onTabSelected);
@@ -72,10 +73,10 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	};
 
 	//
-	//	Fired after the user has requested that a movie be added to his or her favorites.
-	//	movie:				The movie to be favorited.
+	//	Fired after the user has requested that a movie be added to or removed from his or her favorites.
+	//	movie:				The movie to be favorited or unfavorited.
 	//
-	var onMovieFavorited = function(movie) {
+	var onMovieFavoriteChanged = function(movie) {
 		alert("favorite " + movie.id);
 	};
 

@@ -23,8 +23,8 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//	Sets the event handler for deleting a movie.
 	this.onMovieDeleted = function(handler) { _components.tabs.onMovieDeleted(handler); };
 
-	//	Sets the event handler for favoriting a movie.
-	this.onMovieFavorited = function(handler) { _components.tabs.onMovieFavorited(handler); };
+	//	Sets the event handler for favoriting or unfavoriting a movie.
+	this.onMovieFavoriteChanged = function(handler) { _components.tabs.onMovieFavoriteChanged(handler); };
 
 	//	Sets the event handler for selecting a movie.
 	this.onMovieSelected = function(handler) { _components.tabs.onMovieSelected(handler); };

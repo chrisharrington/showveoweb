@@ -18,8 +18,8 @@ Showveo.Views.Movie.Manage.Movie = function(parameters) {
 	//	The event handler that's fired when the user requests that the movie be deleted.
 	var _onMovieDeleted;
 
-	//	The event handler that's fired when the user requests that the movie be placed in his or her favorites.
-	var _onMovieFavorited;
+	//	The event handler that's fired when the user requests that the movie be placed in or removed from his or her favorites.
+	var _onMovieFavoriteChanged;
 
 	//	The event handler that's fired when the user selects a movie.
 	var _onMovieSelected;
@@ -33,8 +33,8 @@ Showveo.Views.Movie.Manage.Movie = function(parameters) {
 	//	Sets the event handler for deleting a movie.
 	this.onMovieDeleted = function(handler) { _components.linkDelete.click(function() { handler(_movie); }); };
 
-	//	Sets the event handler for favoriting a movie.
-	this.onMovieFavorited = function(handler) { _components.linkFavorite.click(function() { handler(_movie); }); };
+	//	Sets the event handler for favoriting or unfavoriting a movie.
+	this.onMovieFavoriteChanged = function(handler) { _components.linkFavorite.click(function() { handler(_movie, !_movie.isFavorite); }); };
 
 	//	Sets the event handler for selecting a movie.
 	this.onMovieSelected = function(handler) { _components.panel.find(".selectable").click(function() { handler(_movie); }); };
@@ -49,8 +49,6 @@ Showveo.Views.Movie.Manage.Movie = function(parameters) {
 	//  The default constructor.
 	//  panel:                      The panel containing the control elements.
 	//  movie:                      The wrapped movie.
-	//	onMovieDeleted:	The event handler for deleting a movie.
-	//	onMovieFavorited:	The event handler for favoriting a movie.
 	//
 	this.initialize = function(parameters) {
 		_movie = parameters.movie;

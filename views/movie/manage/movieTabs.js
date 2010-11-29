@@ -23,8 +23,8 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	The event handler that's fired when the user requests that the movie be deleted.
 	var _onMovieDeleted;
 
-	//	The event handler that's fired when the user requests that the movie be placed in his or her favorites.
-	var _onMovieFavorited;
+	//	The event handler that's fired when the user requests that the movie be placed in or removed from his or her favorites.
+	var _onMovieFavoriteChanged;
 
 	//	The event handler that's fired when the user selects a movie.
 	var _onMovieSelected;
@@ -41,8 +41,8 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	Sets the event handler for deleting a movie.
 	this.onMovieDeleted = function(handler) { _onMovieDeleted = handler; };
 
-	//	Sets the event handler for favoriting a movie.
-	this.onMovieFavorited = function(handler) { _onMovieFavorited = handler; };
+	//	Sets the event handler for favoriting or unfavoriting a movie.
+	this.onMovieFavoriteChanged = function(handler) { _onMovieFavoriteChanged = handler; };
 
 	//	Sets the event handler for selecting a movie.
 	this.onMovieSelected = function(handler) { _onMovieSelected = handler; };
@@ -58,16 +58,16 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	The default constructor.
-	//	tabs:				The tab parameters.
-	//	panel:			The panel containing the control elements.
-	//	factory:			Creates movie panels.
-	//	onMovieDeleted:	The event handler for deleting a movie.
-	//	onMovieFavorited:	The event handler for favoriting a movie.
+	//	tabs:					The tab parameters.
+	//	panel:					The panel containing the control elements.
+	//	factory:				Creates movie panels.
+	//	onMovieDeleted:			The event handler for deleting a movie.
+	//	onMovieFavoriteChanged:	The event handler for favoriting or unfavoriting a movie.
 	//
 	this.initialize = function(parameters) {
 		_moviePanelFactory = parameters.factory;
 		_onMovieDeleted = parameters.onMovieDeleted;
-		_onMovieFavorited = parameters.onMovieFavorited;
+		_onMovieFavoriteChanged = parameters._onMovieFavoriteChanged;
 		_movies = new Array();
 		_status = {};
 
@@ -84,8 +84,8 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	Sets the movies for a particular tab.
-	//	name:			The name of the tab.
-	//	movies:			The collection of movies.
+	//	name:					The name of the tab.
+	//	movies:					The collection of movies.
 	//
 	this.setMoviesForTab = function(name, movies) {
 		_status[name] = true;
@@ -99,7 +99,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	Selects the tab with the given name.
-	//	name:			The name of the tab to select.
+	//	name:					The name of the tab to select.
 	//
 	this.selectTab = function(name) {
 		selectTab(name);
@@ -130,7 +130,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	Creates the selection panel.
-	//	tabs:				The tab parameters.
+	//	tabs:					The tab parameters.
 	//
 	var createSelection = function(tabs) {
 		var selection = _components.panelSelection = $("<div></div>").addClass("selection");
@@ -157,7 +157,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	Creates the tabs for movies.
-	//	tabs:				The tab parameters.
+	//	tabs:					The tab parameters.
 	//
 	var createTabs = function (tabs) {
 		$(tabs).each(function(index, tab) {
@@ -167,8 +167,8 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//  	Populates a tab with a list of movies.
-	//	name::			The name of the tab to populate.
-	//	movies:			The list of movies to insert into the tab.
+	//	name::					The name of the tab to populate.
+	//	movies:					The list of movies to insert into the tab.
 	//
 	var populateTab = function(name, movies) {
 		var tab = _components.panel.find("[name='" + name + "']>div");
@@ -185,7 +185,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	Selects the tab with the given name.
-	//	name:			The name of the tab to select.
+	//	name:					The name of the tab to select.
 	//
 	var selectTab = function(name) {
 		deselectAll(function() {
@@ -197,7 +197,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	Deselects and hides all tabs.
-	//	callback:			The function to exceute once all tabs have been hidden.
+	//	callback:				The function to exceute once all tabs have been hidden.
 	//
 	var deselectAll = function(callback) {
 		var panel = _components.panel.find("div.loading").is(":visible") ? _components.panel.find("div.loading") : _components.panel.find("div.tab.selected");
@@ -209,7 +209,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	Loads the status of the control.
-	//	tabs:				The tab parameters.
+	//	tabs:					The tab parameters.
 	//
 	var loadEmptyStatus = function (tabs) {
 		$(tabs).each(function(index, tab) {
@@ -219,7 +219,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	Checks to see if the control has been completely loaded.
-	//	callback:			The callback function to execute if the control has been loaded.
+	//	callback:				The callback function to execute if the control has been loaded.
 	//
 	var checkStatus = function (callback) {
 		var done = true;
@@ -240,7 +240,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	var addHandlers = function () {
 		$(_movies).each(function(index, movie) {
 			movie.onMovieDeleted(_onMovieDeleted);
-			movie.onMovieFavorited(_onMovieFavorited);
+			movie.onMovieFavoriteChanged(_onMovieFavoriteChanged);
 			movie.onMovieSelected(_onMovieSelected);
 			movie.onGenreSelected(_onGenreSelected);
 		});

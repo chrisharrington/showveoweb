@@ -31,7 +31,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 	var createOverview = function (movie) {
 		var panel = $("<div></div>");
 		panel.append($("<a></a>").addClass("selectable").text(movie.name + " (" + movie.year + ")"));
-		panel.append($("<i></i>").html("Uploaded by <b>" + movie.owner.firstName + " " + movie.owner.lastName + "</b> " + movie.uploadDate.differenceString() + ". " + deriveLastWatched(movie)));
+		panel.append($("<i></i>").html("Uploaded by <b>" + movie.owner.firstName + " " + movie.owner.lastName + "</b> " + movie.uploadDate.parseShortDate().differenceString() + ". " + deriveLastWatched(movie)));
 		panel.append($("<u></u>").text(movie.synopsis));
 		panel.append(createFooter(movie));
 		return panel;
@@ -46,7 +46,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 		if (!movie.lastWatched)
 			return "This movie has never been watched.";
 
-		return "Last watched by <b>" + movie.lastWatched.firstName + " " + movie.lastWatched.lastName + "</b> " + movie.lastWatchedDate.differenceString() + ".";
+		return "Last watched by <b>" + movie.lastWatched.firstName + " " + movie.lastWatched.lastName + "</b> " + movie.lastWatchedDate.parseShortDate().differenceString() + ".";
 	};
 
 	//
