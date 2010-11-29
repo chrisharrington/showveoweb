@@ -34,7 +34,13 @@ Showveo.Views.Movie.Manage.Movie = function(parameters) {
 	this.onMovieDeleted = function(handler) { _components.linkDelete.click(function() { handler(_movie); }); };
 
 	//	Sets the event handler for favoriting or unfavoriting a movie.
-	this.onMovieFavoriteChanged = function(handler) { _components.linkFavorite.click(function() { handler(_movie, !_movie.isFavorite); }); };
+	this.onMovieFavoriteChanged = function(handler) {
+		_components.linkFavorite.click(function() {
+			_movie.isFavorite = !_movie.isFavorite;
+			_components.linkFavorite.attr("src", _movie.isFavorite ? "/images/favorite.png" : "/images/favoritegray.png").tooltip("hide");
+			handler(_movie);
+		});
+	};
 
 	//	Sets the event handler for selecting a movie.
 	this.onMovieSelected = function(handler) { _components.panel.find(".selectable").click(function() { handler(_movie); }); };

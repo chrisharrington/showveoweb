@@ -21,7 +21,8 @@
 		"uploadDate": "01/02/2010",
 		"lastWatched": null,
 		"lastWatchedDate": null,
-		"poster": "/images/test.jpg"
+		"poster": "/images/test.jpg",
+		"isFavorite": false
 	},
 	{
 		"id": 1,
@@ -45,6 +46,7 @@
 		"uploadDate": "02/03/2010",
 		"lastWatched": null,
 		"lastWatchedDate": null,
-		"poster": "/images/test.jpg"
+		"poster": "/images/test.jpg",
+		"isFavorite": false
 	}
 ]

@@ -77,7 +77,7 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	//	movie:				The movie to be favorited or unfavorited.
 	//
 	var onMovieFavoriteChanged = function(movie) {
-		alert("favorite " + movie.id);
+		_model.setMovieFavorite(movie);
 	};
 
 	//

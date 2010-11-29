@@ -88,7 +88,7 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//	Sets the list of movies by genre.
 	//	movies:					The movies list.
 	//
-	this.moviesByGenres = function(movies) {
+	this.moviesByGenre = function(movies) {
 		_components.tabs.setMoviesForTab("genres", movies);
 	};
 
@@ -108,6 +108,14 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 		if (name == "" || name == "/")
 			name = "recent";
 		_components.tabs.selectTab(name);	
+	};
+
+	//
+	//	Indicates that the favorite status of a movie has been changed.
+	//	movie:					The movie whose favorite status has been changed.
+	//
+	this.favoriteChanged = function(movie) {
+		_components.tabs.updateMovie(movie);
 	};
 
 	this.base_initialize(parameters, this);

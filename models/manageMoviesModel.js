@@ -102,6 +102,25 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 		});
 	};
 
+	//
+	//	Changes the favorite status of a movie.
+	//	movie:					The movie whose favorite status is changing.
+	//
+	this.setMovieFavorite = function(movie) {
+		$.ajax({
+			url: _service + (movie.isFavorite ? "/favorite" : "/unfavorite") + "/" + movie.id,
+			type: "PUT",
+			dataType: "json",
+			success: function() {
+				_this.notify("favoriteChanged", movie);
+			},
+			error: function() {
+				_this.notify("error", "An error has occurred while changing the favorite status of your movie.  Please try again later!");	
+			},
+			fixture: function() {}
+		});
+	};
+
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
 };

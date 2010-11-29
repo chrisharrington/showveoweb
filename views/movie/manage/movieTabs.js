@@ -105,6 +105,14 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 		selectTab(name);
 	};
 
+	//
+	//	Updates the movie in all tabs.
+	//	movie:					The movie to update.
+	//
+	this.updateMovie = function(movie) {
+		alert("update movie " + movie.name);
+	};
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handers */
 
