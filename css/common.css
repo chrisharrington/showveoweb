@@ -69,6 +69,6 @@ div.panel a[disabled] { color:#888; }
 
 div.tooltip { position:absolute; z-index:4; background-color:Black; padding:3px 7px; font-size:12px; }
 div.tooltip>span { float:left; width:100%; color:White; }
-div.tooltip>div.arrow { border-color:transparent transparent Black transparent; border-style:solid; border-width:10px; height:0; width:0; position:absolute; top:-19px; }
-div.tooltip.left>div.arrow { left:5px; }
-div.tooltip.right>div.arrow { right:5px; }
+div.tooltip>div.arrow { border-style:solid; border-width:6px; height:0; width:0; position:absolute; top:-11px; }
+div.tooltip.left>div.arrow { border-color:transparent transparent Black Black; left:0px; }
+div.tooltip.right>div.arrow { border-color:transparent Black Black transparent; right:0px; }
