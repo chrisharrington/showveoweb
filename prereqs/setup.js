@@ -61,7 +61,7 @@ $(document).ready(function() {
 	//	container:						Holds the loaded models, referenced by namespace.
 	//
 	var loadModels = function(container) {
-        var service = "http://localhost:3000/";
+        var service = "http://localhost:3001/";
 
 		container.Models = {};
 		container.Models.GuestModel = new Showveo.Models.GuestModel({ service: service + "guest" });
