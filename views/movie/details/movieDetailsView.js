@@ -55,6 +55,7 @@ Showveo.Views.MovieDetailsView = function(parameters) {
 		_components.labelSynopsis = view.find(">div.moviedetails>div.synopsis");
 		_components.panelGenres = view.find(">div.moviedetails>div.genres");
 		_components.imgFavorite = view.find(">div.moviedetails>div.title>img").click(function() { _handlers["onFavoriteChanged"](_movie, !_movie.isFavorite); });
+		_components.videoMovie = view.find(">div.moviedetails>div.display>video");
 	};
 
 	//
@@ -70,6 +71,7 @@ Showveo.Views.MovieDetailsView = function(parameters) {
 		_components.labelActors.text(movie.actors.toCommaString());
 		_components.labelSynopsis.text(movie.synopsis);
 		_components.imgFavorite.attr("src", movie.isFavorite ? "/images/favorite.png" : "/images/favoritegray.png");
+		_components.videoMovie.attr("src", movie.url);
 
 		createGenres(movie.genres);
 
