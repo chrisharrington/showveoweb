@@ -4,6 +4,7 @@ div.moviedetails>div.title>span { float:left; }
 div.moviedetails>div.title>img { float:right; width:16px; height:16px; display:none; }
 div.moviedetails>i { float:left; width:100%; color:#888; font-size:0.8em; margin-top:3px; font-style:normal; }
 div.moviedetails>div.display { float:left; width:970px; height:546px; background-color:Black; margin-top:15px; margin-bottom:5px; }
+div.moviedetails>div.display>video { float:left; width:100%; height:100%; }
 div.moviedetails>div.cast { float:left; width:100%; margin-top:5px; }
 div.moviedetails>div.cast>b { float:left; width:80px; }
 div.moviedetails>div.cast>span { float:left; }
