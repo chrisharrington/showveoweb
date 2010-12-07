@@ -58,9 +58,9 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	The default constructor.
-	//	tabs:					The tab parameters.
+	//	tabs:						The tab parameters.
 	//	panel:					The panel containing the control elements.
-	//	factory:				Creates movie panels.
+	//	factory:					Creates movie panels.
 	//	onMovieDeleted:			The event handler for deleting a movie.
 	//	onMovieFavoriteChanged:	The event handler for favoriting or unfavoriting a movie.
 	//
@@ -110,7 +110,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	movie:					The movie to update.
 	//
 	this.updateMovie = function(movie) {
-		alert("update movie " + movie.name);
+		updateMovie(movie);
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	var tabSelected = function() {
 		if ($(this).hasClass("selected"))
 			return;
-		selectTab($(this).attr("name"));	
+		selectTab($(this).attr("name"));
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -247,10 +247,44 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//
 	var addHandlers = function () {
 		$(_movies).each(function(index, movie) {
-			movie.onMovieDeleted(_onMovieDeleted);
-			movie.onMovieFavoriteChanged(_onMovieFavoriteChanged);
-			movie.onMovieSelected(_onMovieSelected);
-			movie.onGenreSelected(_onGenreSelected);
+			addHandlersToMovie(movie);
+
+		});
+	};
+
+	//
+	//	Adds event handlers for a movie.
+	//	movie:				The movie.
+	//
+	var addHandlersToMovie = function(movie) {
+		movie.onMovieDeleted(_onMovieDeleted);
+		movie.onMovieFavoriteChanged(_onMovieFavoriteChanged);
+		movie.onMovieSelected(_onMovieSelected);
+		movie.onGenreSelected(_onGenreSelected);
+	};
+
+	//
+	//	Updates a movie panel.
+	//	movie:				The movie to update.
+	//
+	var updateMovie = function(movie) {
+		$(_movies).each(function(index, curr) {
+			if (curr.getMovie().id != movie.id)
+				return true;
+
+			if (movie.isFavorite && !curr.getMovie().isFavorite) {
+				var panel = _moviePanelFactory.create(movie);
+				var created = new Showveo.Views.Movie.Manage.Movie({
+					panel: panel,
+					movie: movie
+				});
+
+				addHandlersToMovie(created);
+				_movies.push(created);
+				_components.panel.find("div.tab[name='favorites']>div").append(panel);
+			}
+
+			curr.update(movie);
 		});
 	};
 

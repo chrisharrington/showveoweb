@@ -31,7 +31,6 @@ Showveo.Controls.State = function() {
 		_refresh = true;
 
 		$(window).hashchange(function() {
-			//alert(_refresh + " " + window.location.hash);
 			if (_refresh)
 				load();
 			_refresh = true;
@@ -88,7 +87,7 @@ Showveo.Controls.State = function() {
 	this.setState = function(state) {
 		_refresh = false;
 		window.location.hash = state;
-	}
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
@@ -103,7 +102,7 @@ Showveo.Controls.State = function() {
 		else {
 			var state = hash.substring(1);
 			var parts = state.split("/");
-			var substate = parts[1] ? parts[1] : "";
+			var substate = parts[1] ? parts.slice(1, parts.length) : "";
 			switch (parts[0]) {
 				case "movie": _controllers.MovieDetailsController.load(substate); break;
 				case "movies": _controllers.ManageMoviesController.load(substate); break;

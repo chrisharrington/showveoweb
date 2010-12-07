@@ -58,7 +58,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 		var panel = $("<div></div>");
 		panel.append(createGenres(movie));
 		panel.append($("<img />").attr("src", movie.isFavorite ? "/images/favorite.png" : "/images/favoritegray.png").attr("alt", "").attr("title", "Mark this movie as a favorite."));
-		panel.append($("<img />").attr("src", "/images/delete.png").attr("alt", "").attr("title", "Delete this movie."));
+		panel.append($("<img />").attr("src", "/images/delete.png").attr("alt", "").attr("title", "Delete this movie.").hide());
 		return panel;
 	};
 

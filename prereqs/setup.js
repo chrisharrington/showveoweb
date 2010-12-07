@@ -184,7 +184,7 @@ $(document).ready(function() {
 		container.Controllers.MovieDetailsController = new Showveo.Controllers.MovieDetailsController({
 			view: container.Views.MovieDetailsView,
 			model: container.Models.MovieDetailsModel,
-			onGenreSelected: function(genre) { alert("genre " + genre); }
+			onGenreSelected: function(genre) { _state.setStateRefresh("movies/genres/" + genre); }
 		});
 	};
 

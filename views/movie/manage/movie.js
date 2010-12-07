@@ -47,19 +47,34 @@ Showveo.Views.Movie.Manage.Movie = function(parameters) {
 
 	//	Sets the event handler for selecting a movie genre.
 	this.onGenreSelected = function(handler) { _components.linkGenres.click(function() { handler($(this).text()); }); };
-	
+
+	//	Returns the wrapped movie.
+	this.getMovie = function() { return _movie; };
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
 	//
 	//  The default constructor.
-	//  panel:                      The panel containing the control elements.
-	//  movie:                      The wrapped movie.
+	//  panel:                      	The panel containing the control elements.
+	//  movie:			The wrapped movie.
 	//
 	this.initialize = function(parameters) {
 		_movie = parameters.movie;
 
 		loadComponents(parameters.panel);
+	};
+
+	//------------------------------------------------------------------------------------------------------------------
+	/* Public Methods */
+
+	//
+	//	Updates the movie panel.
+	//	movie:			The new movie.
+	//
+	this.update = function(movie) {
+		_movie = movie;
+		_components.linkFavorite.attr("src", _movie.isFavorite ? "/images/favorite.png" : "/images/favoritegray.png").tooltip("hide");
 	};
 
 	//------------------------------------------------------------------------------------------------------------------

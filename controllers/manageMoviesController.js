@@ -58,7 +58,10 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 		_view.onGenreSelected(onGenreSelected);
 		_view.onTabSelected(_onTabSelected);
 
-		_view.selectTab(state.replace("movies/", ""));
+		if (state.length == 1)
+			_view.selectTab(state[0]);
+		else
+			selectGenre(state[1]);
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -81,19 +84,11 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	};
 
 	//
-	//	Fired after the user has selected a movie.
-	//	movie:				The selected movie.
-	//
-	var onMovieSelected = function(movie) {
-		alert("selected " + movie.id);	
-	};
-
-	//
 	//	Fired after the user has selected a movie genre to view.
 	//	genre:				The genre to view.
 	//
 	var onGenreSelected = function(genre) {
-		alert("genre " + genre);
+		selectGenre(genre);
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -104,6 +99,14 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	//
 	var loadHandlers = function() {
 
+	};
+
+	//
+	//	Selects the genre tab.
+	//	genre:				The name of the genre to select.
+	//
+	var selectGenre = function (genre) {
+		_view.selectTab("genres");
 	};
 
 	this.base_initialize(parameters, this);
