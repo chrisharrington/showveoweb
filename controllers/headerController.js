@@ -52,9 +52,9 @@ Showveo.Controllers.HeaderController = function(parameters) {
 
 	//
 	//	Called after the controller has loaded.
+	//	identity:			The identity of the logged in user, or nothing.
 	//
-	this.loaded = function() {
-		var identity = _cookie.read("identity");
+	this.loaded = function(identity) {
 		if (!identity)
 			_this.guest();
 		else {

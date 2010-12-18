@@ -1,3 +1,4 @@
+
 Showveo.Validator.validateNamespace("Showveo.Views");
 
 //
@@ -70,7 +71,7 @@ Showveo.Views.Base = function(parameters) {
 
 			if (callback)
 				callback();
-		}
+		};
 
 		_panel.fadeOut(0, function() {
 			status.panel = true;
@@ -85,7 +86,7 @@ Showveo.Views.Base = function(parameters) {
 		});
 
 		$("head").append($("<link>").attr({ type: "text/css", rel: "stylesheet", href: _path + ".css" }));
-	}
+	};
 
 	//
 	//	Shows an error message.
