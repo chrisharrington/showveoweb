@@ -66,7 +66,6 @@ $(document).ready(function() {
 		container.Models = {};
 		container.Models.GuestModel = new Showveo.Models.GuestModel({ service: service + "guest" });
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
-		container.Models.AddMovieModel = new Showveo.Models.AddMovieModel({ service: service + "movie", apikey: "c26c67ed161834067f4d91430df1024e" });
 		container.Models.LandingModel = new Showveo.Models.LandingModel({ service: service + "landing" });
 		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: service + "header" });
         container.Models.ManageMoviesModel = new Showveo.Models.ManageMoviesModel({ service: service + "movies" });
@@ -89,13 +88,6 @@ $(document).ready(function() {
 		});
 
 		container.Views.AddTVView = new Showveo.Views.Base({ path: "views/tv/add/addTV" });
-		
-		container.Views.AddMovieView = new Showveo.Views.AddMovieView({
-			path: "views/movie/add/addMovie",
-			model: container.Models.AddMovieModel,
-			feedback: container.Controls.Feedback,
-			uploadService: "/upload/movie/"
-		});
 
 		container.Views.LandingView = new Showveo.Views.LandingView({
 			path: "views/landing/landing",
@@ -148,13 +140,6 @@ $(document).ready(function() {
 			panel: panel,
 			view: container.Views.AddTVView,
 			model: container.Models.AddTVModel,
-			feedback: container.Controls.Feedback
-		});
-
-		container.Controllers.AddMovieController = new Showveo.Controllers.AddMovieController({
-			panel: panel,
-			view: container.Views.AddMovieView,
-			model: container.Models.AddMovieModel,
 			feedback: container.Controls.Feedback
 		});
 

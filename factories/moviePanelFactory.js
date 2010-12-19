@@ -10,8 +10,8 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 
     //
     //	Creates a movie panel for the manage movies page.
-    //  	movie:		The movie for which to create a panel.
-	//	Returns:		The 	created movie panel.
+    //  movie:			The movie for which to create a panel.
+	//	Returns:		The created movie panel.
     //
     this.create = function(movie) {
     	var panel = $("<div></div>").addClass("movie");
@@ -19,6 +19,17 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 		panel.append(createOverview(movie));
 		return panel;
     };
+
+	//
+	//	Creates a movie panel for an uncategorized movie.
+	//	movie:			The uncategorized movie.
+	//	Returns:		The created panel.
+	//
+	this.createUncategorized = function(movie) {
+		var panel = $("<div></div>").addClass("srounded selectable");
+		panel.append($("<span></span>").text(movie.name));
+		return panel;
+	};
 
     //------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */

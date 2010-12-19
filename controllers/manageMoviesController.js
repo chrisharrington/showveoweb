@@ -35,8 +35,6 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 		_model = parameters.model;
 		_onTabSelected = parameters.onTabSelected;
 		_onMovieSelected = parameters.onMovieSelected;
-
-		loadHandlers();
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -51,12 +49,10 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 		_model.getFavoriteMovies();
 		_model.getMoviesByGenre("Action");
 		_model.getAllMovies();
+		_model.getUncategorizedMovies();
+		_model.getAllGenres();
 
-		_view.onMovieDeleted(onMovieDeleted);
-		_view.onMovieFavoriteChanged(onMovieFavoriteChanged);
-		_view.onMovieSelected(_onMovieSelected);
-		_view.onGenreSelected(onGenreSelected);
-		_view.onTabSelected(_onTabSelected);
+		loadHandlers();
 
 		if (state.length == 1)
 			_view.selectTab(state[0]);
@@ -91,6 +87,23 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 		selectGenre(genre);
 	};
 
+	//
+	//	Fired after the user has performed a search for uncategorized movies.
+	//	query:				The search query.
+	//
+	var onSearch = function(query) {
+		_model.movieSearch(query);	
+	};
+
+	//
+	//	Fired after the user has changed genres in the genres tab.  Populates the genres tab with movies from the
+	//	selected genre.
+	//	genre:				The new genre.
+	//
+	var onGenreChanged = function(genre) {
+		_model.getMoviesByGenre(genre);
+	};
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Private Methods */
 
@@ -98,7 +111,18 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 	//	Loads the common handlers for the controller.
 	//
 	var loadHandlers = function() {
-
+		_view.onMovieDeleted(onMovieDeleted);
+		_view.onMovieFavoriteChanged(onMovieFavoriteChanged);
+		_view.onMovieSelected(_onMovieSelected);
+		_view.onGenreSelected(onGenreSelected);
+		_view.onTabSelected(_onTabSelected);
+		_view.onSearch(onSearch);
+		_view.onGenreChanged(onGenreChanged);
+		_view.onUncategorizedMovieSelected(function() {
+			_model.getRecentlyUploadedMovies();
+			_model.getMoviesByGenre("Action");
+			_model.getAllMovies();
+		});
 	};
 
 	//

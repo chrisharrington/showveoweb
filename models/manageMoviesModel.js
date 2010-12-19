@@ -103,6 +103,61 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	};
 
 	//
+	//	Retrieves the list of uncategorized movies.
+	//
+	this.getUncategorizedMovies = function() {
+		$.ajax({
+			url: _service + "/uncategorized",
+			dataType: "json",
+			global: false,
+			success: function(movies) {
+				_this.notify("uncategorizedMovies", movies);
+			},
+			error: function(error) {
+				_this.notify("error", "An error has occurred while retrieving the uncategorized movies list.  Please try again later.");
+			},
+			fixture: "/fixtures/uncategorizedMovies.json"
+		});
+	};
+
+	//
+	//	Retrieves a list of remote movies that match the given query.
+	//	query:					The search query.
+	//
+	this.movieSearch = function(query) {
+		$.ajax({
+			url: _service + "/search",
+			dataType: "json",
+			global: false,
+			success: function(movies) {
+				_this.notify("searchResults", movies);
+			},
+			error: function() {
+				_this.notify("searchError", "An error has occurred while retrieving the search results.");
+			},
+			fixture: "/fixtures/movieSearch.json"
+		});
+	};
+
+	//
+	//	Retrieves a list of all genres.
+	//
+	this.getAllGenres = function() {
+		$.ajax({
+			url: _service + "/genres",
+			dataType: "json",
+			global: false,
+			success: function(genres) {
+				_this.notify("genres", genres);
+			},
+			error: function() {
+				_this.notify("error", "An error has occurred while retrieving the genres list.  Please try again later.");
+			},
+			fixture: "/fixtures/allGenres.json"
+		});
+	};
+
+	//
 	//	Changes the favorite status of a movie.
 	//	movie:					The movie whose favorite status is changing.
 	//

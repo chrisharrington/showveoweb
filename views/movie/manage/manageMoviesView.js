@@ -35,6 +35,15 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//	Sets the event handler for selecting a movie tab.
 	this.onTabSelected = function(handler) { _components.tabs.onTabSelected(handler); };
 
+	//	Sets the event handler for searching for movies for categorization.
+	this.onSearch = function(handler) { _components.addMovie.onSearch(handler); };
+
+	//	Sets the event handler for selecting an uncategorized movie's information.
+	this.onUncategorizedMovieSelected = function(handler) { _components.addMovie.onUncategorizedMovieSelected(handler); };
+
+	//	Sets the event handler to fire once the genre has been changed in the genres tab.
+	this.onGenreChanged = function(handler) { _components.tabs.onGenreChanged(handler); };
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
@@ -61,10 +70,16 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 		_components.panelLoading = view.find("div.loading");
 		_components.panelRecentlyUploaded = view.find("div.tabs>div.recent>div.movies");
 
+		_components.addMovie = new Showveo.Controls.AddMovie.AddMovie({
+			panel: $("div.addmovie")
+		});
+
 		_components.tabs = new Showveo.Views.Movie.Manage.MovieTabs({
-			tabs: [{ name: "recent", title: "New Additions"}, { name: "favorites", title: "Favorites"}, { name: "genres", title: "Genres" }, { name: "all", title: "All" }],
+			tabs: [{ name: "recent", title: "New Additions"}, { name: "favorites", title: "Favorites"}, { name: "genres", title: "Genres" }, { name: "all", title: "All" }, { name: "uncategorized", title: "Uncategorized" }],
 			panel: view.find("div.tabs"),
-			factory: _moviePanelFactory
+			factory: _moviePanelFactory,
+			uncategorized: view.find("div.uncategorized"),
+			addMovie: _components.addMovie
 		});
 	};
 
@@ -101,6 +116,14 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	};
 
 	//
+	//	Sets the list of uncategorized movies.
+	//	movies:					The list of uncategorized movies.
+	//
+	this.uncategorizedMovies = function(movies) {
+		_components.tabs.setUncategorizedMovies(movies);	
+	};
+
+	//
 	//	Selects the tab with the given name.
 	//	name:					The tab to select.
 	//
@@ -116,6 +139,30 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//
 	this.favoriteChanged = function(movie) {
 		_components.tabs.updateMovie(movie);
+	};
+
+	//
+	//	Loads the add movie search results with the given list of movies.
+	//	movies:					The movie list.
+	//
+	this.searchResults = function(movies) {
+		_components.addMovie.loadSearchResults(movies);	
+	};
+
+	//
+	//	Sets the list of all genres.
+	//	genres:					The list of genres.
+	//
+	this.genres = function(genres) {
+		_components.tabs.setGenres(genres);	
+	};
+
+	//
+	//	Indicates that an error has occurred while searching for movies.
+	//	error;					The error message.
+	//
+	this.searchError = function(error) {
+		_components.addMovie.error(error);	
 	};
 
 	this.base_initialize(parameters, this);

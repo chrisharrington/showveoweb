@@ -37,9 +37,7 @@ Showveo.Controls.State = function() {
 		});
 
 		_controllers.HeaderController.load(identity);
-		if (identity)
-			load();
-		else
+		if (!identity)
 			_controllers.GuestController.load();
 	};
 

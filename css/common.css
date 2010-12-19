@@ -11,16 +11,17 @@ a.tag:hover { background-color:#CEE8F5; }
 
 input[type='button'] { font-size:12px; }
 button { font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size:13px; cursor:pointer; padding:2px; background-color:#eee; border:solid 1px #AAA; -moz-border-radius:3px; -webkit-border-radius:3px; }
+button[disabled] { cursor:default; }
 button>img { float:left; margin-top:1px; }
 button>span { float:left; margin-left:3px; font-weight:bold; }
 button.success>span { color:Green; }
-button.success:hover { background-color:#E6EFC2; }
+button.success:hover, button.success:focus { background-color:#E6EFC2; }
 button.success:active { background-color:#B1D698; }
 button.neutral>span { color:#336699; }
-button.neutral:hover { background-color:#CEE8F5; }
+button.neutral:hover, button.neutral:focus { background-color:#CEE8F5; }
 button.neutral:active { background-color:#98C1D6; }
 button.negative>span { color:#d12f19; }
-button.negative:hover { background-color:#fbe3e4; }
+button.negative:hover, button.negative:focus { background-color:#fbe3e4; }
 button.negative:active { background-color:#E3AAAD; }
 
 span.subheader { font-size:1.25em; }

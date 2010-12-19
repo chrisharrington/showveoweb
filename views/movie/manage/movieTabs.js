@@ -17,6 +17,9 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	Creates movie panels.
 	var _moviePanelFactory;
 
+	//	The add movie control.
+	var _addMovie;
+
 	//	The status of the control.
 	var _status;
 
@@ -53,21 +56,27 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	Sets the event handler for selecting a movie tab.
 	this.onTabSelected = function(handler) { _onTabSelected = handler; };
 
+	//	Sets the handler for when the user has changed genres in the genres tab.
+	this.onGenreChanged = function(handler) { _components.selectGenres.change(function() { handler($(this).find("option:selected").text()); }); };
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Constructors */
 
 	//
 	//	The default constructor.
-	//	tabs:						The tab parameters.
+	//	tabs:					The tab parameters.
 	//	panel:					The panel containing the control elements.
-	//	factory:					Creates movie panels.
+	//	factory:				Creates movie panels.
+	//	uncategorized:			The uncategorized movies panel.
+	//	addMovie:				The add movie control.
 	//	onMovieDeleted:			The event handler for deleting a movie.
 	//	onMovieFavoriteChanged:	The event handler for favoriting or unfavoriting a movie.
 	//
 	this.initialize = function(parameters) {
 		_moviePanelFactory = parameters.factory;
+		_addMovie = parameters.addMovie;
 		_onMovieDeleted = parameters.onMovieDeleted;
-		_onMovieFavoriteChanged = parameters._onMovieFavoriteChanged;
+		_onMovieFavoriteChanged = parameters.onMovieFavoriteChanged;
 		_movies = new Array();
 		_status = {};
 
@@ -77,6 +86,9 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 		createSelection(parameters.tabs);
 		createLoading();
 		createTabs(parameters.tabs);
+		createGenres(parameters.panel.find("div.tab[name='genres']>div"));
+
+		loadUncategorized(parameters.uncategorized);
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -98,6 +110,14 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	};
 
 	//
+	//	Sets the list of uncategorized movies.
+	//	movies:					The collection of uncategorized movies.
+	//
+	this.setUncategorizedMovies = function(movies) {
+		populateUncategorizedMoviesTab(movies);
+	};
+
+	//
 	//	Selects the tab with the given name.
 	//	name:					The name of the tab to select.
 	//
@@ -111,6 +131,16 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//
 	this.updateMovie = function(movie) {
 		updateMovie(movie);
+	};
+
+	//
+	//	Sets the genres for the genres tab.
+	//	genres:					The genres.
+	//
+	this.setGenres = function(genres) {
+		$(genres).each(function(index, genre) {
+			_components.selectGenres.append($("<option></option>").val(genre.id).text(genre.name));	
+		});
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -134,6 +164,16 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	var loadComponents = function(panel) {
 		_components = {};
 		_components.panel = panel;
+	};
+
+	//
+	//	Loads the uncategorized panel into a tab.
+	//	panel:					The uncategorized movies panel.
+	//
+	var loadUncategorized = function (panel) {
+		var tab = _components.panel.find("div.tab[name='uncategorized']");
+		tab.addClass("uncategorized").find(">div").remove();
+		tab.append(panel.find(">*"));
 	};
 
 	//
@@ -174,12 +214,24 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	};
 
 	//
-	//  	Populates a tab with a list of movies.
+	//	Creates the additional controls required for the genres tab.
+	//	tab:					The genres tab.
+	//
+	var createGenres = function (tab) {
+		var panel = $("<div></div>").addClass("genres");
+		panel.append($("<span></span>").text("Genre:"));
+		panel.append(_components.selectGenres = $("<select></select>"));
+		tab.append(panel);
+	};
+	
+	//
+	//  Populates a tab with a list of movies.
 	//	name::					The name of the tab to populate.
 	//	movies:					The list of movies to insert into the tab.
 	//
 	var populateTab = function(name, movies) {
 		var tab = _components.panel.find("[name='" + name + "']>div");
+		tab.find(">div.movie").remove();
 
 		$(movies).each(function(index, movie) {
 			var panel = _moviePanelFactory.create(movie);
@@ -187,6 +239,20 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 				panel: panel,
 				movie: movie
 			}));
+			tab.append(panel);
+		});
+	};
+
+	//
+	//	Populates the uncategorized movies tab.
+	//	movies:					The collection of uncategorized movies.
+	//
+	var populateUncategorizedMoviesTab = function(movies) {
+		var tab = _components.panel.find("[name='uncategorized']>div");
+
+		$(movies).each(function(index, movie) {
+			var panel = _moviePanelFactory.createUncategorized(movie);
+			panel.click(function() { _addMovie.loadMovie(movie); });
 			tab.append(panel);
 		});
 	};

@@ -2,6 +2,29 @@ div.managemovies { float:left; width:100%; }
 div.managemovies>span { float:left; width:100%; }
 div.managemovies>div.movies { float:left; width:100%; margin-top:25px; }
 
+div.uncategorized>div>span { float:left; width:100%; }
+div.uncategorized>div>div { float:left; width:930px; padding:5px; background-color:#EFEFEF; margin-top:5px; }
+div.uncategorized>div>div>span { float:left; width:100%; }
+
+div.genres { float:left; width:100%; padding-bottom:10px; }
+div.genres>span { float:left; width:60px; margin-top:4px; }
+div.genres>select { float:left; width:300px; }
+
+div.addmovie { float:left; width:600px; display:none; }
+div.addmovie>span { float:left; width:100%; font-size:1.3em; }
+div.addmovie>div { float:left; width:100%; margin-top:10px; }
+div.addmovie>div.search>span { float:left; width:100%; font-size:1em; }
+div.addmovie>div.search>input[type='text'] { float:left; width:590px; padding:3px; margin-top:3px; }
+div.addmovie>div.buttons>span { float:left; margin-top:2px; color:Red; }
+div.addmovie>div.buttons>div { float:right; }
+div.addmovie>div.buttons>div>button { float:left; margin-left:5px; }
+div.addmovie>div.results>div { float:left; width:590px; padding:5px; margin-top:3px; border:solid 1px #999; background-color:#FFF; }
+div.addmovie>div.results>div:first-child { margin-top:3px; }
+div.addmovie>div.results>div>span { float:left; width:100%; }
+div.addmovie>div.results>div.selected { background-color:#2F8BBA; color:#FFF; }
+div.addmovie>div.results>div.more { float:left; width:100%; margin-top:10px; background-color:#EFEFEF; border:none; padding:0; }
+div.addmovie>div.results>div.more>a { float:right; margin-left:5px; color:#549BE3; font-size:0.85em; }
+
 div.tabs { float:left; width:100%; margin-top:25px; }
 div.tabs>div.selection { float:left; width:100%; font-size:0.7em; font-weight:bold; font-family:Arial; }
 div.tabs>div.selection>span { float:left; padding:3px 8px; background-color:#EBEBEB; color:#888; margin-left:5px; margin-right:5px; -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; cursor:pointer; text-transform:uppercase; }

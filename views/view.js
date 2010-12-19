@@ -48,7 +48,7 @@ Showveo.Views.Base = function(parameters) {
 		_components = {};
 
 		_this.model = parameters.model;
-	}
+	};
 
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
@@ -62,27 +62,15 @@ Showveo.Views.Base = function(parameters) {
 		if (!_path)
 			return;
 
-		var status = { panel: false, html: false };
+		_panel.hide();
 
-		var done = function(html) {
-			_panel.empty().append(html).fadeIn(0);
+		$.get(_path + ".html", function(html) {
+			_panel.empty().append(html).show();
 
 			_implementer.loadComponents(_panel);
 
 			if (callback)
 				callback();
-		};
-
-		_panel.fadeOut(0, function() {
-			status.panel = true;
-			if (status.panel && status.html)
-				done(status.html);
-		});
-
-		$.get(_path + ".html", function(html) {
-			status.html = html;
-			if (status.panel && status.html)
-				done(status.html);
 		});
 
 		$("head").append($("<link>").attr({ type: "text/css", rel: "stylesheet", href: _path + ".css" }));

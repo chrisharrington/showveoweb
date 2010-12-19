@@ -41,7 +41,7 @@
 						show();
 					else if (method == "hide")
 						hide();
-				}
+				};
 
 				//--------------------------------------------------------------------------------------------------------------
 				/* Private Methods */
@@ -52,10 +52,10 @@
 				var show = function () {
 					setModalPosition();
 
-					_wrapper.css("max-height", ($(window).height() - 200) + "px").show();
+					_wrapper.show();
 
 					_focus.height($(document).height()).show();
-				}
+				};
 
 				//
 				//	Hides the modal dialog.
@@ -63,7 +63,7 @@
 				var hide = function () {
 					_focus.hide();
 					_wrapper.hide();
-				}
+				};
 
 				//
 				//	Derives the width from the given panel.
@@ -73,7 +73,7 @@
 				var deriveWidth = function (panel) {
 					var width = panel.outerWidth();
 					return width == 0 ? 500 : width;
-				}
+				};
 
 				//
 				//	Wraps the given panel with modal dialog functionality.
@@ -88,7 +88,7 @@
 					_wrapper = panel.parent();
 
 					setModalPosition();
-				}
+				};
 
 				//
 				//	Sets the position of the modal to the center of the screen.
@@ -99,7 +99,7 @@
 
 					_wrapper.css({ left: left + "px", top: top + "px" });
 					_focus.height($(document).height());
-				}
+				};
 
 				initialize({
 					panel: $(this),
