@@ -289,6 +289,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 		$(tabs).each(function(index, tab) {
 			_status[tab.name] = false;
 		});
+		_status["uncategorized"] = true;
 	};
 
 	//
