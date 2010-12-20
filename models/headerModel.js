@@ -33,14 +33,17 @@ Showveo.Models.HeaderModel = function(parameters) {
 	//
 	this.signIn = function(emailAddress, password, callback) {
 		$.ajax({
-			url: _service + "/signin",
-			data: { emailAddress: emailAddress, password: password },
+			url: _service + "/signin.data",
+			data: { emailAddress: emailAddress, password: $.sha256(password) },
 			dataType: "json",
-			success: function(data) { callback(data); },
+			success: function(data) {
+				callback(data);
+			},
+			error: function(error) { alert(error.status); }/*,
 			fixture: function() {
 				if (emailAddress == "q")
 					return [];
-
+				
 				return [{
 					id: 1,
 					firstName: "Chris",
@@ -49,7 +52,7 @@ Showveo.Models.HeaderModel = function(parameters) {
 					password: "",
 					emailAddress: "chrisharrington99@gmail.com"
 				}];
-			}
+			}*/
 		});
 	};
 

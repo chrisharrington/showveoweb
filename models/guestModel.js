@@ -25,34 +25,6 @@ Showveo.Models.GuestModel = function(parameters) {
 	//------------------------------------------------------------------------------------------------------------------
 	/* Public Methods */
 
-	//
-	//	Attempts to sign in a user.
-	//	emailAddress:			The user's email address.
-	//	password:				The user's password.
-	//	callback:				The callback function.
-	//
-	this.signIn = function(emailAddress, password, callback) {
-		$.ajax({
-			url: _service + "/signin",
-			data: { emailAddress: emailAddress, password: password },
-			dataType: "json",
-			success: function(data) { callback(data); },
-			fixture: function() {
-				if (emailAddress == "q")
-					return [];
-
-				return [{
-					id: 1,
-					firstName: "Chris",
-					lastName: "Harrington",
-					identity: "areallylongidentity",
-					password: "",
-					emailAddress: "chrisharrington99@gmail.com"
-				}];
-			}
-		});
-	};
-
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
 };

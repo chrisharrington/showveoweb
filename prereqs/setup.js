@@ -61,13 +61,13 @@ $(document).ready(function() {
 	//	container:						Holds the loaded models, referenced by namespace.
 	//
 	var loadModels = function(container) {
-        var service = "http://localhost:3001/";
+        var service = "http://localhost:3000/";
 
 		container.Models = {};
 		container.Models.GuestModel = new Showveo.Models.GuestModel({ service: service + "guest" });
 		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
 		container.Models.LandingModel = new Showveo.Models.LandingModel({ service: service + "landing" });
-		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: service + "header" });
+		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: service + "account" });
         container.Models.ManageMoviesModel = new Showveo.Models.ManageMoviesModel({ service: service + "movies" });
 		container.Models.MovieDetailsModel = new Showveo.Models.MovieDetailsModel({ service: service + "movie" });
 	};
