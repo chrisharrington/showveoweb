@@ -66,7 +66,7 @@ Showveo.Models.HeaderModel = function(parameters) {
 			callback();
 
 		$.ajax({
-			url: _service + "/signin/" + identity,
+			url: _service + "/signin/" + identity + ".data",
 			dataType: "json",
 			success: function(data) { callback(data); },
 			fixture: function() {
