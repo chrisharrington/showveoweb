@@ -68,7 +68,7 @@ Showveo.Models.HeaderModel = function(parameters) {
 		$.ajax({
 			url: _service + "/signin/" + identity + ".data",
 			dataType: "json",
-			success: function(data) { callback(data); },
+			success: function(data) { callback(data); }/*,
 			fixture: function() {
 				return [{
 					id: 1,
@@ -78,7 +78,7 @@ Showveo.Models.HeaderModel = function(parameters) {
 					password: "",
 					emailAddress: "chrisharrington99@gmail.com"
 				}];
-			}
+			}*/
 		});
 	};
 
