@@ -33,7 +33,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	//
 	this.getRecentlyUploadedMovies = function() {
 		$.ajax({
-			url: _service + "/recent",
+			url: _service + "/recent.data",
 			dataType: "json",
 			global: false,
 			success: function(movies) {
@@ -41,8 +41,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your recenly uploaded movies list.  Please try again later!");
-			},			
-			fixture: "/fixtures/recentMovies.json"
+			}/*,
+			fixture: "/fixtures/recentMovies.json"*/
 		});
 	};
 
