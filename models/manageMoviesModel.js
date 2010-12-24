@@ -70,7 +70,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	//
 	this.getMoviesByGenre = function(genre) {
 		$.ajax({
-			url: _service + "/genre/" + genre,
+			url: _service + "/genre/" + genre.replace(/ /g, "_") + ".data",
 			dataType: "json",
 			type: "GET",
 			global: false,
@@ -79,8 +79,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function() {
 				_this.notify("error", "An error has occurred while retrieving your movies by genre.  Please try again later!");
-			},
-			fixture: "/fixtures/genreMovies.json"
+			}/*,
+			fixture: "/fixtures/genreMovies.json"*/
 		});
 	};
 
@@ -144,7 +144,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	//
 	this.getAllGenres = function() {
 		$.ajax({
-			url: _service + "/genres",
+			url: _service + "/genres.data",
 			dataType: "json",
 			global: false,
 			success: function(genres) {
@@ -152,8 +152,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function() {
 				_this.notify("error", "An error has occurred while retrieving the genres list.  Please try again later.");
-			},
-			fixture: "/fixtures/allGenres.json"
+			}/*,
+			fixture: "/fixtures/allGenres.json"*/
 		});
 	};
 

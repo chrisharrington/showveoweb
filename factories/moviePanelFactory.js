@@ -80,7 +80,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 	var createGenres = function (movie) {
 		var panel = $("<div></div>");
 		$(movie.genres).each(function(index, genre) {
-			panel.append($("<a></a>").text(genre).addClass("tag"));
+			panel.append($("<a></a>").text(genre.name).addClass("tag"));
 		});
 		return panel;
 	};
