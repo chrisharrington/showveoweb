@@ -51,7 +51,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	//
 	this.getFavoriteMovies = function() {
 		$.ajax({
-			url: _service + "/favorites",
+			url: _service + "/favorites.data",
 			dataType: "json",
 			global: false,
 			success: function(movies) {
@@ -59,8 +59,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your favorite movies list.  Please try again later!");
-			},
-			fixture: "/fixtures/favoriteMovies.json"
+			}/*,
+			fixture: "/fixtures/favoriteMovies.json"*/
 		});
 	};
 
@@ -89,7 +89,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	//
 	this.getAllMovies = function() {
 		$.ajax({
-			url: _service + "/all",
+			url: _service + "/all.data",
 			dataType: "json",
 			global: false,
 			success: function(movies) {
@@ -97,8 +97,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your movies list.  Please try again later!");
-			},
-			fixture: "/fixtures/allMovies.json"
+			}/*,
+			fixture: "/fixtures/allMovies.json"*/
 		});
 	};
 
