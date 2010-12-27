@@ -163,16 +163,21 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	//
 	this.setMovieFavorite = function(movie) {
 		$.ajax({
-			url: _service + (movie.isFavorite ? "/favorite" : "/unfavorite") + "/" + movie.id,
+			url: _service + (movie.isFavorite ? "/favorite" : "/unfavorite") + "/" + movie.id + ".data",
 			type: "PUT",
 			dataType: "json",
+			global: false,
 			success: function() {
 				_this.notify("favoriteChanged", movie);
 			},
-			error: function() {
+			error: function(error) {
+				if (error.status == 200) {
+					_this.notify("favoriteChanged", movie);
+					return;
+				}
 				_this.notify("error", "An error has occurred while changing the favorite status of your movie.  Please try again later!");	
-			},
-			fixture: function() {}
+			}/*,
+			fixture: function() {}*/
 		});
 	};
 
