@@ -27,7 +27,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 	//
 	this.createUncategorized = function(movie) {
 		var panel = $("<div></div>").addClass("srounded selectable");
-		panel.append($("<span></span>").text(movie.name));
+		panel.append($("<span></span>").text(movie.filename));
 		panel.append($("<b></b>").text(movie.encoded ? "" : "Encoding in progress."));
 		return panel;
 	};

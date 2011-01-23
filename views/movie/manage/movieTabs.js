@@ -250,6 +250,14 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	var populateUncategorizedMoviesTab = function(movies) {
 		var tab = _components.panel.find("[name='uncategorized']>div");
 
+		var label = tab.find(">span");
+		if (movies.length == 0)
+			label.text("There are currently no uncategorized movies.");
+		else if (movies.length == 1)
+			label.html("There is currently <b>" + movies.length + "</b> movie that is uncategorized.  To assign information to this movie, click on it below.");
+		else
+			label.html("There are currently <b>" + movies.length + "</b> movies that are uncategorized.  To assign information to these movies, click on each of them below.");
+
 		$(movies).each(function(index, movie) {
 			var panel = _moviePanelFactory.createUncategorized(movie);
 			panel.click(function() { _addMovie.loadMovie(movie); });

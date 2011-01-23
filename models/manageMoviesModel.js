@@ -107,7 +107,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	//
 	this.getUncategorizedMovies = function() {
 		$.ajax({
-			url: _service + "/uncategorized",
+			url: _service + "/uncategorized.data",
 			dataType: "json",
 			global: false,
 			success: function(movies) {
@@ -115,8 +115,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving the uncategorized movies list.  Please try again later.");
-			},
-			fixture: "/fixtures/uncategorizedMovies.json"
+			}/*,
+			fixture: "/fixtures/uncategorizedMovies.json"*/
 		});
 	};
 
