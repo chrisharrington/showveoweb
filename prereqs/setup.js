@@ -65,7 +65,6 @@ $(document).ready(function() {
 
 		container.Models = {};
 		container.Models.GuestModel = new Showveo.Models.GuestModel({ service: service + "guest" });
-		container.Models.AddTVModel = new Showveo.Models.AddTVModel({});
 		container.Models.LandingModel = new Showveo.Models.LandingModel({ service: service + "landing" });
 		container.Models.HeaderModel = new Showveo.Models.HeaderModel({ service: service + "account" });
         container.Models.ManageMoviesModel = new Showveo.Models.ManageMoviesModel({ service: service + "movies" });
@@ -86,8 +85,6 @@ $(document).ready(function() {
 			model: container.Models.GuestModel,
 			feedback: container.Controls.Feedback
 		});
-
-		container.Views.AddTVView = new Showveo.Views.Base({ path: "views/tv/add/addTV" });
 
 		container.Views.LandingView = new Showveo.Views.LandingView({
 			path: "views/landing/landing",
@@ -134,13 +131,6 @@ $(document).ready(function() {
 			header: container.Controls.Header,
 			cookie: container.Controls.Cookie,
 			onSignIn: _state.signIn
-		});
-
-		container.Controllers.AddTVController = new Showveo.Controllers.AddTVController({
-			panel: panel,
-			view: container.Views.AddTVView,
-			model: container.Models.AddTVModel,
-			feedback: container.Controls.Feedback
 		});
 
 		container.Controllers.LandingController = new Showveo.Controllers.LandingController({

@@ -15,7 +15,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
     //
     this.create = function(movie) {
     	var panel = $("<div></div>").addClass("movie");
-		panel.append($("<img />").addClass("selectable").attr("src", movie.poster).attr("alt", ""));
+		panel.append($("<img />").addClass(movie.encoded ? "selectable" : "").attr("src", movie.poster).attr("alt", ""));
 		panel.append(createOverview(movie));
 		return panel;
     };
@@ -28,6 +28,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 	this.createUncategorized = function(movie) {
 		var panel = $("<div></div>").addClass("srounded selectable");
 		panel.append($("<span></span>").text(movie.name));
+		panel.append($("<b></b>").text(movie.encoded ? "" : "Encoding in progress."));
 		return panel;
 	};
 
@@ -41,7 +42,9 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 	//
 	var createOverview = function (movie) {
 		var panel = $("<div></div>");
-		panel.append($("<a></a>").addClass("selectable").text(movie.name + " (" + movie.year + ")"));
+		panel.append($("<a></a>").addClass(movie.encoded ? "selectable" : "").text(movie.name + " (" + movie.year + ")"));
+		if (!movie.encoded)
+			panel.append($("<b></b>").text("Encoding in progress."));
 		panel.append($("<i></i>").html("Uploaded by <b>" + movie.owner.firstName + " " + movie.owner.lastName + "</b> " + movie.uploadDate.parseShortDate().differenceString() + ". " + deriveLastWatched(movie)));
 		panel.append($("<u></u>").text(movie.synopsis));
 		panel.append(createFooter(movie));

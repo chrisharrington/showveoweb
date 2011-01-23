@@ -4,7 +4,8 @@ div.managemovies>div.movies { float:left; width:100%; margin-top:25px; }
 
 div.uncategorized>div>span { float:left; width:100%; }
 div.uncategorized>div>div { float:left; width:930px; padding:5px; background-color:#EFEFEF; margin-top:5px; }
-div.uncategorized>div>div>span { float:left; width:100%; }
+div.uncategorized>div>div>span { float:left; }
+div.uncategorized>div>div>b { float:right; font-weight:normal; font-size:0.85em; color:#777; margin-top:2px; }
 
 div.genres { float:left; width:100%; padding-bottom:10px; }
 div.genres>span { float:left; width:60px; margin-top:4px; }
@@ -38,6 +39,7 @@ div.movie:last-child { margin-bottom:0px; }
 div.movie>img { float:left; width:86px; height:129px; }
 div.movie>div { float:left; width:844px; margin-left:10px; }
 div.movie>div>a { float:left; font-size:1.2em; cursor:pointer; color:#2A7AC9; }
+div.movie>div>b { float:left; margin-top:3px; font-size:0.9em; color:Red; margin-left:10px; }
 div.movie>div>a:hover { color:#04315E; }
 div.movie>div>i { float:left; width:100%; margin-top:3px; color:#888; font-size:0.7em; font-style:normal; font-family:sans-serif; }
 div.movie>div>u { float:left; width:100%; overflow:hidden; margin-top:5px; text-decoration:none; font-size:0.8em; font-family:sans-serif; height:62px; margin-bottom:5px; }

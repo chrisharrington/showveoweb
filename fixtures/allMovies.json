@@ -31,7 +31,8 @@
 			"fifth actor"
 		],
 		"isFavorite": false,
-		"url": "test.ogv"
+		"url": "test.ogv",
+		"encoded": "false"
 	},
 	{
 		"id": 2,
@@ -65,7 +66,8 @@
 			"fifth actor"
 		],
 		"isFavorite": true,
-		"url": "test.ogv"
+		"url": "test.ogv",
+		"encoded": "false"
 	},
 	{
 		"id": 3,
@@ -99,7 +101,8 @@
 			"fifth actor"
 		],
 		"isFavorite": true,
-		"url": "test.ogv"
+		"url": "test.ogv",
+		"encoded": "true"
 	},
 	{
 		"id": 4,
@@ -133,6 +136,7 @@
 			"fifth actor"
 		],
 		"isFavorite": false,
-		"url": "test.ogv"
+		"url": "test.ogv",
+		"encoded": "true"
 	}
 ]

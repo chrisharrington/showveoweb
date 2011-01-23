@@ -2,11 +2,13 @@
 	{
 		"id": 1,
 		"name": "some.movie.name[2010]-DVDRip.avi",
-		"size": 711000000
+		"size": 711000000,
+		"encoded": false
 	},
 	{
 		"id": 2,
 		"name": "another_movie[R5][2010].mpg",
-		"size": 712300000
+		"size": 712300000,
+		"encoded": true
 	}
 ]
