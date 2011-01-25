@@ -118,10 +118,13 @@ Showveo.Controllers.ManageMoviesController = function(parameters) {
 		_view.onTabSelected(_onTabSelected);
 		_view.onSearch(onSearch);
 		_view.onGenreChanged(onGenreChanged);
-		_view.onUncategorizedMovieSelected(function() {
-			_model.getRecentlyUploadedMovies();
-			_model.getMoviesByGenre("Action");
-			_model.getAllMovies();
+		_view.onUncategorizedMovieSelected(function(uncategorizedMovie, selectedMovie) {
+			_model.categorize(uncategorizedMovie, selectedMovie, function() {
+				_model.getRecentlyUploadedMovies();
+				_model.getMoviesByGenre("Action");
+				_model.getAllMovies();
+				_model.getFavoriteMovies();
+			});
 		});
 	};
 

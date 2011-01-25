@@ -126,7 +126,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 	//
 	this.movieSearch = function(query) {
 		$.ajax({
-			url: _service + "/search",
+			url: _service + "/search/" + (query.replace(/ /g, "+")) + ".data",
 			dataType: "json",
 			global: false,
 			success: function(movies) {
@@ -167,17 +167,27 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			type: "PUT",
 			dataType: "json",
 			global: false,
-			success: function() {
-				_this.notify("favoriteChanged", movie);
-			},
-			error: function(error) {
-				if (error.status == 200) {
-					_this.notify("favoriteChanged", movie);
-					return;
-				}
-				_this.notify("error", "An error has occurred while changing the favorite status of your movie.  Please try again later!");	
-			}/*,
+			success: function() { _this.notify("favoriteChanged", movie); },
+			error: function(error) { _this.notify("error", "An error has occurred while changing the favorite status of your movie.  Please try again later!"); }/*,
 			fixture: function() {}*/
+		});
+	};
+
+	//
+	//	Categorizes a movie.
+	//	uncategorized:				The uncategorized movie.
+	//	info:						The selected movie information.
+	//	callback:					The controller callback.
+	//
+	this.categorize = function(uncategorized, info, callback) {
+		$.ajax({
+			url: _service + "/categorize.data",
+			data: { "uncategorizedMovieID": uncategorized.id, "infoID": info.id },
+			type: "PUT",
+			dataType: "json",
+			global: false,
+			success: function() { callback(); },
+			error: function(error) { _this.notify("error", "An error has occurred while categorizing your movie.  Please try again later!"); }
 		});
 	};
 

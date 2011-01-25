@@ -20,6 +20,9 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 	//	The current page.
 	var _page;
 
+	//	The uncategorized movie.
+	var _uncategorizedMovie;
+
 	//	The event handler to fire when the user requests a search.
 	var _onSearch;
 
@@ -58,6 +61,8 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 	//	movie:				The uncategorized movie.
 	//
 	this.loadMovie = function(movie) {
+		_uncategorizedMovie = movie;
+
 		_components.labelName.text(movie.name);
 		_components.panel.modal("show");
 		_components.textTitle.focus();
@@ -104,6 +109,8 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 		_components.labelFeedback.text("");
 
 		_onSearch(_components.textTitle.val());
+
+		_components.panelResultButtons.show();
 	};
 
 	//
@@ -113,6 +120,8 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 		_components.panel.modal("hide");
 		_components.textTitle.val("");
 		_components.labelFeedback.text("");
+		_components.panelResults.hide();
+		_components.panelResultButtons.hide();
 	};
 
 	//
@@ -120,7 +129,7 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 	//
 	var buttonSelectClicked = function() {
 		buttonCancelClicked();
-		_onUncategorizedMovieSelected();
+		_onUncategorizedMovieSelected(_uncategorizedMovie, getMovieByID(_components.panelResults.find(".selected").attr("name")));
 	};
 
 	//------------------------------------------------------------------------------------------------------------------
@@ -142,6 +151,7 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 		_components.buttonSelect = panel.find(">div.resultbuttons>div>button").click(buttonSelectClicked);
 		_components.linkPrevious = panel.find(">div.results>div.more>a:last").click(function() { loadResults(--_page); });
 		_components.linkNext = panel.find(">div.results>div.more>a:first").click(function() { loadResults(++_page); });
+		_components.panelResultButtons = panel.find(">div.resultbuttons");
 	};
 
 	//
@@ -163,7 +173,7 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 			_components.panelResults.find(">div:not(.more)").remove();
 			for (var i = (page-1)*_pageSize; i < page*_pageSize; i++) {
 				var movie = _results[i];
-				var panel = $("<div></div>").addClass("selectable rounded").click(function() {
+				var panel = $("<div></div>").addClass("selectable rounded").attr("name", movie.id).click(function() {
 					var add = !$(this).hasClass("selected");
 					_components.panelResults.find("div.selected").removeClass("selected");
 					if (add)
@@ -176,6 +186,22 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 
 			_components.panelResults.fadeIn(200);
 		});
+	};
+
+	//
+	//	Iterates through the list of movie results looking for the movie with the given ID.
+	//	id:					The movie ID.
+	//	Returns:				The found movie or nothing.
+	//
+	var getMovieByID = function(id) {
+		var movie;
+		$(_results).each(function(index, curr) {
+			if (curr.id == id) {
+				movie = curr;
+				return true;
+			}
+		});
+		return movie;
 	};
 
 	this.initialize(parameters);

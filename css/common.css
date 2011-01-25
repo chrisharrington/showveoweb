@@ -11,7 +11,6 @@ a.tag:hover { background-color:#CEE8F5; }
 
 input[type='button'] { font-size:12px; }
 button { font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif; font-size:13px; cursor:pointer; padding:2px; background-color:#eee; border:solid 1px #AAA; -moz-border-radius:3px; -webkit-border-radius:3px; }
-button[disabled] { cursor:default; }
 button>img { float:left; margin-top:1px; }
 button>span { float:left; margin-left:3px; font-weight:bold; }
 button.success>span { color:Green; }
@@ -23,6 +22,9 @@ button.neutral:active { background-color:#98C1D6; }
 button.negative>span { color:#d12f19; }
 button.negative:hover, button.negative:focus { background-color:#fbe3e4; }
 button.negative:active { background-color:#E3AAAD; }
+button[disabled] { cursor:default; background-color:#DDD; }
+button[disabled]>span { color:#888; }
+button[disabled]:hover { background-color:#DDD; }
 
 span.subheader { font-size:1.25em; }
 span.description { font-size:0.85em; }

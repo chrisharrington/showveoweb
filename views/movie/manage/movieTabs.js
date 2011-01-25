@@ -64,10 +64,10 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 	//
 	//	The default constructor.
-	//	tabs:					The tab parameters.
+	//	tabs:						The tab parameters.
 	//	panel:					The panel containing the control elements.
-	//	factory:				Creates movie panels.
-	//	uncategorized:			The uncategorized movies panel.
+	//	factory:					Creates movie panels.
+	//	uncategorized:				The uncategorized movies panel.
 	//	addMovie:				The add movie control.
 	//	onMovieDeleted:			The event handler for deleting a movie.
 	//	onMovieFavoriteChanged:	The event handler for favoriting or unfavoriting a movie.
