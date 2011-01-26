@@ -186,8 +186,12 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			type: "PUT",
 			dataType: "json",
 			global: false,
-			success: function() { callback(); },
-			error: function(error) { _this.notify("error", "An error has occurred while categorizing your movie.  Please try again later!"); }
+			success: function() {
+				callback();
+				_this.notify("movieCategorized", uncategorized);
+			},
+			error: function(error) { _this.notify("error", "An error has occurred while categorizing your movie.  Please try again later!"); }/*,
+			fixture: function() {}*/
 		});
 	};
 

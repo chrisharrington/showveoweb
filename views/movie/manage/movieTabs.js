@@ -143,6 +143,18 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 		});
 	};
 
+	//
+	//	Removes the given uncategorized movie from the uncategorized movie list.
+	//	movie:					The movie to remove.
+	//
+	this.removeUncategorizedMovie = function(movie) {
+		var panel = _components.panel.find("div.uncategorized");
+		panel.find("div[name='" + movie.id + "']").remove();
+
+		var count = parseInt(panel.find(">div>span b").text(), 10);
+		updateUncategorizedCount(panel.find(">div>span"), count-1);
+	};
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handers */
 
@@ -250,13 +262,7 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	var populateUncategorizedMoviesTab = function(movies) {
 		var tab = _components.panel.find("[name='uncategorized']>div");
 
-		var label = tab.find(">span");
-		if (movies.length == 0)
-			label.text("There are currently no uncategorized movies.");
-		else if (movies.length == 1)
-			label.html("There is currently <b>" + movies.length + "</b> movie that is uncategorized.  To assign information to this movie, click on it below.");
-		else
-			label.html("There are currently <b>" + movies.length + "</b> movies that are uncategorized.  To assign information to these movies, click on each of them below.");
+		updateUncategorizedCount(tab.find(">span"), movies.length);
 
 		$(movies).each(function(index, movie) {
 			var panel = _moviePanelFactory.createUncategorized(movie);
@@ -361,6 +367,20 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 
 			curr.update(movie);
 		});
+	};
+
+	//
+	//	Updates the descriptive text for the uncategorized movies tab.
+	//	label:				The label containing the text.
+	//	count:				The new movie count.
+	//
+	var updateUncategorizedCount = function (label, count) {
+		if (count == 0)
+			label.text("There are currently no uncategorized movies.");
+		else if (count == 1)
+			label.html("There is currently <b>1</b> movie that is uncategorized.  To assign information to this movie, click on it below.");
+		else
+			label.html("There are currently <b>" + count + "</b> movies that are uncategorized.  To assign information to these movies, click on each of them below.");
 	};
 
 	this.initialize(parameters);

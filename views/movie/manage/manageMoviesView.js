@@ -165,6 +165,14 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 		_components.addMovie.error(error);	
 	};
 
+	//
+	//	Indicates that a movie has been categorized.  Removes that movie from the uncategorized movie list.
+	//	movie:					The newly categorized movie.
+	//
+	this.movieCategorized = function(movie) {
+		_components.tabs.removeUncategorizedMovie(movie);
+	};
+
 	this.base_initialize(parameters, this);
 	this.initialize(parameters);
 };
