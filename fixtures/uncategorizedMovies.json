@@ -3,14 +3,12 @@
 		"id": 1,
 		"categorizedMovieID": 0,
 		"filename": "some.movie.name[2010]-DVDRip.avi",
-		"size": 711000000,
 		"encoded": false
 	},
 	{
 		"id": 2,
 		"categorizedMovieID": 0,
 		"filename": "another_movie[R5][2010].mpg",
-		"size": 712300000,
 		"encoded": true
 	}
 ]

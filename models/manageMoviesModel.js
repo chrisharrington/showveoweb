@@ -134,8 +134,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function() {
 				_this.notify("searchError", "An error has occurred while retrieving the search results.");
-			},
-			fixture: "/fixtures/movieSearch.json"
+			}/*,
+			fixture: "/fixtures/movieSearch.json"*/
 		});
 	};
 

@@ -46,7 +46,7 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 	//	panel:				The panel containing the control elements.
 	//
 	this.initialize = function(parameters) {
-		_pageSize = 5;
+		_pageSize = 10;
 		_results = new Array();
 		_page = 1;
 
@@ -82,7 +82,14 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 			panel.fadeOut(200);
 
 		_page = 1;
-		loadResults(_page);
+		_components.panelResults.find(">span, >div:not(.more)").remove();
+		if (movies.length > 0)
+			loadResults(_page);
+		else
+			_components.panelResults.append($("<span></span>").text("No movies were found for the query \"" + _components.textTitle.val() + "\".")).show();
+
+		_components.panel.find("input, button").attr("disabled", false);
+		_components.imgLoader.hide();
 	};
 
 	//
@@ -107,10 +114,11 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 		}
 
 		_components.labelFeedback.text("");
+		_components.panel.find("input, button").attr("disabled", true);
+		_components.imgLoader.show();
+		_components.buttonSearch.blur();
 
 		_onSearch(_components.textTitle.val());
-
-		_components.panelResultButtons.show();
 	};
 
 	//
@@ -152,6 +160,7 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 		_components.linkPrevious = panel.find(">div.results>div.more>a:last").click(function() { loadResults(--_page); });
 		_components.linkNext = panel.find(">div.results>div.more>a:first").click(function() { loadResults(++_page); });
 		_components.panelResultButtons = panel.find(">div.resultbuttons");
+		_components.imgLoader = panel.find(">div.buttons>div>img");
 	};
 
 	//
@@ -167,11 +176,11 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 
 			if (page == 1)
 				_components.linkPrevious.hide();
-			if (page == (_results.length/_pageSize))
+			if (page == Math.ceil(_results.length/_pageSize))
 				_components.linkNext.hide();
 
 			_components.panelResults.find(">div:not(.more)").remove();
-			for (var i = (page-1)*_pageSize; i < page*_pageSize; i++) {
+			for (var i = (page-1)*_pageSize; i < page*_pageSize && i < _results.length; i++) {
 				var movie = _results[i];
 				var panel = $("<div></div>").addClass("selectable rounded").attr("name", movie.id).click(function() {
 					var add = !$(this).hasClass("selected");
@@ -184,6 +193,7 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 				panel.insertBefore(_components.panelResults.find("div.more"));
 			}
 
+			_components.panelResultButtons.show();
 			_components.panelResults.fadeIn(200);
 		});
 	};

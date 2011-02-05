@@ -18,6 +18,7 @@ div.addmovie>div.search>span { float:left; width:100%; font-size:1em; }
 div.addmovie>div.search>input[type='text'] { float:left; width:590px; padding:3px; margin-top:3px; }
 div.addmovie>div.buttons>span { float:left; margin-top:2px; color:Red; }
 div.addmovie>div.buttons>div { float:right; }
+div.addmovie>div.buttons>div>img { float:left; width:24px; height:24px; margin-right:5px; display:none; }
 div.addmovie>div.buttons>div>button { float:left; margin-left:5px; }
 div.addmovie>div.results>div { float:left; width:590px; padding:5px; margin-top:3px; border:solid 1px #999; background-color:#FFF; }
 div.addmovie>div.results>div:first-child { margin-top:3px; }

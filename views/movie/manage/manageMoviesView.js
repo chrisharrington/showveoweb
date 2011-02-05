@@ -36,7 +36,7 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	this.onTabSelected = function(handler) { _components.tabs.onTabSelected(handler); };
 
 	//	Sets the event handler for searching for movies for categorization.
-	this.onSearch = function(handler) { _components.addMovie.onSearch(handler); };
+	this.onSearch = function(handler) {	_components.addMovie.onSearch(handler); };
 
 	//	Sets the event handler for selecting an uncategorized movie's information.
 	this.onUncategorizedMovieSelected = function(handler) { _components.addMovie.onUncategorizedMovieSelected(handler); };
