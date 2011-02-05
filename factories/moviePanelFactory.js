@@ -45,7 +45,7 @@ Showveo.Factories.MoviePanelFactory = function(parameters) {
 		panel.append($("<a></a>").addClass(movie.encoded ? "selectable" : "").text(movie.name + " (" + movie.year + ")"));
 		if (!movie.encoded)
 			panel.append($("<b></b>").text("Encoding in progress."));
-		panel.append($("<i></i>").html("Uploaded by <b>" + movie.owner.firstName + " " + movie.owner.lastName + "</b> " + movie.uploadDate.parseShortDate().differenceString() + ". " + deriveLastWatched(movie)));
+		panel.append($("<i></i>").html("Uploaded " + movie.uploadDate.parseShortDate().differenceString() + ". " + deriveLastWatched(movie)));
 		panel.append($("<u></u>").text(movie.synopsis));
 		panel.append(createFooter(movie));
 		return panel;
