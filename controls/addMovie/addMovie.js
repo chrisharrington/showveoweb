@@ -63,7 +63,7 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 	this.loadMovie = function(movie) {
 		_uncategorizedMovie = movie;
 
-		_components.labelName.text(movie.name);
+		_components.labelName.text(movie.filename);
 		_components.panel.modal("show");
 		_components.textTitle.focus();
 	};
@@ -182,12 +182,17 @@ Showveo.Controls.AddMovie.AddMovie = function(parameters) {
 			_components.panelResults.find(">div:not(.more)").remove();
 			for (var i = (page-1)*_pageSize; i < page*_pageSize && i < _results.length; i++) {
 				var movie = _results[i];
-				var panel = $("<div></div>").addClass("selectable rounded").attr("name", movie.id).click(function() {
+				var panel = $("<div></div>").addClass("selectable rounded").attr("name", movie.id);
+				panel.click(function() {
 					var add = !$(this).hasClass("selected");
 					_components.panelResults.find("div.selected").removeClass("selected");
 					if (add)
 						$(this).addClass("selected");
 					_components.buttonSelect.attr("disabled", !add);
+				});
+				panel.dblclick(function() {
+					$(this).addClass("selected");
+					buttonSelectClicked();
 				});
 				panel.append($("<span></span>").text(movie.name));
 				panel.insertBefore(_components.panelResults.find("div.more"));
