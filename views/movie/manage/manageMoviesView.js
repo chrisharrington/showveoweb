@@ -171,6 +171,7 @@ Showveo.Views.ManageMoviesView = function(parameters) {
 	//
 	this.movieCategorized = function(movie) {
 		_components.tabs.removeUncategorizedMovie(movie);
+		_components.tabs.reset();
 	};
 
 	this.base_initialize(parameters, this);

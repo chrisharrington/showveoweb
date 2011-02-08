@@ -155,6 +155,14 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 		updateUncategorizedCount(panel.find(">div>span"), count-1);
 	};
 
+	//
+	//	Resets each of the tabs by clearing its list of movies.
+	//
+	this.reset = function() {
+		_movies = new Array();
+		_components.panel.find(">div.tab:not(div.uncategorized) div.movie").remove();
+	};
+
 	//------------------------------------------------------------------------------------------------------------------
 	/* Event Handers */
 
