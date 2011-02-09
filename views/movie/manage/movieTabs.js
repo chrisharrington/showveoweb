@@ -357,11 +357,14 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	//	movie:				The movie to update.
 	//
 	var updateMovie = function(movie) {
+		var addedFavorite = false;
 		$(_movies).each(function(index, curr) {
 			if (curr.getMovie().id != movie.id)
 				return true;
 
-			if (movie.isFavorite && !curr.getMovie().isFavorite) {
+			if (!addedFavorite && movie.isFavorite && !curr.getMovie().isFavorite) {
+				addedFavorite = true;
+
 				var panel = _moviePanelFactory.create(movie);
 				var created = new Showveo.Views.Movie.Manage.Movie({
 					panel: panel,
