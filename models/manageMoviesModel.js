@@ -36,8 +36,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			url: _service + "/recent.data",
 			dataType: "json",
 			global: false,
-			success: function(movies) {
-				_this.notify("recentlyUploadedMovies", movies);
+			success: function(infos) {
+				_this.notify("recentlyUploadedMovies", combine(infos));
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your recenly uploaded movies list.  Please try again later!");
@@ -54,8 +54,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			url: _service + "/favorites.data",
 			dataType: "json",
 			global: false,
-			success: function(movies) {
-				_this.notify("favoriteMovies", movies);
+			success: function(infos) {
+				_this.notify("favoriteMovies", combine(infos));
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your favorite movies list.  Please try again later!");
@@ -74,8 +74,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			dataType: "json",
 			type: "GET",
 			global: false,
-			success: function(movies) {
-				_this.notify("moviesByGenre", movies);
+			success: function(infos) {
+				_this.notify("moviesByGenre", combine(infos));
 			},
 			error: function() {
 				_this.notify("error", "An error has occurred while retrieving your movies by genre.  Please try again later!");
@@ -92,8 +92,8 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			url: _service + "/all.data",
 			dataType: "json",
 			global: false,
-			success: function(movies) {
-				_this.notify("allMovies", movies);
+			success: function(infos) {
+				_this.notify("allMovies", combine(infos));
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your movies list.  Please try again later!");
@@ -193,6 +193,24 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			error: function(error) { _this.notify("error", "An error has occurred while categorizing your movie.  Please try again later!"); }/*,
 			fixture: function() {}*/
 		});
+	};
+
+	//------------------------------------------------------------------------------------------------------------------
+	/* Private Methods */
+
+	//
+	//	Derives a combined movie object from a user-movie relationship.
+	//	info:						The user-movie information object.
+	//	Returns:					The combined object.
+	//
+	var combine = function(infos) {
+		var movies = new Array();
+		infos.forEach(function(info) {
+			var movie = info.movie;
+			movie.isFavorite = info.isFavorite;			
+			movies.push(movie);
+		});
+		return movies;
 	};
 
 	this.base_initialize(parameters, this);

@@ -337,7 +337,6 @@ Showveo.Views.Movie.Manage.MovieTabs = function(parameters) {
 	var addHandlers = function () {
 		$(_movies).each(function(index, movie) {
 			addHandlersToMovie(movie);
-
 		});
 	};
 

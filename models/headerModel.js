@@ -38,8 +38,7 @@ Showveo.Models.HeaderModel = function(parameters) {
 			dataType: "json",
 			success: function(data) {
 				callback(data);
-			},
-			error: function(error) { alert(error.status); }/*,
+			}/*,
 			fixture: function() {
 				if (emailAddress == "q")
 					return [];

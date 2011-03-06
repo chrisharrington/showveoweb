@@ -28,7 +28,7 @@ button[disabled]:hover { background-color:#DDD; }
 
 span.subheader { font-size:1.25em; }
 span.description { font-size:0.85em; }
-span.header { font-size:1.5em; font-family:Impact, sans-serif; }
+span.header { font-size:1.5em; font-family:sans-serif; }
 input[type='text'].rounded, input[type='password'].rounded { -moz-border-radius:3px; -webkit-border-radius:3px; }
 
 div.header { float:left; width:100%; background:url(../images/headergradient.jpg) repeat-x; height:50px; }
