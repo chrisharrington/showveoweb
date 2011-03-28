@@ -42,8 +42,8 @@ Showveo.Controllers.MovieDetailsController = function(parameters) {
 	//	state:				The state of the application.
 	//
 	this.loaded = function(state) {
-		var title = state[0].substring(0, state.lastIndexOf("_")).replace(/_/g, " ");
-		var year = state[0].substring(state.lastIndexOf("_")+1);
+		var title = state[0].substring(0, state[0].lastIndexOf("_")).replace(/_/g, " ");
+		var year = state[0].substring(state[0].lastIndexOf("_")+1);
 
 		_model.getMovieDetails(title, year);
 	};

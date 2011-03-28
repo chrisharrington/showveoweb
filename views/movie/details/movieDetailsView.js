@@ -49,7 +49,7 @@ Showveo.Views.MovieDetailsView = function(parameters) {
 	this.loadComponents = function(view) {
 		_components = {};
 		_components.labelTitle = view.find(">div.moviedetails>div.title>span.header");
-		_components.labelOwner = view.find(">div.moviedetails>i");
+		_components.labelAddedOn = view.find(">div.moviedetails>i");
 		_components.labelDirector = view.find(">div.moviedetails>div.cast:first>span");
 		_components.labelActors = view.find(">div.moviedetails>div.cast:last>span");
 		_components.labelSynopsis = view.find(">div.moviedetails>div.synopsis");
@@ -66,7 +66,7 @@ Showveo.Views.MovieDetailsView = function(parameters) {
 		_movie = movie;
 
 		_components.labelTitle.text(movie.name);
-		_components.labelOwner.html("Uploaded by <b>" + movie.owner.firstName + " " + movie.owner.lastName + "</b> " + movie.uploadDate.parseShortDate().differenceString() + ".");
+		_components.labelAddedOn.html("Uploaded " + movie.uploadDate.parseShortDate().differenceString() + ".");
 		_components.labelDirector.text(movie.director);
 		_components.labelActors.text(movie.actors.toCommaString());
 		_components.labelSynopsis.text(movie.synopsis);

@@ -35,13 +35,13 @@ Showveo.Models.MovieDetailsModel = function(parameters) {
 	//
 	this.getMovieDetails = function(title, year) {
 		$.ajax({
-			url: _service + "/" + (title.replace(/ /g, "_") + "_" + year),
+			url: _service + "/" + (title.replace(/ /g, "_") + "_" + year) + ".data",
 			type: "GET",
 			dataType: "json",
 			success: function(movie) {
 				_this.notify("movieDetails", movie);
-			},
-			fixture: "/fixtures/movie.json"
+			}/*,
+			fixture: "/fixtures/movie.json"*/
 		})
 	};
 

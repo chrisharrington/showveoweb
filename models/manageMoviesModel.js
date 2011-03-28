@@ -41,8 +41,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your recenly uploaded movies list.  Please try again later!");
-			}/*,
-			fixture: "/fixtures/recentMovies.json"*/
+			}
 		});
 	};
 
@@ -59,8 +58,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your favorite movies list.  Please try again later!");
-			}/*,
-			fixture: "/fixtures/favoriteMovies.json"*/
+			}
 		});
 	};
 
@@ -79,8 +77,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function() {
 				_this.notify("error", "An error has occurred while retrieving your movies by genre.  Please try again later!");
-			}/*,
-			fixture: "/fixtures/genreMovies.json"*/
+			}
 		});
 	};
 
@@ -97,8 +94,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving your movies list.  Please try again later!");
-			}/*,
-			fixture: "/fixtures/allMovies.json"*/
+			}
 		});
 	};
 
@@ -115,8 +111,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function(error) {
 				_this.notify("error", "An error has occurred while retrieving the uncategorized movies list.  Please try again later.");
-			}/*,
-			fixture: "/fixtures/uncategorizedMovies.json"*/
+			}
 		});
 	};
 
@@ -134,8 +129,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function() {
 				_this.notify("searchError", "An error has occurred while retrieving the search results.");
-			}/*,
-			fixture: "/fixtures/movieSearch.json"*/
+			}
 		});
 	};
 
@@ -152,8 +146,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			},
 			error: function() {
 				_this.notify("error", "An error has occurred while retrieving the genres list.  Please try again later.");
-			}/*,
-			fixture: "/fixtures/allGenres.json"*/
+			}
 		});
 	};
 
@@ -168,8 +161,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 			dataType: "json",
 			global: false,
 			success: function() { _this.notify("favoriteChanged", movie); },
-			error: function(error) { _this.notify("error", "An error has occurred while changing the favorite status of your movie.  Please try again later!"); }/*,
-			fixture: function() {}*/
+			error: function(error) { _this.notify("error", "An error has occurred while changing the favorite status of your movie.  Please try again later!"); }
 		});
 	};
 
@@ -190,8 +182,7 @@ Showveo.Models.ManageMoviesModel = function(parameters) {
 				callback();
 				_this.notify("movieCategorized", uncategorized);
 			},
-			error: function(error) { _this.notify("error", "An error has occurred while categorizing your movie.  Please try again later!"); }/*,
-			fixture: function() {}*/
+			error: function(error) { _this.notify("error", "An error has occurred while categorizing your movie.  Please try again later!"); }
 		});
 	};
 
